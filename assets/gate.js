@@ -8,7 +8,7 @@
    ============================================================ */
 (function(){
   // --- config ---
-  var PASSWORD = "compliance2026";        // <-- change this to your chosen password
+  var PASSWORD = "Vent234";        // <-- change this to your chosen password
   var KEY      = "esgcre_gate_ok";          // sessionStorage flag
   var TITLE    = "ESG·CRE Knowledge Base";
   var SUBTITLE = "Private research · enter password to continue";
