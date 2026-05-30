@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iSBEM, Taken Apart — Companion to the RegTech Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1e9;
+    --paper-2:#efebe0;
+    --ink:#1c1b18;
+    --ink-soft:#4a473f;
+    --ink-faint:#7c786c;
+    --rule:#d6d0bf;
+    --rule-strong:#bdb6a1;
+
+    --uk:#1d5fa6;        --uk-bg:#e6eff8;   --uk-line:#9cbfe0;
+    --eu:#0f7a5e;        --eu-bg:#e2f3ec;
+    --global:#9a6a12;    --global-bg:#f7eed9; --global-line:#dcc188;
+
+    --data:#7a3b6e;      --data-bg:#f3e8f0;  --data-line:#d9bcd1;
+    --pressure:#a8431f;  --pressure-bg:#f8e9e2; --pressure-line:#e3bda9;
+    --venture:#0f5132;   --venture-bg:#dcefe2; --venture-line:#a6cdb4;
+    --market:#3a3730;    --market-bg:#eceadf;
+
+    --shadow:0 1px 2px rgba(28,27,24,.05), 0 4px 14px rgba(28,27,24,.06);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      radial-gradient(circle at 18% 8%, rgba(255,255,255,.5), transparent 45%),
+      radial-gradient(circle at 90% 100%, rgba(189,182,161,.18), transparent 55%);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",-apple-system,sans-serif;
+    font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1100px;margin:0 auto;padding:42px 30px 90px;}
+
+  /* ---------- masthead ---------- */
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:30px;}
+  .kicker{
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--data);margin:0 0 10px;
+  }
+  h1{
+    font-family:"Fraunces",serif;font-weight:600;font-size:clamp(30px,5.4vw,52px);
+    line-height:1.02;margin:0;letter-spacing:-.01em;
+  }
+  h1 em{font-style:italic;color:var(--data);font-weight:500;}
+  .standfirst{max-width:740px;margin:16px 0 0;font-size:16px;color:var(--ink-soft);line-height:1.55;}
+  .standfirst b{color:var(--ink);font-weight:600;}
+  .crumb{
+    font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);
+    margin-top:14px;letter-spacing:.03em;
+  }
+  .crumb b{color:var(--data);font-weight:600;}
+
+  /* ---------- contents ---------- */
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;}
+  .toc a{
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-soft);
+    text-decoration:none;border:1px solid var(--rule-strong);border-radius:20px;
+    padding:5px 13px;transition:all .15s ease;
+  }
+  .toc a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  /* ---------- section scaffolding ---------- */
+  section.mod{margin:0 0 52px;scroll-margin-top:20px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+  .sec-num{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);
+    border:1.5px solid var(--ink);border-radius:5px;padding:2px 7px;flex:none;
+  }
+  .sec-title{font-family:"Fraunces",serif;font-weight:600;font-size:23px;letter-spacing:-.01em;margin:0;}
+  .sec-intro{max-width:760px;color:var(--ink-soft);font-size:14.5px;line-height:1.55;margin:0 0 20px;}
+  .sec-intro b{color:var(--ink);}
+  .takeaway{
+    margin-top:16px;border-left:3px solid var(--data);background:var(--data-bg);
+    padding:11px 16px;border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-soft);
+  }
+  .takeaway b{color:var(--data);}
+  .takeaway.v{border-left-color:var(--venture);background:var(--venture-bg);}
+  .takeaway.v b{color:var(--venture);}
+
+  /* ---------- generic card ---------- */
+  .card{background:#fff;border:1px solid var(--rule);border-radius:11px;box-shadow:var(--shadow);}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);}
+
+  /* ---------- §1 nesting ---------- */
+  .nest-wrap{display:grid;grid-template-columns:1.55fr 1fr;gap:20px;align-items:start;}
+  .nest{
+    background:linear-gradient(180deg,#fbf8f1,#f1ece0);border:1.5px solid var(--rule-strong);
+    border-radius:13px;padding:16px;position:relative;
+  }
+  .nest .layer-tag{position:absolute;top:-9px;left:16px;background:var(--paper);padding:0 8px;
+    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase;}
+  .nest .desc{font-size:12px;color:var(--ink-faint);margin:4px 0 0;line-height:1.4;}
+  .nest-name{font-family:"Fraunces",serif;font-weight:600;font-size:16px;}
+  .nest.ncm{border-color:var(--global-line);}
+  .nest.sbem{margin-top:14px;background:#fff;border-color:var(--data-line);}
+  .nest.sbem .nest-name{color:var(--data);}
+  .modrow{display:flex;gap:10px;margin-top:12px;}
+  .modbox{flex:1;background:var(--data-bg);border:1px solid var(--data-line);border-radius:8px;padding:9px 11px;}
+  .modbox .mn{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;color:var(--data);}
+  .modbox .md{font-size:11.5px;color:var(--ink-soft);margin-top:2px;line-height:1.35;}
+  .iface{margin-top:13px;background:var(--ink);color:var(--paper);border-radius:8px;padding:10px 13px;}
+  .iface .mn{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;}
+  .iface .md{font-size:11.5px;color:#cfc9ba;margin-top:2px;line-height:1.4;}
+  .dbrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .db{font-family:"IBM Plex Mono",monospace;font-size:10.5px;background:var(--global-bg);
+    border:1px solid var(--global-line);color:#7a5410;border-radius:5px;padding:3px 8px;}
+  .aside{background:var(--uk-bg);border:1px solid var(--uk-line);border-radius:11px;padding:15px 16px;}
+  .aside h4{margin:0 0 7px;font-family:"Fraunces",serif;font-size:15px;color:var(--uk);}
+  .aside p{margin:0 0 9px;font-size:12.5px;color:var(--ink-soft);line-height:1.45;}
+  .aside p:last-child{margin-bottom:0;}
+  .aside .pin{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--uk);letter-spacing:.08em;text-transform:uppercase;}
+
+  /* ---------- §2 three tiers ---------- */
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .tier{background:#fff;border:1px solid var(--rule);border-radius:11px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+  .tier .tn{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-faint);letter-spacing:.1em;text-transform:uppercase;}
+  .tier h4{margin:5px 0 6px;font-family:"Fraunces",serif;font-weight:600;font-size:17px;}
+  .tier p{margin:0 0 10px;font-size:12.5px;color:var(--ink-soft);line-height:1.45;}
+  .tier .ex{margin-top:auto;display:flex;flex-wrap:wrap;gap:5px;}
+  .tier .ex span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;background:var(--paper-2);
+    border:1px solid var(--rule);border-radius:5px;padding:3px 8px;color:var(--ink-soft);}
+  .tier.t0{border-top:3px solid var(--data);}
+  .tier.t1{border-top:3px solid var(--uk);}
+  .tier.t2{border-top:3px solid var(--global);}
+
+  /* ---------- §3 workflow ---------- */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;}
+  .step{flex:1;min-width:150px;background:#fff;border:1px solid var(--rule);box-shadow:var(--shadow);
+    padding:13px 14px;position:relative;}
+  .step:first-child{border-radius:11px 0 0 11px;}
+  .step:last-child{border-radius:0 11px 11px 0;}
+  .step + .step{border-left:none;}
+  .step .sn{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-faint);letter-spacing:.1em;}
+  .step h5{margin:3px 0 5px;font-family:"Fraunces",serif;font-weight:600;font-size:15px;}
+  .step p{margin:0;font-size:12px;color:var(--ink-soft);line-height:1.4;}
+  .step.hard{background:var(--pressure-bg);border-color:var(--pressure-line);}
+  .step.hard h5{color:var(--pressure);}
+  .forms{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px;align-items:center;}
+  .forms .fstep{font-family:"IBM Plex Mono",monospace;font-size:11.5px;background:#fff;border:1px solid var(--rule-strong);
+    border-radius:6px;padding:6px 11px;color:var(--ink-soft);}
+  .forms .fstep b{color:var(--ink);}
+  .forms .ar{color:var(--ink-faint);font-size:13px;}
+  .forms .fstep.run{background:var(--data);color:#fff;border-color:var(--data);}
+
+  /* ---------- §4 hierarchy ---------- */
+  .hier{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .tree{background:#fff;border:1px solid var(--rule);border-radius:11px;padding:16px 18px;box-shadow:var(--shadow);}
+  .tree h4{margin:0 0 10px;font-family:"Fraunces",serif;font-size:15px;}
+  .node{font-family:"IBM Plex Mono",monospace;font-size:12.5px;padding:4px 0;color:var(--ink);position:relative;}
+  .node .role{color:var(--ink-faint);font-size:11px;font-family:"IBM Plex Sans",sans-serif;}
+  .lvl1{margin-left:0;font-weight:600;color:var(--data);}
+  .lvl2{margin-left:20px;}
+  .lvl3{margin-left:40px;color:var(--ink-soft);}
+  .lvl2::before,.lvl3::before{content:"└ ";color:var(--rule-strong);}
+
+  /* ---------- §5 two jobs + maths ---------- */
+  .jobs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;}
+  .job{background:#fff;border:1px solid var(--rule);border-radius:11px;padding:15px 16px;box-shadow:var(--shadow);}
+  .job.comp{border-left:3px solid var(--uk);}
+  .job.epc{border-left:3px solid var(--data);}
+  .job .jt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);}
+  .job h4{margin:4px 0 6px;font-family:"Fraunces",serif;font-size:16px;}
+  .job .eq{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--paper-2);border:1px solid var(--rule);
+    border-radius:6px;padding:7px 10px;margin:6px 0;color:var(--ink);}
+  .job p{margin:6px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.45;}
+  .threebld{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap;}
+  .threebld .b{flex:1;min-width:150px;border:1px solid var(--rule);border-radius:9px;padding:10px 12px;background:#fff;box-shadow:var(--shadow);}
+  .threebld .b .bn{font-family:"Fraunces",serif;font-weight:600;font-size:14px;}
+  .threebld .b .bd{font-size:11.5px;color:var(--ink-soft);margin-top:3px;line-height:1.4;}
+  .threebld .b.act{border-top:3px solid var(--venture);}
+  .threebld .b.not{border-top:3px solid var(--uk);}
+  .threebld .b.ref{border-top:3px solid var(--data);}
+  .threebld .b.typ{border-top:3px solid var(--ink-faint);background:var(--paper-2);}
+
+  /* interactive ladder */
+  .calc{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:18px;box-shadow:var(--shadow);
+    display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:center;}
+  .ladder{display:flex;flex-direction:column;gap:3px;}
+  .rung{display:flex;align-items:center;gap:10px;border-radius:6px;padding:5px 10px;transition:all .15s ease;
+    border:1px solid transparent;}
+  .rung .gr{font-family:"Fraunces",serif;font-weight:700;font-size:15px;width:26px;}
+  .rung .rng{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);}
+  .rung.on{border-color:var(--ink);box-shadow:0 2px 10px rgba(28,27,24,.14);transform:translateX(4px);}
+  .rung.on .rng{color:var(--ink);}
+  .gAp{background:#d8f0e2;} .gA{background:#cdeccd;} .gB{background:#e6f0c8;}
+  .gC{background:#fbf3c9;} .gD{background:#fde3bf;} .gE{background:#fad2b0;}
+  .gF{background:#f6c0a6;} .gG{background:#f3b2a6;}
+  .calc .ctrl label{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);letter-spacing:.05em;}
+  .calc .ber{font-family:"Fraunces",serif;font-weight:600;font-size:28px;color:var(--data);line-height:1;}
+  .calc input[type=range]{width:100%;margin:12px 0 4px;accent-color:var(--data);}
+  .calc .res{margin-top:14px;font-size:13px;color:var(--ink-soft);line-height:1.6;}
+  .calc .res .big{font-family:"Fraunces",serif;font-weight:700;font-size:22px;color:var(--ink);}
+  .calc .fixed{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-faint);}
+  .quirk{margin-top:16px;border-left:3px solid var(--pressure);background:var(--pressure-bg);padding:11px 15px;border-radius:0 8px 8px 0;font-size:13px;color:var(--ink-soft);}
+  .quirk b{color:var(--pressure);}
+
+  /* ---------- §6 wedge ---------- */
+  .wedge{background:linear-gradient(180deg,#fbf8f1,#efe9dc);border:1.5px solid var(--rule-strong);
+    border-radius:14px;padding:20px;}
+  .wflow{display:grid;grid-template-columns:0.9fr 1fr 1.5fr;gap:12px;align-items:stretch;}
+  .wnode{border-radius:10px;padding:13px 14px;display:flex;flex-direction:column;}
+  .wnode .wt{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px;}
+  .wnode h4{margin:0 0 7px;font-family:"Fraunces",serif;font-weight:600;font-size:15px;}
+  .wnode ul{margin:0;padding-left:15px;font-size:12px;color:var(--ink-soft);line-height:1.5;}
+  .wnode .foot{margin-top:9px;font-size:11px;font-style:italic;color:var(--ink-faint);}
+  .w-in{background:var(--pressure-bg);border:1px solid var(--pressure-line);}
+  .w-in .wt{color:var(--pressure);}
+  .w-eng{background:var(--data-bg);border:1px solid var(--data-line);}
+  .w-eng .wt{color:var(--data);}
+  .w-out{background:transparent;border:none;padding:0;gap:9px;}
+  .lane{border-radius:10px;padding:12px 14px;}
+  .lane .lh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px;}
+  .lane .lh .ln{font-family:"Fraunces",serif;font-weight:600;font-size:14px;}
+  .lane .lh .lk{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;}
+  .lane .files{display:flex;flex-wrap:wrap;gap:5px;}
+  .lane .files span{font-family:"IBM Plex Mono",monospace;font-size:10px;border-radius:5px;padding:3px 7px;}
+  .lane .foot{margin-top:8px;font-size:11.5px;line-height:1.4;}
+  .lane.priv{background:#fff;border:2px solid var(--venture);box-shadow:0 4px 16px rgba(15,81,50,.15);}
+  .lane.priv .ln{color:var(--venture);} .lane.priv .lk{color:var(--venture);}
+  .lane.priv .files span{background:var(--venture-bg);border:1px solid var(--venture-line);color:#0c422a;}
+  .lane.priv .foot{color:var(--venture);font-weight:500;}
+  .lane.pub{background:var(--uk-bg);border:1px dashed var(--uk-line);}
+  .lane.pub .ln{color:var(--uk);} .lane.pub .lk{color:var(--uk);}
+  .lane.pub .files span{background:#fff;border:1px solid var(--uk-line);color:var(--uk);}
+  .lane.pub .foot{color:var(--ink-faint);}
+  .wedge-bracket{margin-top:16px;background:var(--venture);color:#eaf5ee;border-radius:11px;padding:14px 18px;
+    display:flex;gap:14px;align-items:flex-start;}
+  .wedge-bracket .mk{font-family:"Fraunces",serif;font-weight:700;font-size:30px;line-height:1;color:#fff;flex:none;}
+  .wedge-bracket .wb-t{font-family:"Fraunces",serif;font-weight:600;font-size:16px;color:#fff;margin:0 0 4px;}
+  .wedge-bracket p{margin:0;font-size:13px;line-height:1.5;color:#cfe6d8;}
+  .wedge-bracket p b{color:#fff;}
+  .gapbar{text-align:center;margin:8px 0 2px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);letter-spacing:.04em;}
+
+  /* ---------- §7 strategic read ---------- */
+  .read{background:linear-gradient(135deg,#0d1f15,#163a26);color:#e7f1ea;border-radius:14px;padding:24px 26px;}
+  .read h3{font-family:"Fraunces",serif;font-weight:600;font-size:21px;color:#fff;margin:0 0 4px;}
+  .read .sub{font-size:13px;color:#a9c7b6;margin:0 0 18px;max-width:620px;line-height:1.5;}
+  .reads{display:grid;grid-template-columns:repeat(2,1fr);gap:13px;}
+  .rc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:13px 15px;}
+  .rc .ri{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8fc6a6;margin-bottom:5px;}
+  .rc h5{margin:0 0 5px;font-family:"Fraunces",serif;font-weight:600;font-size:15px;color:#fff;}
+  .rc p{margin:0;font-size:12.5px;color:#cfe2d6;line-height:1.5;}
+  .rc.flag{border-color:rgba(245,200,170,.4);background:rgba(168,67,31,.16);}
+  .rc.flag .ri{color:#f0b48f;}
+
+  /* ---------- footer ---------- */
+  .foot-note{margin-top:50px;border-top:1px solid var(--rule);padding-top:16px;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);line-height:1.7;}
+  .foot-note b{color:var(--data);}
+
+  @media (max-width:760px){
+    .nest-wrap,.hier,.jobs,.reads,.calc{grid-template-columns:1fr;}
+    .tiers{grid-template-columns:1fr;}
+    .wflow{grid-template-columns:1fr;}
+    .calc{gap:16px;}
+  }
+</style>
+</head>
+<body>
+<div style="position:sticky;top:0;z-index:50;background:rgba(244,241,233,.94);backdrop-filter:blur(6px);border-bottom:1px solid #d6d0bf;padding:10px 0;font-family:'IBM Plex Mono',monospace;font-size:11.5px;">
+  <div style="max-width:1180px;margin:0 auto;padding:0 30px;display:flex;align-items:center;gap:14px;">
+    <a href="../index.html" style="color:#7c786c;text-decoration:none;">ESG·CRE Knowledge Base</a><span style="color:#bdb6a1;">/</span>
+    <a href="index.html" style="color:#4a473f;text-decoration:none;font-weight:600;">UK</a><span style="color:#bdb6a1;">/</span>
+    <span style="color:#7c786c;">iSBEM deep-dive</span>
+    <span style="background:#e6eff8;color:#1d5fa6;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 10px;border-radius:20px;">UK</span>
+    <span style="flex:1;"></span>
+    <button onclick="window.print()" style="font-family:'IBM Plex Mono',monospace;font-size:12px;border:1px solid #bdb6a1;background:transparent;color:#4a473f;padding:6px 14px;border-radius:20px;cursor:pointer;">⤓ Download PDF</button>
+  </div>
+</div>
+<div class="wrap">
+
+  <!-- ================= MASTHEAD ================= -->
+  <header class="masthead">
+    <p class="kicker">Companion module · the data-creation layer, up close</p>
+    <h1>iSBEM, <em>taken apart</em></h1>
+    <p class="standfirst">The free government tool that produces almost every non-domestic EPC in the UK — what it is, what it emits, and <b>exactly where a venture plugs in above it</b>. Built from the iSBEM User Guide, Volumes 1–3 (v6.1.e).</p>
+    <p class="crumb">SITS AT <b>LAYER 4</b> OF THE REGTECH ATLAS · WHERE A BUILDING'S DATA IS BORN</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#s1">01 · What-is-what</a>
+    <a href="#s2">02 · The 3-tier market</a>
+    <a href="#s3">03 · Assessor workflow</a>
+    <a href="#s4">04 · The data model</a>
+    <a href="#s5">05 · Two jobs &amp; the maths</a>
+    <a href="#s6">06 · The wedge</a>
+    <a href="#s7">07 · Strategic read</a>
+  </nav>
+
+  <!-- ================= §1 NESTING ================= -->
+  <section class="mod" id="s1">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">What is actually what</h2></div>
+    <p class="sec-intro">People say "iSBEM" loosely. It's really four nested things: a <b>method</b>, an <b>engine</b>, two <b>modules</b>, and an <b>interface</b>. Knowing which is which tells you what is regulated (and untouchable) versus what is just a workflow (and contestable).</p>
+
+    <div class="nest-wrap">
+      <div class="nest ncm">
+        <span class="layer-tag">The method</span>
+        <div class="nest-name">NCM — National Calculation Methodology</div>
+        <p class="desc">MHCLG's official method for non-domestic building energy. Supplies fixed, standardised assumptions via four internal databases — the reason every rating is modelled, not measured.</p>
+        <div class="dbrow">
+          <span class="db">Activity DB</span><span class="db">Construction DB</span><span class="db">Glazing DB</span><span class="db">Weather DB</span>
+        </div>
+
+        <div class="nest sbem">
+          <span class="layer-tag">The engine</span>
+          <div class="nest-name">SBEM — Simplified Building Energy Model</div>
+          <p class="desc">BRE's C++ engine implementing the NCM. Runs two modules:</p>
+          <div class="modrow">
+            <div class="modbox"><div class="mn">BRUKL</div><div class="md">Part L compliance checker (the BRUKL report).</div></div>
+            <div class="modbox"><div class="mn">EPCgen</div><div class="md">EPC asset-rating + recommendations generator.</div></div>
+          </div>
+          <div class="iface">
+            <div class="mn">iSBEM — the interface</div>
+            <div class="md">Free, Windows-only MS Access desktop app. No cloud, no API, local <span class="mono">.nct</span> files, version-locked. The default tool most assessors use — and the layer you sit above, not against.</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="aside">
+        <h4>Three things it is not</h4>
+        <p><span class="pin">Not domestic</span> Dwellings use <b>SAP / RdSAP</b>, an entirely separate methodology — not SBEM.</p>
+        <p><span class="pin">Not a design tool</span> It's a compliance/certification tool. It won't even calculate internal temperatures.</p>
+        <p><span class="pin">Not the judge</span> No tool can "pass" or "fail" a building. The software only produces information; <b>Building Control decides</b>.</p>
+      </aside>
+    </div>
+
+    <div class="takeaway">The regulated objects are the <b>method, the engine and the signature</b>. The interface and the data around it are not. That boundary is the whole opportunity map.</div>
+  </section>
+
+  <!-- ================= §2 THREE TIERS ================= -->
+  <section class="mod" id="s2">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">The three-tier calculation market</h2></div>
+    <p class="sec-intro">Vendors don't all use the free tool. There are three tiers — and the strategic point is that <b>none of them is the wedge</b>. You don't compete with any engine; you consume what they emit.</p>
+
+    <div class="tiers">
+      <div class="tier t0">
+        <span class="tn">Tier 0 · the default</span>
+        <h4>Use free gov iSBEM</h4>
+        <p>The vast majority of assessors run the free government iSBEM/SBEM directly. Clunky, local, but accredited and zero-cost.</p>
+        <div class="ex"><span>iSBEM</span><span>SBEM</span></div>
+      </div>
+      <div class="tier t1">
+        <span class="tn">Tier 1 · embedded</span>
+        <h4>Embed the SBEM engine</h4>
+        <p>Commercial front-ends wrap the accredited SBEM engine in a nicer UI. They sell the workflow, not the calculation.</p>
+        <div class="ex"><span>commercial front-ends</span></div>
+      </div>
+      <div class="tier t2">
+        <span class="tn">Tier 2 · own engine</span>
+        <h4>Accredited DSM</h4>
+        <p>Dynamic Simulation Models — <em>required</em> (not optional) for complex buildings SBEM can't model: atria, internal light transfer, sub-hourly behaviour.</p>
+        <div class="ex"><span>IES VE</span><span>DesignBuilder</span><span>EDSL Tas</span></div>
+      </div>
+    </div>
+
+    <div class="takeaway v">Building any tier is a hard, accredited, low-margin race against incumbents. <b>Ingesting the output of all three</b> is open ground.</div>
+  </section>
+
+  <!-- ================= §3 WORKFLOW ================= -->
+  <section class="mod" id="s3">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">The assessor's workflow</h2></div>
+    <p class="sec-intro">Four steps. The expensive, unautomatable difficulty lives <b>before the software opens</b> — in gathering and judging data. The software part is almost clerical by comparison.</p>
+
+    <div class="flow">
+      <div class="step hard">
+        <div class="sn">STEP 1 · the hard part</div>
+        <h5>Gather &amp; judge</h5>
+        <p>Chase drawings that may not exist; physically survey plant rooms &amp; ceiling voids; interrogate contractors; where data is missing, <b>infer</b> fabric from build-date + observation (erring pessimistic). Plus skilled <b>zoning</b>.</p>
+      </div>
+      <div class="step">
+        <div class="sn">STEP 2</div>
+        <h5>Enter the model</h5>
+        <p>Type the building into iSBEM's five forms, in a fixed order (below).</p>
+      </div>
+      <div class="step">
+        <div class="sn">STEP 3</div>
+        <h5>Run</h5>
+        <p>Ratings form → SBEM + EPCgen compute the rating and write all output files.</p>
+      </div>
+      <div class="step">
+        <div class="sn">STEP 4</div>
+        <h5>Review &amp; lodge</h5>
+        <p>Edit/curate recommendations, record the audit trail, then lodge the XML on the National Register.</p>
+      </div>
+    </div>
+
+    <div class="forms">
+      <span class="fstep"><b>General</b> · project + certifier ID</span><span class="ar">→</span>
+      <span class="fstep"><b>Project DB</b> · constructions + glazing (U-values)</span><span class="ar">→</span>
+      <span class="fstep"><b>Geometry</b> · zones → envelopes → openings</span><span class="ar">→</span>
+      <span class="fstep"><b>Building Services</b> · HVAC, HWS, PV…</span><span class="ar">→</span>
+      <span class="fstep run">Ratings · run</span>
+    </div>
+
+    <div class="takeaway">The defensible problem isn't running SBEM — it's <b>assembling and standing behind the data SBEM eats</b>. Software can't survey a plant room.</div>
+  </section>
+
+  <!-- ================= §4 DATA MODEL ================= -->
+  <section class="mod" id="s4">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">The building, as structured data</h2></div>
+    <p class="sec-intro">Behind the forms is a linked hierarchy of "objects." This is the <b>audit-grade data model</b> the venture wants to own — every value with a place and, via the audit trail, a provenance.</p>
+
+    <div class="hier">
+      <div class="tree">
+        <h4>Geometry objects</h4>
+        <div class="node lvl1">Zones <span class="role">— split by activity, HVAC, daylight</span></div>
+        <div class="node lvl2">Envelopes <span class="role">— walls / roofs / floors</span></div>
+        <div class="node lvl3">Windows &amp; rooflights <span class="role">— glazing, frame, shading</span></div>
+        <div class="node lvl3">Doors</div>
+        <div class="node lvl3">Thermal bridges <span class="role">— ψ-values per junction</span></div>
+      </div>
+      <div class="tree">
+        <h4>Building-services objects</h4>
+        <div class="node lvl1">Per-zone services</div>
+        <div class="node lvl2">HVAC system <span class="role">— type, fuel, seasonal efficiency</span></div>
+        <div class="node lvl2">HWS <span class="role">— generator, storage, circulation</span></div>
+        <div class="node lvl2">Ventilation &amp; lighting <span class="role">— SFP, controls, lux</span></div>
+        <div class="node lvl2">PVS / SES / CHP / wind <span class="role">— on-site generation</span></div>
+      </div>
+    </div>
+
+    <div class="takeaway">Every override of a default carries an <b>EPC Audit</b> entry — walk-through, survey, technical inspection, as-built docs. The tool already structures evidence provenance; it just buries it in a local <span class="mono">.nct</span>, queryable by no one.</div>
+  </section>
+
+  <!-- ================= §5 TWO JOBS + MATHS ================= -->
+  <section class="mod" id="s5">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Two jobs, one model — and the maths</h2></div>
+    <p class="sec-intro">The same building model answers two different questions against two different theoretical benchmarks. To do it, SBEM secretly builds <b>three buildings</b> (every object ×3), plus a fourth derived as a stock average.</p>
+
+    <div class="threebld">
+      <div class="b act"><div class="bn">Actual</div><div class="bd">The real building, as modelled from survey + drawings.</div></div>
+      <div class="b not"><div class="bn">Notional</div><div class="bd">The Part L compliance target benchmark.</div></div>
+      <div class="b ref"><div class="bn">Reference</div><div class="bd">The fixed EPC scale anchor — frozen at the 2006 Part L spec.</div></div>
+      <div class="b typ"><div class="bn">Typical</div><div class="bd">Stock-average, derived from the Notional.</div></div>
+    </div>
+
+    <div class="jobs">
+      <div class="job comp">
+        <div class="jt">Job 1 · BRUKL</div>
+        <h4>Part L compliance</h4>
+        <div class="eq">BER  vs  TER  &nbsp;(from the Notional)</div>
+        <p>England &amp; Wales also compare primary energy (BPER vs TPER); Scotland uses delivered energy (BDER vs TDER). A new-build / refurb gate.</p>
+      </div>
+      <div class="job epc">
+        <div class="jt">Job 2 · EPCgen</div>
+        <h4>EPC asset rating</h4>
+        <div class="eq">SER = RER × 0.765 &nbsp;·&nbsp; AR = BER / SER × 50</div>
+        <p>Mapped onto the A–G scale, with the B/C border pinned at AR = 50. A sale / lease / build certificate.</p>
+      </div>
+    </div>
+
+    <div class="calc">
+      <div>
+        <div class="ladder" id="ladder">
+          <div class="rung gAp" data-band="A+"><span class="gr">A+</span><span class="rng">AR &lt; 0 · net-zero</span></div>
+          <div class="rung gA" data-band="A"><span class="gr">A</span><span class="rng">0 – 25</span></div>
+          <div class="rung gB" data-band="B"><span class="gr">B</span><span class="rng">26 – 50</span></div>
+          <div class="rung gC" data-band="C"><span class="gr">C</span><span class="rng">51 – 75</span></div>
+          <div class="rung gD" data-band="D"><span class="gr">D</span><span class="rng">76 – 100</span></div>
+          <div class="rung gE" data-band="E"><span class="gr">E</span><span class="rng">101 – 125</span></div>
+          <div class="rung gF" data-band="F"><span class="gr">F</span><span class="rng">126 – 150</span></div>
+          <div class="rung gG" data-band="G"><span class="gr">G</span><span class="rng">over 150</span></div>
+        </div>
+      </div>
+      <div class="ctrl">
+        <label>Actual building emissions — BER (kgCO₂/m²·yr)</label>
+        <div class="ber"><span id="berval">13.5</span></div>
+        <input type="range" id="ber" min="0" max="60" step="0.5" value="13.5">
+        <div class="fixed">Scale anchor held fixed: SER = 25.7 (a real worked example)</div>
+        <div class="res">
+          Asset Rating <span class="big" id="arval">26</span> &nbsp;→&nbsp; band <span class="big" id="bandval">B</span><br>
+          <span id="reltext" class="fixed"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quirk"><b>The buried quirk.</b> The Reference building is <em>always</em> gas-heated, mixed-mode cooled and naturally ventilated, frozen at 2006 standards. So the A–G scale is anchored to a gas hypothetical — an all-electric building can score worse than a gas one even when its real-world carbon is lower. The headline letter can be structurally misleading.</div>
+
+    <div class="takeaway">Both targets are theoretical buildings; the operating patterns are standardised. <b>The EPC is a modelled number from assumptions and drawings — never a meter reading.</b> That "modelled-vs-metered gap" is the deepest unsolved problem in the stack.</div>
+  </section>
+
+  <!-- ================= §6 THE WEDGE ================= -->
+  <section class="mod" id="s6">
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">The wedge — input → engine → output</h2></div>
+    <p class="sec-intro">The centrepiece. Follow the data: hard-won inputs go into the engine, which emits a rich surface of files. That surface splits into <b>two on-ramps</b> — and the venture sits above iSBEM, taking the rich one through the assessor.</p>
+
+    <div class="wedge">
+      <div class="wflow">
+        <div class="wnode w-in">
+          <span class="wt">Input · the hard part</span>
+          <h4>Survey &amp; judgement</h4>
+          <ul>
+            <li>Drawings (if they exist)</li>
+            <li>Physical survey of plant &amp; voids</li>
+            <li>Inference where data is missing</li>
+            <li>Zoning &amp; engineering judgement</li>
+          </ul>
+          <div class="foot">Not software-solvable.</div>
+        </div>
+
+        <div class="wnode w-eng">
+          <span class="wt">Engine · regulated</span>
+          <h4>SBEM × 3 buildings</h4>
+          <ul>
+            <li>Actual / Notional / Reference</li>
+            <li>every object multiplied ×3</li>
+            <li>→ EPCgen + BRUKL</li>
+          </ul>
+          <div class="foot">Don't rebuild this.</div>
+        </div>
+
+        <div class="wnode w-out">
+          <div class="lane priv">
+            <div class="lh"><span class="ln">Rich · private on-ramp</span><span class="lk">stays local · at the assessor</span></div>
+            <div class="files">
+              <span>.nct</span><span>_dr.htm / .pdf</span><span>_sim.csv ×3</span><span>EPC.pdf</span><span>recs.pdf</span><span>EPC Audit</span>
+            </div>
+            <div class="foot">Every U-value, zone, system &amp; evidence source. The full picture.</div>
+          </div>
+          <div class="gapbar">↕ the gap between these two is the asset ↕</div>
+          <div class="lane pub">
+            <div class="lh"><span class="ln">Thin · public on-ramp</span><span class="lk">anyone can scrape</span></div>
+            <div class="files">
+              <span>RRN.xml</span><span>→ National Register</span><span>→ open data</span>
+            </div>
+            <div class="foot">A projection: the certificate + some collected data. Not the model.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wedge-bracket">
+        <span class="mk">↑</span>
+        <div>
+          <p class="wb-t">The venture sits here — above iSBEM, not against it</p>
+          <p><b>Ingest the rich private surface through the accredited assessor channel.</b> The public register answers "why not just scrape it?" — because the register is the thin projection; the model, the provenance and the recommendations stay local in the <span class="mono" style="color:#fff">.nct</span>. Closing that gap, at scale, is the wedge.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway v">Own the data layer; never the regulated calculation or the signature. The integration surface is <b>file handoff</b>, and the <b>assessor is the channel</b>.</div>
+  </section>
+
+  <!-- ================= §7 STRATEGIC READ ================= -->
+  <section class="mod" id="s7">
+    <div class="read">
+      <h3>Strategic read</h3>
+      <p class="sub">What the whole iSBEM stack means for the venture — the locked thesis, plus the two refinements the EPC-generation volume forced.</p>
+      <div class="reads">
+        <div class="rc">
+          <div class="ri">Position</div>
+          <h5>Sit above, don't compete</h5>
+          <p>Every calculation tier is accredited, hard and low-margin. Consume their files; live in the asset-owner's workflow, not the assessor's calculator.</p>
+        </div>
+        <div class="rc">
+          <div class="ri">Channel</div>
+          <h5>The assessor is the on-ramp</h5>
+          <p>The rich data is born at, and stays with, the accredited assessor. The relationship to that channel is the route to audit-grade data.</p>
+        </div>
+        <div class="rc">
+          <div class="ri">Difficulty</div>
+          <h5>The moat is collection, not code</h5>
+          <p>The unautomatable work is gathering and judging data — survey, inference, zoning. That's where defensibility lives, not in the software.</p>
+        </div>
+        <div class="rc">
+          <div class="ri">The atom</div>
+          <h5>The EPC is the reused data point</h5>
+          <p>One modelled number flows into MEES legality, UKSRS disclosure, GRESB, lender covenants and valuation. Own its workflow, sit at the centre.</p>
+        </div>
+        <div class="rc flag">
+          <div class="ri">Refinement · moat</div>
+          <h5>Two on-ramps, one gap</h5>
+          <p>The public register is a thin projection of a lodged XML. The rich model stays private in the <span class="mono">.nct</span>. The gap between them — not the public data — is the asset.</p>
+        </div>
+        <div class="rc flag">
+          <div class="ri">Refinement · scope</div>
+          <h5>A second asset class</h5>
+          <p>Each run also emits a coded, payback-banded recommendations set and a (Scotland) scenario engine — a retrofit-planning dataset sitting next to the rating, ready for MEES &amp; stranding triage.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot-note">
+      Companion to <b>UK_CRE_RegTech_Ecosystem_Atlas</b> · occupies Layer 4 (data-creation).<br>
+      Source: iSBEM User Guide v6.1.e — Vol 1 (Basics), Vol 2 (Compliance Assessment), Vol 3 (EPC Generation).<br>
+      Decisions locked: own the data layer · never the calculation or the signature · difficulty = data collection + judgement.
+    </div>
+  </section>
+
+</div>
+
+<script>
+  (function(){
+    var SER = 25.7;
+    var ber = document.getElementById('ber');
+    var berval = document.getElementById('berval');
+    var arval = document.getElementById('arval');
+    var bandval = document.getElementById('bandval');
+    var reltext = document.getElementById('reltext');
+    var rungs = document.querySelectorAll('#ladder .rung');
+
+    function bandFor(ar){
+      if(ar < 0) return 'A+';
+      if(ar <= 25) return 'A';
+      if(ar <= 50) return 'B';
+      if(ar <= 75) return 'C';
+      if(ar <= 100) return 'D';
+      if(ar <= 125) return 'E';
+      if(ar <= 150) return 'F';
+      return 'G';
+    }
+    function update(){
+      var b = parseFloat(ber.value);
+      var ar = Math.round(b / SER * 50);
+      var band = bandFor(ar);
+      berval.textContent = b.toFixed(1);
+      arval.textContent = ar;
+      bandval.textContent = band;
+      rungs.forEach(function(r){ r.classList.toggle('on', r.getAttribute('data-band') === band); });
+      if(Math.abs(b - SER) < 0.3){
+        reltext.textContent = 'BER ≈ SER → AR ≈ 50, the B/C border: a building just meeting the scale anchor.';
+      } else if(b < SER){
+        reltext.textContent = 'BER below the SER anchor → better than the standard (A or B territory).';
+      } else {
+        reltext.textContent = 'BER above the SER anchor → worse than the standard. Each step up SER ≈ 50 rating points.';
+      }
+    }
+    ber.addEventListener('input', update);
+    update();
+  })();
+</script>
+</body>
+</html>
