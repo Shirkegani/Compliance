@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UAE RegTech Ecosystem Atlas · ESG·CRE Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+/* atlas-specific additions on top of shared.css */
+.controls{position:sticky;top:0;z-index:30;background:rgba(244,241,233,.93);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--rule);margin:22px -30px 38px;padding:13px 30px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;}
+.control-label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);}
+.chips{display:flex;gap:7px;flex-wrap:wrap;}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:500;border:1px solid var(--rule-strong);
+  background:transparent;color:var(--ink-soft);padding:5px 13px;border-radius:20px;cursor:pointer;transition:all .15s ease;
+  display:inline-flex;align-items:center;gap:7px;}
+.chip:hover{border-color:var(--ink-soft);color:var(--ink);}
+.chip .dot{width:8px;height:8px;border-radius:50%;}
+.chip[data-geo="federal"] .dot{background:var(--uae);}
+.chip[data-geo="emirate"] .dot{background:var(--data);}
+.chip[data-geo="freezone"] .dot{background:var(--global);}
+.chip[data-geo="global"] .dot{background:var(--pressure);}
+.chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+.layer{margin-bottom:30px;position:relative;}
+.layer-head{display:flex;align-items:baseline;gap:14px;margin-bottom:13px;}
+.layer-num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);
+  border:1.5px solid var(--ink);border-radius:5px;padding:2px 7px;flex:none;}
+.layer-title{font-family:"Fraunces",serif;font-weight:600;font-size:20px;letter-spacing:-.01em;margin:0;}
+.layer-sub{font-size:13px;color:var(--ink-faint);margin-left:auto;text-align:right;max-width:340px;line-height:1.35;}
+.group{margin-bottom:12px;}
+.group-label{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-faint);margin:0 0 8px;display:flex;align-items:center;gap:9px;}
+.group-label::after{content:"";flex:1;height:1px;background:var(--rule);}
+.row{display:flex;flex-wrap:wrap;gap:10px;}
+.ent{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:9px;padding:11px 13px 12px;
+  min-width:150px;flex:1 1 150px;max-width:230px;box-shadow:var(--shadow);cursor:default;
+  transition:transform .14s ease, box-shadow .14s ease, opacity .2s ease;border-left-width:3px;}
+.ent:hover{transform:translateY(-2px);box-shadow:var(--shadow-lift);z-index:5;}
+.ent .code{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;line-height:1.2;color:var(--ink);}
+.ent .role{font-size:12px;color:var(--ink-soft);margin-top:3px;line-height:1.35;}
+.ent .geo{position:absolute;top:10px;right:11px;width:9px;height:9px;border-radius:50%;}
+.ent[data-geo="federal"]{border-left-color:var(--uae);} .ent[data-geo="federal"] .geo{background:var(--uae);}
+.ent[data-geo="emirate"]{border-left-color:var(--data);} .ent[data-geo="emirate"] .geo{background:var(--data);}
+.ent[data-geo="freezone"]{border-left-color:var(--global);} .ent[data-geo="freezone"] .geo{background:var(--global);}
+.ent[data-geo="global"]{border-left-color:var(--pressure);} .ent[data-geo="global"] .geo{background:var(--pressure);}
+.ent.dimmed{opacity:.16;filter:grayscale(.6);}
+.ent .tip{display:none;}
+.layer.tint-data .ent{background:#fbf5fa;}
+.layer.tint-pressure .ent{background:#fcf3ee;}
+.layer.market .ent{background:#f6f4ea;border-left-color:var(--market);}
+.layer.market .ent .geo{display:none;}
+.ent .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;
+  text-transform:uppercase;margin-top:6px;padding:1px 6px;border-radius:4px;}
+.tag.threat{background:#f6dcd2;color:#9a3a18;} .tag.partner{background:#dcecdf;color:#2c6a43;} .tag.terrain{background:#e3e0d2;color:#5b574a;}
+.statehub{margin-top:14px;background:linear-gradient(135deg,#0c3b2e,#11694a);color:#e9f8f0;border-radius:12px;
+  padding:18px 20px;box-shadow:0 6px 22px rgba(15,105,74,.28);}
+.statehub .h{font-family:"Fraunces",serif;font-weight:600;font-size:18px;margin:0 0 4px;color:#fff;}
+.statehub p{margin:0 0 12px;font-size:13.5px;color:#cdeede;max-width:700px;line-height:1.5;}
+.statehub .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+.statehub .src{font-family:"IBM Plex Mono",monospace;font-weight:600;background:#fff;color:#11694a;padding:5px 11px;border-radius:6px;font-size:13px;}
+.statehub .arrow{color:#7fc9ab;font-size:16px;}
+.statehub .dest{font-family:"IBM Plex Mono",monospace;font-size:12px;background:rgba(255,255,255,.13);color:#e3f4ec;padding:5px 10px;border-radius:6px;border:1px solid rgba(255,255,255,.2);}
+.band-divider{display:flex;align-items:center;gap:16px;margin:46px 0 26px;}
+.band-divider .line{flex:1;height:2px;background:var(--ink);}
+.band-divider .lbl{font-family:"Fraunces",serif;font-weight:600;font-size:22px;}
+.wedge{margin-top:40px;background:linear-gradient(135deg,#0f5132,#12694a);color:#eafaf0;border-radius:16px;
+  padding:30px 34px;box-shadow:0 10px 34px rgba(15,81,50,.28);position:relative;overflow:hidden;}
+.wedge::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 88% 12%, rgba(255,255,255,.12), transparent 42%);}
+.wedge .ek{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9fdcb8;margin:0 0 9px;position:relative;}
+.wedge h2{font-family:"Fraunces",serif;font-weight:600;font-size:27px;margin:0 0 10px;color:#fff;position:relative;}
+.wedge p{margin:0 0 16px;font-size:15px;color:#d6f0e0;max-width:720px;line-height:1.55;position:relative;}
+.wedge p b{color:#fff;}
+.wedge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;position:relative;}
+.wcard{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.16);border-radius:10px;padding:13px 15px;}
+.wcard .t{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#9fdcb8;margin:0 0 5px;}
+.wcard .d{font-size:13px;color:#eafaf0;line-height:1.45;}
+.legend{margin-top:50px;border-top:1px solid var(--rule);padding-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px;}
+.legend h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 10px;}
+.legend .li{display:flex;gap:9px;align-items:flex-start;font-size:13px;color:var(--ink-soft);margin-bottom:7px;line-height:1.4;}
+.legend .sw{width:12px;height:12px;border-radius:50%;flex:none;margin-top:3px;}
+.legend b{color:var(--ink);}
+@media (max-width:720px){.controls{margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px;}.layer-sub{display:none;}.ent{min-width:135px;flex-basis:135px;}}
+@media print{.controls,.chip{display:none !important;} .ent{break-inside:avoid;} .ent .tip{display:none;}}
+</style>
+</head>
+<body>
+<div class="topbar no-print"><div class="row">
+  <a class="crumb" href="../index.html">ESG·CRE Knowledge Base</a>
+  <span class="crumb sep">/</span>
+  <a class="crumb" href="index.html"><b>UAE</b></a>
+  <span class="crumb sep">/</span>
+  <span class="crumb">Ecosystem Atlas</span>
+  <span class="mkt-pill" data-mkt="uae">UAE</span>
+  <span class="spacer"></span>
+  <button class="btn" onclick="window.print()">⤓ Download PDF</button>
+</div></div>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="kicker">United Arab Emirates · ESG &amp; Compliance Technology in CRE</p>
+    <h1 class="title">The RegTech<br><em>Ecosystem Atlas</em></h1>
+    <p class="standfirst">
+      The whole UAE picture on one page: who makes the rules, what instruments they issue, who is licensed to verify,
+      where a building's data is actually born, the <b>five forcing functions</b> that demand it — led by a top-down
+      <b>state mandate</b> the UK has no equivalent of — and the buyer who absorbs it all. Origin is tagged on every
+      entity: <b>federal</b>, <b>emirate</b>, <b>free-zone</b>, or <b>global</b>. Use the filter to isolate one.
+    </p>
+  </header>
+
+  <div class="controls">
+    <span class="control-label">Filter origin</span>
+    <div class="chips" id="chips">
+      <button class="chip active" data-geo="all">All</button>
+      <button class="chip" data-geo="federal"><span class="dot"></span>Federal</button>
+      <button class="chip" data-geo="emirate"><span class="dot"></span>Emirate</button>
+      <button class="chip" data-geo="freezone"><span class="dot"></span>Free zone</button>
+      <button class="chip" data-geo="global"><span class="dot"></span>Global</button>
+    </div>
+    <a href="glossary.html" class="crumb" style="margin-left:auto">Glossary →</a>
+    <span class="control-label">Hover any card for detail</span>
+  </div>
+
+  <div id="stack"></div>
+
+  <!-- MARKET BAND -->
+  <div class="band-divider"><span class="lbl">The market you'd enter</span><span class="line"></span></div>
+  <p class="band-note">
+    Everything above is the <b>terrain</b>. This is the <b>competition</b> — crowded at the top (Big 4 + global SaaS),
+    thin in the contested middle, and wide open in the long tail. Tags mark each as a competitive
+    <span style="color:#9a3a18;font-weight:600">threat</span>, a potential
+    <span style="color:#2c6a43;font-weight:600">partner / integration point</span>, or fixed
+    <span style="color:#5b574a;font-weight:600">terrain</span>.
+  </p>
+  <div id="market"></div>
+
+  <!-- WEDGE -->
+  <div class="wedge">
+    <p class="ek">The venture's position</p>
+    <h2>Own UAE-localised MRV for the long tail. Never the verification signature.</h2>
+    <p>
+      Sit <b>above the free government IEQT tool</b> (let it remain the lodgement rail) and <b>below the Big-4 advisory
+      bundle</b> — in the workflow that turns a UAE building's messy reality (district-cooling Scope 2, DEWA/ADDC factors,
+      free-zone structures) into a defensible inventory + reduction plan, gathered once and reported to the State, the
+      lender, the investor and the listing exchange. The localisation depth is the moat; the India cost base is the price weapon.
+    </p>
+    <div class="wedge-grid">
+      <div class="wcard"><p class="t">The wedge</p><p class="d">UAE-localised MRV for the non-HCEE long tail — the ~35k private entities the Big 4 can't serve economically.</p></div>
+      <div class="wcard"><p class="t">The boundary</p><p class="d">Supply the verified inventory &amp; plan; never claim to issue the verification sign-off or the Pearl/Al Sa'fat certificate.</p></div>
+      <div class="wcard"><p class="t">The moat</p><p class="d">Depth of UAE-CRE localisation (factors, district cooling, free zones) — not the workflow, which incumbents already sell.</p></div>
+      <div class="wcard"><p class="t">The route</p><p class="d">Consulting-led first (mirror S&amp;P/PwC), productise underneath; anchor a free-zone-authority "whale" deal, then GCC.</p></div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div>
+      <h4>Origin of authority</h4>
+      <div class="li"><span class="sw" style="background:var(--uae)"></span><span><b>Federal</b> — the UAE-wide layer: MOCCAE, the climate law, the IEQT platform. Universal reach.</span></div>
+      <div class="li"><span class="sw" style="background:var(--data)"></span><span><b>Emirate</b> — Abu Dhabi / Dubai / RAK rules: Estidama, Al Sa'fat, Barjeel, the local utilities and authorities.</span></div>
+      <div class="li"><span class="sw" style="background:var(--global)"></span><span><b>Free zone</b> — the parallel jurisdictions (DMCC, ADGM, DIFC) with their own authorities and disclosure rules.</span></div>
+      <div class="li"><span class="sw" style="background:var(--pressure)"></span><span><b>Global</b> — not UAE law but standards demanded by capital and tenants (ISSB, GHG Protocol, LEED, GRESB).</span></div>
+    </div>
+    <div>
+      <h4>How to read the stack</h4>
+      <div class="li"><span><b>Layers 1→7</b> read top-down: rules are set, instruments issued, gatekeepers verify, data is created, the five pressures demand it, the buyer absorbs it.</span></div>
+      <div class="li"><span><b>Layer 5</b> (the pressures) is where the UAE diverges most from the UK — a fifth, dominant <b>state-mandate</b> pressure sits above the familiar four.</span></div>
+      <div class="li"><span>The <b>MRV inventory</b> is the most reused data artifact — the hub every pressure consumes (the UAE analogue of the UK's EPC node).</span></div>
+    </div>
+  </div>
+
+  <p class="colophon">
+    <b>Sources &amp; caveats.</b> Built from UAE Modules 1–8 and the ingested primary sources (Federal Decree-Law 11/2024 text;
+    PwC/KPMG/S&amp;P/Uniqus readiness guides). Market-size and entity-count figures are flagged <b>VERIFY</b> in the modules and
+    kept qualitative here. The penalty structure reflects the corrected reading from the statute (judicial Art. 15 fine + deferred
+    Art. 17 administrative regime). A living document — deepened as MOCCAE implementing resolutions are published.
+  </p>
+</div>
+
+<script>
+const LAYERS = [
+  { num:"01", title:"Rule-makers", sub:"The authorities that set the rules. The state's fingerprints are everywhere — this is the layer that makes the UAE different.",
+    groups:[{ items:[
+      {code:"MOCCAE", role:"Federal climate authority", geo:"federal", tip:"<b>Ministry of Climate Change &amp; Environment.</b> Owns the federal climate law, the MRV methodologies, the IEQT platform and the National Carbon Credit Registry. The single most important rule-maker."},
+      {code:"UAE Cabinet", role:"Sets national targets", geo:"federal", tip:"<b>The Cabinet.</b> Sets annual sector emission-reduction targets (Art. 5), can extend the compliance deadline (Art. 18), and will define the administrative-penalty regime (Art. 17)."},
+      {code:"SCA", role:"Securities + carbon market", geo:"federal", tip:"<b>Securities &amp; Commodities Authority.</b> Mandates listed-company sustainability disclosure and oversees the developing carbon-credit trading market."},
+      {code:"CBUAE", role:"Climate financial risk", geo:"federal", tip:"<b>Central Bank of the UAE.</b> Sets principles for managing climate-related financial risk; steers banks toward sustainable finance."},
+      {code:"Abu Dhabi DMT", role:"Estidama / Pearl", geo:"emirate", tip:"<b>Dept of Municipalities &amp; Transport (Abu Dhabi).</b> Administers Estidama and the Pearl Rating System — the emirate's construction-stage sustainability gate."},
+      {code:"Dubai Municipality", role:"Al Sa'fat / DSM", geo:"emirate", tip:"<b>Dubai Municipality.</b> Owns the Al Sa'fat green-building system and Dubai's demand-side-management retrofit agenda."},
+      {code:"EAD / RAK", role:"Other emirate authorities", geo:"emirate", tip:"<b>Environment Agency – Abu Dhabi, RAK Municipality, etc.</b> Run emirate-level MRV (Abu Dhabi) and codes like Barjeel (Ras Al Khaimah)."},
+      {code:"ISSB / IFRS", role:"Global disclosure baseline", geo:"global", tip:"<b>Intl Sustainability Standards Board.</b> Authors S1/S2 — the global baseline the UAE's listed-company disclosure is converging toward."},
+      {code:"GHG Protocol", role:"Carbon accounting rules", geo:"global", tip:"<b>Greenhouse Gas Protocol.</b> The global Scope 1/2/3 rulebook every UAE inventory is built on."},
+    ]}]
+  },
+  { num:"02", title:"The instruments", sub:"What the rule-makers issue: the law, the codes, the disclosure rules an entity must answer to.",
+    groups:[
+      {label:"Federal — mandatory, universal", items:[
+        {code:"Climate Law 11/2024", role:"Universal MRV duty", geo:"federal", tip:"<b>Federal Decree-Law 11/2024.</b> The anchor. Every emitting entity — including free zones, no threshold — must measure, report and plan to reduce emissions. Penalty-backed (AED 50k–2m)."},
+        {code:"IEQT / MRV system", role:"The reporting rail", geo:"federal", tip:"<b>Integrated Emissions Quantification Tool (mrv.ae).</b> MOCCAE's mandatory digital platform for emissions reporting — the lodgement rail you sit above."},
+        {code:"NRCC (Res. 67/2024)", role:"Carbon-credit registry", geo:"federal", tip:"<b>National Register for Carbon Credits.</b> The market track — issuance/trading of credits, mostly relevant to large emitters (HCEEs), not the typical building."},
+      ]},
+      {label:"Emirate — construction gates", items:[
+        {code:"Estidama / Pearl", role:"Abu Dhabi build gate", geo:"emirate", tip:"<b>Estidama Pearl Rating System.</b> Min. 1 Pearl for new buildings, 2 for government. A design/construction gate — not an in-life leasing ban (the key UK contrast)."},
+        {code:"Al Sa'fat", role:"Dubai build gate", geo:"emirate", tip:"<b>Al Sa'fat.</b> Dubai's green-building system; Silver is the mandatory baseline for every new building permit from 2026."},
+        {code:"Barjeel", role:"RAK build gate", geo:"emirate", tip:"<b>Barjeel.</b> Ras Al Khaimah's green-building regulations, mandatory since 2020."},
+      ]},
+      {label:"Disclosure & free-zone rules", items:[
+        {code:"SCA / ADX / DFM", role:"Listed-co reporting", geo:"federal", tip:"<b>Listed-company sustainability disclosure.</b> SCA mandate; ADX and DFM each require annual sustainability reports for listed firms."},
+        {code:"ADGM / DIFC", role:"Free-zone ESG rules", geo:"freezone", tip:"<b>Financial free zones.</b> ADGM runs a comply-or-explain ESG disclosure framework (~USD 68m threshold); DIFC/DFSA expect ESG integration."},
+        {code:"IFRS S1/S2", role:"Convergence target", geo:"global", tip:"<b>IFRS S1/S2.</b> The disclosure standard the UAE is converging toward — the biggest reuse of UK/global knowledge."},
+      ]},
+    ]
+  },
+  { num:"03", title:"Gatekeepers", sub:"Who verifies emissions and who is licensed to certify buildings. You sit alongside these — never become them.",
+    groups:[
+      {label:"Verification & assurance", items:[
+        {code:"Verification bodies", role:"ISO 14064 verifiers", geo:"global", tip:"<b>Third-party verifiers.</b> Accredited bodies that verify HCEE inventories and (increasingly) assurance on disclosures — the independent sign-off you support but don't issue."},
+        {code:"Big 4 assurance", role:"PwC·KPMG·EY·Deloitte", geo:"global", tip:"<b>The Big-4 assurance bundle.</b> Run readiness + assurance for large clients; a bundling risk if they push down-market, but they vacate the long tail."},
+        {code:"Judicial officers", role:"Statutory enforcement", geo:"federal", tip:"<b>MOCCAE/authority judicial officers (Art. 14).</b> Detect violations; the Art. 15 fine runs through a judicial-conviction route."},
+      ]},
+      {label:"Building-certification professionals", items:[
+        {code:"PQP", role:"Estidama facilitator", geo:"emirate", tip:"<b>Pearl Qualified Professional.</b> The licensed professional who facilitates Estidama certification — a gatekeeper to partner with, not replace."},
+        {code:"Al Sa'fat assessors", role:"Dubai certification", geo:"emirate", tip:"<b>Accredited Al Sa'fat professionals.</b> Sign off Dubai green-building compliance at permit stage."},
+        {code:"LEED / BREEAM APs", role:"Voluntary cert pros", geo:"global", tip:"<b>Accredited professionals</b> for the voluntary international schemes premium assets pursue for capital."},
+      ]},
+    ]
+  },
+  { num:"04", title:"Data-creation layer", sub:"Where a UAE building's emissions data is actually born — and where the localisation difficulty (and the moat) lives.", tint:"data",
+    groups:[
+      {label:"The UAE-specific factors & sources", items:[
+        {code:"DEWA / ADDC factors", role:"Grid emission factors", geo:"emirate", tip:"<b>Utility emission factors.</b> Dubai (DEWA) and Abu Dhabi (ADDC) grids differ; using the right local factor is a correctness problem generic tools get wrong."},
+        {code:"District cooling", role:"Scope 2 knot", geo:"emirate", tip:"<b>Empower / Tabreed district cooling.</b> A huge share of UAE building energy — and a genuine Scope 2 accounting knot with no clean UK analogue. A signature localisation feature."},
+        {code:"Refrigerants / DX", role:"Scope 1 leakage", geo:"global", tip:"<b>Refrigerant leakage</b> from heavy cooling loads — a material Scope 1 source in the UAE climate that's easy to under-count."},
+        {code:"Sub-meters / BMS", role:"Actual consumption", geo:"global", tip:"<b>Building Management Systems &amp; meters.</b> Real metered kWh — the input verifiers and lenders increasingly want. A data-source partner."},
+      ]},
+      {label:"The reporting artifacts", items:[
+        {code:"GHG inventory", role:"The core deliverable", geo:"federal", tip:"<b>The verified Scope 1/2 (then 3) inventory.</b> The central artifact — the UAE analogue of the UK EPC as the most-reused data point."},
+        {code:"Reduction plan", role:"Mandatory submission", geo:"federal", tip:"<b>The emissions-reduction plan.</b> Current + planned measures and expected results — a mandatory submission under Art. 6, not just a number."},
+        {code:"IEQT submission", role:"The lodgement file", geo:"federal", tip:"<b>The mrv.ae submission.</b> The federal lodgement of the inventory + plan — the rail your workflow feeds, never replaces."},
+      ]},
+    ]
+  },
+  { num:"05", title:"The five forcing functions", sub:"Why anyone acts. The UAE has five, not the UK's four — and the extra one sits on top.", tint:"pressure",
+    groups:[{ items:[
+      {code:"① State mandate", role:"The dominant force", geo:"federal", tip:"<b>The top-down state mandate.</b> National Net Zero 2050, the NDC, Vision alignment — a genuine decision-driver for state-linked buyers that has no UK parallel. The pitch's third register."},
+      {code:"② Regulator", role:"Climate law · MRV", geo:"federal", tip:"<b>Regulatory pressure.</b> The universal MRV duty + emirate build codes. Penalty-backed, deadline-driven."},
+      {code:"③ Investor", role:"GRESB · S1/S2", geo:"global", tip:"<b>Investor pressure.</b> Funds and listing exchanges demand benchmark scores and disclosure — strongest for listed and institutionally-held stock."},
+      {code:"④ Lender", role:"Green finance · sukuk", geo:"global", tip:"<b>Lender pressure.</b> Green loans and green sukuk increasingly tie terms to sustainability performance — nascent but rising under CBUAE steer."},
+      {code:"⑤ Tenant", role:"Weak / inverted", geo:"global", tip:"<b>Tenant pressure.</b> Weaker than the UK and sometimes inverted in a landlord-favourable, occupier-light market — don't lead the pitch with it."},
+    ]}]
+  },
+  { num:"06", title:"The buyer", sub:"Absorbs all five pressures — and must answer them from one set of building data. Not a UK-style REIT.",
+    groups:[{ items:[
+      {code:"Corporate occupier", role:"The beachhead (Seg B)", geo:"federal", tip:"<b>Corporate owner-occupiers.</b> In scope, budget-holding, and under-served — the realistic first buyer (Module 6 beachhead)."},
+      {code:"Master developer", role:"The anchor (Seg A)", geo:"emirate", tip:"<b>Large (often government-linked) developers.</b> Huge portfolios, the anchor client — but slow, relationship-driven, well-courted by the Big 4."},
+      {code:"Free-zone authority", role:"The whale (Seg D)", geo:"freezone", tip:"<b>Free-zone authorities (DMCC etc.).</b> Could mandate a framework across thousands of tenants at once — the highest-leverage single deal."},
+      {code:"FM / district cooling", role:"Data partner (Seg C)", geo:"emirate", tip:"<b>Facilities-management &amp; district-cooling operators.</b> Hold the operational data — a partner/channel more than a buyer."},
+      {code:"Masdar Green REIT", role:"The lighthouse", geo:"emirate", tip:"<b>The nascent REIT layer.</b> Thin today, but a lighthouse reference client for the institutionally-minded segment."},
+    ]}]
+  },
+];
+
+const MARKET = [
+  {label:"Big 4 & major advisory (top end taken)", items:[
+    {code:"PwC ME", role:"Readiness + assurance + legal", tag:"threat", tip:"<b>PwC Middle East.</b> Published a full readiness guide with a five-step prep flow + dedicated assurance/reporting/legal teams. Owns the high end."},
+    {code:"KPMG / S&P", role:"Readiness solutions", tag:"threat", tip:"<b>KPMG &amp; S&amp;P Global.</b> S&amp;P's six-step 'readiness solution' mirrors the consulting-led MRV motion almost exactly — the workflow is not a differentiator."},
+    {code:"Uniqus", role:"India-led ESG + tool", tag:"threat", tip:"<b>Uniqus.</b> Indian-leadership ESG consultancy with its own 'ESG UniVerse' tool selling into this exact law — the closest competitor and template."},
+  ]},
+  {label:"Carbon-accounting SaaS (generic)", items:[
+    {code:"Plan A / Zevero", role:"Global carbon platforms", tag:"threat", tip:"<b>Global SaaS.</b> Polished and cheap, but weak on UAE specifics (DEWA factors, district cooling, free-zone structures). The gap narrows over time — the window is now."},
+    {code:"Spectreco", role:"GCC ESG-compliance", tag:"threat", tip:"<b>Spectreco.</b> GCC-wide, cross-border (UAE+Qatar) ESG-compliance positioning."},
+    {code:"DHL GoGreen", role:"Supply-chain channel", tag:"threat", tip:"<b>Sideways competitor.</b> Sells carbon insetting + a dashboard to its own customers — a building occupier may be touched by its shipper's tool first."},
+  ]},
+  {label:"Green-building consultancies", items:[
+    {code:"Clenergize / others", role:"Estidama/LEED niche", tag:"threat", tip:"<b>Local green-building consultancies.</b> Own the certification niche (Estidama, LEED, Al Sa'fat) — adjacent, partner-or-niche rather than head-on."},
+  ]},
+  {label:"Infrastructure & terrain", items:[
+    {code:"IEQT (mrv.ae)", role:"The free gov rail", tag:"terrain", tip:"<b>The government MRV platform.</b> Free, mandatory lodgement rail — don't compete with it; feed it. Consume its requirements as your spec."},
+    {code:"District-cooling cos", role:"Data holders", tag:"partner", tip:"<b>Empower / Tabreed.</b> Hold the district-cooling consumption data the Scope 2 calc needs — integration points."},
+    {code:"MOCCAE / SCA", role:"Define the terrain", tag:"terrain", tip:"<b>Rule-makers, not vendors.</b> They define what data matters. The ground everyone builds on."},
+  ]},
+];
+
+function entHTML(e, isMarket){
+  const geo = e.geo ? ` data-geo="${e.geo}"` : ' data-geo="market"';
+  const tag = isMarket && e.tag ? `<span class="tag ${e.tag}">${e.tag==='partner'?'partner / integ.':e.tag}</span>` : '';
+  const dot = isMarket ? '' : '<span class="geo"></span>';
+  return `<div class="ent"${geo}>${dot}<div class="code">${e.code}</div><div class="role">${e.role}</div>${tag}<div class="tip">${e.tip}</div></div>`;
+}
+function groupsHTML(groups, isMarket){
+  return groups.map(g=>{
+    const lbl = g.label ? `<p class="group-label">${g.label}</p>` : '';
+    return `<div class="group">${lbl}<div class="row">${g.items.map(i=>entHTML(i,isMarket)).join('')}</div></div>`;
+  }).join('');
+}
+const stack=document.getElementById('stack');
+stack.innerHTML = LAYERS.map(L=>{
+  const tint = L.tint ? ` tint-${L.tint}` : '';
+  let extra='';
+  if(L.num==="04"){
+    extra = `<div class="statehub">
+      <p class="h">★ The MRV inventory — the atomic data artifact</p>
+      <p>The most reused, most leveraged data object in the UAE stack — gathered once, it answers all five pressures at once. The localisation difficulty (district-cooling Scope 2, local grid factors, refrigerant leakage, free-zone boundaries) is exactly where a generic global tool fails and where the venture's moat is built.</p>
+      <div class="flow">
+        <span class="src">GHG inventory + plan</span><span class="arrow">→</span>
+        <span class="dest">Federal MRV (IEQT)</span>
+        <span class="dest">Listed-co disclosure</span>
+        <span class="dest">GRESB / investor</span>
+        <span class="dest">Green-finance terms</span>
+        <span class="dest">State-alignment story</span>
+      </div></div>`;
+  }
+  return `<section class="layer${tint}"><div class="layer-head"><span class="layer-num">${L.num}</span><h3 class="layer-title">${L.title}</h3><span class="layer-sub">${L.sub}</span></div>${groupsHTML(L.groups,false)}${extra}</section>`;
+}).join('');
+document.getElementById('market').innerHTML = `<section class="layer market">${groupsHTML(MARKET,true)}</section>`;
+
+// geography filter
+const chips=document.getElementById('chips');
+chips.addEventListener('click', ev=>{
+  const btn=ev.target.closest('.chip'); if(!btn) return;
+  [...chips.children].forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  const geo=btn.dataset.geo;
+  document.querySelectorAll('#stack .ent').forEach(el=>{
+    el.classList.toggle('dimmed', geo!=='all' && el.getAttribute('data-geo')!==geo);
+  });
+});
+
+// body-mounted tooltip (atlas cards carry their own .tip, not the glossary engine)
+const PAD=10;
+const tt=document.createElement('div'); tt.id='tt'; document.body.appendChild(tt);
+let active=null;
+function place(el){
+  const src=el.querySelector('.tip'); if(!src) return;
+  tt.innerHTML=src.innerHTML; tt.classList.add('show');
+  const tw=tt.offsetWidth, th=tt.offsetHeight, vw=document.documentElement.clientWidth;
+  const c=el.getBoundingClientRect(), cx=c.left+c.width/2;
+  const left=Math.max(PAD, Math.min(cx-tw/2, vw-tw-PAD));
+  let top=c.top-th-10, below=false;
+  if(top<PAD){ top=c.bottom+10; below=true; }
+  tt.style.left=left+'px'; tt.style.top=top+'px';
+  tt.classList.toggle('below',below);
+  tt.style.setProperty('--arrow', Math.max(14, Math.min(cx-left, tw-14))+'px');
+  active=el;
+}
+function hide(){ tt.classList.remove('show'); active=null; }
+document.querySelectorAll('.ent').forEach(el=>{
+  el.addEventListener('mouseenter',()=>place(el));
+  el.addEventListener('mouseleave',hide);
+  el.addEventListener('click',e=>{e.stopPropagation(); active===el?hide():place(el);});
+});
+document.addEventListener('click',hide);
+window.addEventListener('scroll',hide,{passive:true});
+window.addEventListener('resize',hide);
+</script>
+</body>
+</html>
