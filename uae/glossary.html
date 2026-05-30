@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary · UAE · ESG·CRE Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+</head>
+<body>
+<div class="topbar no-print"><div class="row">
+  <a class="crumb" href="../index.html">ESG·CRE Knowledge Base</a>
+  <span class="crumb sep">/</span>
+  <a class="crumb" href="index.html"><b>UAE</b></a>
+  <span class="crumb sep">/</span>
+  <span class="crumb">Glossary</span>
+  <span class="mkt-pill" data-mkt="uae">UAE</span>
+  <span class="spacer"></span>
+  <button class="btn" onclick="window.print()">⤓ Download PDF</button>
+</div></div>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="kicker">United Arab Emirates · Reference</p>
+    <h1 class="title">Glossary</h1>
+    <p class="standfirst">
+      Every acronym and short-form across the UAE study, grouped by function.
+      Format: <b>acronym — full form</b>, then a one-line description. Start typing to filter.
+      The same definitions appear as hover-tooltips throughout the modules.
+    </p>
+  </header>
+
+  <div class="gloss-search">
+    <input id="gsearch" type="text" placeholder="Search acronym, full form, or description…" autocomplete="off">
+    <span id="gcount"></span>
+  </div>
+  <div id="glossary-body"></div>
+  <div class="gtoggle-wrap"><button id="gtoggle"></button></div>
+
+  <p class="colophon no-print">UAE glossary · shared with the inline tooltips across all UAE modules.
+    Looking for a UK term? See the <a href="../uk/glossary.html">UK glossary</a>.</p>
+</div>
+
+<script>window.MARKET="uae";</script>
+<script src="../assets/glossary.js"></script>
+<script>
+/* group the flat dictionary into functional categories for display */
+const G = window.__GLOSSARY;
+const CATS = [
+  ["Regulators & authorities", ["MOCCAE","SCA","ADX","DFM","ADGM","DIFC","DFSA","DMT","CBUAE","EAD","DEWA","ADDC"]],
+  ["The climate-law machinery", ["MRV","IEQT","NRCC","HCEE","NDC","DSM"]],
+  ["Green-building & asset regimes", ["Estidama","Pearl","PBRS","PQP","Al Sa'fat","Barjeel","SHGC","District cooling","BREEAM","LEED","WELL"]],
+  ["Carbon & sustainability concepts", ["GHG","GHG Protocol","Scope 1","Scope 2","Scope 3","Scope 1/2/3","CCUS","Net Zero","CBAM","ISO 14064","ISO","Single / double materiality","Stranded asset"]],
+  ["Disclosure standards", ["ISSB","IFRS","IFRS S1","IFRS S2","S1/S2","TCFD","GRI","SASB","CDP","GRESB"]],
+  ["Real estate, finance & venture", ["CRE","REIT","SLL","Sukuk","ESG","SME","DMCC","SSOT","CAGR","GTM","B2B2B","BMS"]],
+];
+function look(k){ return G.core[k] || G.uae[k]; }
+const body=document.getElementById('glossary-body');
+let total=0;
+body.innerHTML = CATS.map(([cat,keys])=>{
+  const items=keys.filter(look).map(k=>{
+    const e=look(k); total++;
+    return `<div class="gterm"><span class="gac">${k}</span> <span class="gfull">— ${e[0]}</span><div class="gdesc">${e[1]}</div></div>`;
+  }).join('');
+  return `<div class="gloss-cat"><p class="gloss-cat-h">${cat}</p><div class="gloss-grid">${items}</div></div>`;
+}).join('');
+
+/* search + collapse (Atlas engine) */
+const gcount=document.getElementById('gcount'), gtoggle=document.getElementById('gtoggle');
+let expanded=false, searching=false;
+function setCount(n){ gcount.textContent = (n===total? total+" terms" : n+" of "+total); }
+function sync(){
+  body.classList.toggle('collapsed', !expanded && !searching);
+  if(searching){ gtoggle.style.display='none'; }
+  else { gtoggle.style.display=''; gtoggle.textContent = expanded? 'Hide glossary ↑' : ('Show all '+total+' terms ↓'); }
+}
+setCount(total); sync();
+gtoggle.addEventListener('click', ()=>{ expanded=!expanded; sync(); if(!expanded) window.scrollTo({top:0,behavior:'smooth'}); });
+document.getElementById('gsearch').addEventListener('input', e=>{
+  const q=e.target.value.trim().toLowerCase(); searching=q.length>0; let shown=0;
+  body.querySelectorAll('.gloss-cat').forEach(cat=>{
+    let has=false;
+    cat.querySelectorAll('.gterm').forEach(t=>{
+      const hit=!q||t.textContent.toLowerCase().includes(q);
+      t.classList.toggle('hidden',!hit); if(hit){has=true;shown++;}
+    });
+    cat.classList.toggle('hidden',!has);
+  });
+  setCount(shown); sync();
+});
+</script>
+</body>
+</html>
