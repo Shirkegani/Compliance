@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venture Value Chain · UAE · ESG·CRE Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+.vc-intro{max-width:820px;margin:6px 0 30px;font-size:15px;color:var(--ink-soft);line-height:1.6;}
+.vc-intro b{color:var(--ink);}
+/* pipeline: inputs → engine → outputs */
+.pipe{display:grid;grid-template-columns:1fr auto 1.3fr auto 1fr;gap:0;align-items:stretch;margin:8px 0 24px;}
+.pcol{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:16px 16px 14px;box-shadow:var(--shadow);}
+.pcol.engine{background:linear-gradient(135deg,#0f5132,#12694a);border:none;color:#eafaf0;box-shadow:0 8px 26px rgba(15,81,50,.26);}
+.pcol h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 10px;}
+.pcol.engine h4{color:#9fdcb8;}
+.pcol ul{margin:0;padding:0;list-style:none;}
+.pcol li{font-size:13px;line-height:1.4;padding:6px 0;border-bottom:1px solid var(--rule);color:var(--ink-soft);}
+.pcol li:last-child{border-bottom:none;}
+.pcol.engine li{border-color:rgba(255,255,255,.15);color:#eafaf0;}
+.pcol.engine .big{font-family:"Fraunces",serif;font-weight:600;font-size:17px;color:#fff;display:block;margin-bottom:6px;}
+.parrow{display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--uae);padding:0 8px;}
+.section-h{display:flex;align-items:center;gap:14px;margin:38px 0 16px;}
+.section-h .line{flex:1;height:2px;background:var(--ink);}
+.section-h .lbl{font-family:"Fraunces",serif;font-weight:600;font-size:20px;}
+/* channels → buyers */
+.cb{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.panel{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:18px;box-shadow:var(--shadow);}
+.panel h4{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 12px;}
+.item{display:flex;gap:11px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule);}
+.item:last-child{border-bottom:none;}
+.item .pri{font-family:"IBM Plex Mono",monospace;font-size:11px;flex:none;width:42px;color:var(--global);padding-top:2px;}
+.item .bd .t{font-weight:600;font-size:14px;}
+.item .bd .d{font-size:12.5px;color:var(--ink-soft);line-height:1.45;margin-top:2px;}
+.item.beach{background:var(--venture-bg);margin:0 -10px;padding:9px 10px;border-radius:8px;border-bottom:none;}
+.item.beach .pri{color:var(--venture);}
+.moat{margin-top:14px;background:var(--paper-2);border-left:3px solid var(--venture);border-radius:0 10px 10px 0;padding:14px 16px;font-size:13.5px;color:var(--ink-soft);line-height:1.55;}
+.moat b{color:var(--ink);}
+/* phases */
+.phases{display:flex;flex-direction:column;gap:10px;margin-top:6px;}
+.phase{display:grid;grid-template-columns:90px 1fr;gap:14px;background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--uae);border-radius:10px;padding:13px 16px;box-shadow:var(--shadow);}
+.phase .ph{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;color:var(--uae);}
+.phase .pt{font-weight:600;font-size:14px;margin-bottom:3px;}
+.phase .pd{font-size:13px;color:var(--ink-soft);line-height:1.5;}
+.phase.race{border-left-color:var(--pressure);}
+.phase.race .ph{color:var(--pressure);}
+@media (max-width:760px){.pipe{grid-template-columns:1fr;}.parrow{transform:rotate(90deg);padding:6px 0;}.cb{grid-template-columns:1fr;}}
+@media print{.pcol,.panel,.phase{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="topbar no-print"><div class="row">
+  <a class="crumb" href="../index.html">ESG·CRE Knowledge Base</a>
+  <span class="crumb sep">/</span><a class="crumb" href="index.html"><b>UAE</b></a>
+  <span class="crumb sep">/</span><span class="crumb">Venture Value Chain</span>
+  <span class="mkt-pill" data-mkt="uae">UAE</span>
+  <span class="spacer"></span>
+  <button class="btn" onclick="window.print()">⤓ Download PDF</button>
+</div></div>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="kicker">United Arab Emirates · Value Chain 3 of 3</p>
+    <h1 class="title">The Venture<br><em>Value Chain</em></h1>
+    <p class="vc-intro">
+      Where the venture itself sits: what it <b>consumes</b>, what it <b>produces</b>, how it <b>reaches buyers</b>, and what
+      makes the position <b>defensible</b>. This is the business-model view — the synthesis of the wedge, the moat, the channels
+      and the phased sequence from Module 8, drawn as one picture.
+    </p>
+  </header>
+
+  <div class="section-h"><span class="lbl">The core pipeline</span><span class="line"></span></div>
+  <div class="pipe">
+    <div class="pcol">
+      <h4>Inputs / consumed</h4>
+      <ul>
+        <li>DEWA / ADDC grid emission factors</li>
+        <li>District-cooling data (Empower / Tabreed)</li>
+        <li>Refrigerant &amp; fuel activity data</li>
+        <li>Free-zone &amp; group entity structures</li>
+        <li>MOCCAE rules &amp; IEQT submission specs</li>
+        <li>BMS / sub-meter / utility feeds</li>
+      </ul>
+    </div>
+    <div class="parrow">→</div>
+    <div class="pcol engine">
+      <h4>The engine (what the venture does)</h4>
+      <ul>
+        <li><span class="big">UAE-CRE-localised MRV engine</span>Pre-loaded local factors, district-cooling logic, refrigerant modules, free-zone templates.</li>
+        <li><span class="big">Reduction-plan generator</span>The under-served "now what" — current + planned measures, expected results.</li>
+      </ul>
+    </div>
+    <div class="parrow">→</div>
+    <div class="pcol">
+      <h4>Outputs / produced</h4>
+      <ul>
+        <li>Defensible Scope 1/2 (→3) inventory</li>
+        <li>IEQT-submission-ready filing</li>
+        <li>Mandatory reduction plan</li>
+        <li>Verifier-ready evidence pack</li>
+        <li>Annual re-baseline &amp; monitoring</li>
+      </ul>
+    </div>
+  </div>
+  <div class="moat">
+    <b>The moat is not the technology.</b> Any of these steps can be coded. The defensibility is <b>UAE-CRE domain depth + localisation</b>
+    (the things generic Western SaaS gets wrong) <b>+ the India cost base</b> (serving a long tail the Big 4 can't economically reach).
+    Every feature is chosen to be one a generic tool can't replicate without UAE-CRE knowledge.
+  </div>
+
+  <div class="section-h"><span class="lbl">Channels &amp; buyers</span><span class="line"></span></div>
+  <div class="cb">
+    <div class="panel">
+      <h4>Routes to market (channels)</h4>
+      <div class="item"><span class="pri">Direct</span><div class="bd"><div class="t">Direct outbound to Segment B</div><div class="d">Deadline-urgency hook; consulting-led first, then self-serve product.</div></div></div>
+      <div class="item"><span class="pri">B2B2B</span><div class="bd"><div class="t">Tool the green-building consultancies</div><div class="d">Sell them the Estidama / Al Sa'fat documentation engine — reach their clients.</div></div></div>
+      <div class="item"><span class="pri">Referral</span><div class="bd"><div class="t">Big-4 down-market referrals</div><div class="d">Take the clients the Big 4 can't serve economically.</div></div></div>
+      <div class="item"><span class="pri">Data</span><div class="bd"><div class="t">FM / district-cooling partnerships</div><div class="d">Whoever controls the cooling data controls the inventory — a distribution channel to A &amp; B.</div></div></div>
+    </div>
+    <div class="panel">
+      <h4>Buyer segments (priority)</h4>
+      <div class="item beach"><span class="pri">★★★ B</span><div class="bd"><div class="t">Corporate owner-occupiers</div><div class="d"><b>The beachhead.</b> Real pain, must-spend compliance budget, reachable.</div></div></div>
+      <div class="item"><span class="pri">★★★ A</span><div class="bd"><div class="t">Large state-linked developers</div><div class="d">Aspirational anchor; win one later as proof, don't build the plan on it.</div></div></div>
+      <div class="item"><span class="pri">★★ D</span><div class="bd"><div class="t">Free-zone authorities / gov</div><div class="d"><b>The whale</b> — one deal aggregates thousands of entities. The prize the beachhead earns.</div></div></div>
+      <div class="item"><span class="pri">★★ C</span><div class="bd"><div class="t">FM / district-cooling operators</div><div class="d">More data-partner / channel than payer — but strategically vital.</div></div></div>
+      <div class="item"><span class="pri">★ E</span><div class="bd"><div class="t">Masdar Green REIT (lighthouse)</div><div class="d">Not REITs as a category (thin) — Masdar specifically, as a sustainability-native reference.</div></div></div>
+    </div>
+  </div>
+
+  <div class="section-h"><span class="lbl">The phased sequence (how the chain is built over time)</span><span class="line"></span></div>
+  <div class="phases">
+    <div class="phase"><div class="ph">Phase 0<br>0–6 mo</div><div><div class="pt">Credibility &amp; first inventories — consulting</div><div class="pd">3–5 paying MRV engagements in Segment B, done by hand, anchored on the 30 May 2026 deadline. Goal: reference logos, real UAE-CRE data, discovery of which localisation problems recur. Revenue: consulting fees (funds the build).</div></div></div>
+    <div class="phase"><div class="ph">Phase 1<br>6–18 mo</div><div><div class="pt">Productise the repeatable core</div><div class="pd">Turn the hand-built process into the localised MRV engine + reduction-plan generator. Sell low-touch to the long-tail volume market; keep higher-touch consulting for larger clients. Revenue: SaaS subscription begins (recurring).</div></div></div>
+    <div class="phase"><div class="ph">Phase 2<br>12–24 mo</div><div><div class="pt">Anchor references &amp; B2B2B channels</div><div class="pd">Win an anchor logo; open the consultancy-tooling and Big-4-referral channels. Revenue: B2B2B licensing + anchor contracts.</div></div></div>
+    <div class="phase race"><div class="ph">Phase 3<br>18–36 mo</div><div><div class="pt">The free-zone-authority platform prize ⚠ race condition</div><div class="pd">Pursue the Segment-D whale — but a funded incumbent (Plan A) is <b>already reaching for it</b>. Win on UAE-CRE localisation depth + timing, only once Phase 0–2 references give credibility.</div></div></div>
+    <div class="phase"><div class="ph">Phase 4<br>24 mo+</div><div><div class="pt">Regional expansion (GCC)</div><div class="pd">The UAE is the beachhead for the Gulf — every neighbouring state is now mandating disclosure. The localised engine ports outward.</div></div></div>
+  </div>
+
+  <p class="colophon">Built from UAE Module 8 (wedge, sequence, moat, business model) with segment detail from Module 6 and competitive context from Module 7. One of three value-chain views — see also the <a href="value-chain-asset.html">asset</a> and <a href="value-chain-services.html">compliance-services</a> chains.</p>
+</div>
+
+<script>window.MARKET="uae";</script>
+<script src="../assets/glossary.js"></script>
+</body>
+</html>

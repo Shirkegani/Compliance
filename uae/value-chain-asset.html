@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asset Value Chain · UAE · ESG·CRE Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+.vc-intro{max-width:820px;margin:6px 0 30px;font-size:15px;color:var(--ink-soft);line-height:1.6;}
+.vc-intro b{color:var(--ink);}
+.vc-legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 26px;font-size:12px;color:var(--ink-faint);}
+.vc-legend span{display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;letter-spacing:.03em;}
+.vc-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;}
+.flow{display:flex;flex-direction:column;gap:0;}
+.stage{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:0;margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden;}
+.stage-head{display:flex;align-items:center;gap:14px;padding:15px 18px;cursor:pointer;user-select:none;transition:background .12s;}
+.stage-head:hover{background:var(--paper-2);}
+.stage-n{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;color:#fff;background:var(--uae);width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:none;}
+.stage-t{font-family:"Fraunces",serif;font-weight:600;font-size:18px;letter-spacing:-.01em;flex:1;}
+.stage-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:5px;flex:none;}
+.stage-tag.hot{background:var(--pressure-bg);color:var(--pressure);}
+.stage-tag.gap{background:#eee9da;color:#7c786c;}
+.stage-tag.gate{background:var(--uae-bg);color:var(--uae);}
+.chev{font-family:monospace;color:var(--ink-faint);transition:transform .2s;flex:none;}
+.stage.open .chev{transform:rotate(90deg);}
+.stage-body{display:none;padding:0 18px 18px;border-top:1px solid var(--rule);}
+.stage.open .stage-body{display:block;}
+.stage-body p{margin:13px 0 0;font-size:14px;line-height:1.55;color:var(--ink-soft);}
+.rows{display:grid;grid-template-columns:1fr;gap:0;margin-top:14px;}
+.vrow{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13.5px;line-height:1.5;}
+.vrow:last-child{border-bottom:none;}
+.vrow .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px;display:flex;align-items:flex-start;gap:7px;}
+.vrow .k i{width:11px;height:11px;border-radius:3px;flex:none;margin-top:2px;}
+.vrow .v{color:var(--ink);} .vrow .v b{font-weight:600;}
+.k-money i{background:#1d5fa6;} .k-money{color:#1d5fa6;}
+.k-carbon i{background:var(--pressure);} .k-carbon{color:var(--pressure);}
+.k-reg i{background:var(--uae);} .k-reg{color:var(--uae);}
+.k-data i{background:var(--data);} .k-data{color:var(--data);}
+.connector{text-align:center;color:var(--rule-strong);font-size:18px;line-height:0;margin:-8px 0 6px;}
+.insight{margin-top:34px;background:linear-gradient(135deg,#0f5132,#12694a);color:#eafaf0;border-radius:14px;padding:24px 28px;box-shadow:0 8px 28px rgba(15,81,50,.26);}
+.insight .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9fdcb8;margin:0 0 8px;}
+.insight h3{font-family:"Fraunces",serif;font-weight:600;font-size:21px;margin:0 0 9px;color:#fff;}
+.insight p{margin:0;font-size:14.5px;color:#d6f0e0;line-height:1.55;}
+.insight p b{color:#fff;}
+@media print{.stage-body{display:block !important;}.chev{display:none;}.stage-head{cursor:default;}}
+</style>
+</head>
+<body>
+<div class="topbar no-print"><div class="row">
+  <a class="crumb" href="../index.html">ESG·CRE Knowledge Base</a>
+  <span class="crumb sep">/</span><a class="crumb" href="index.html"><b>UAE</b></a>
+  <span class="crumb sep">/</span><span class="crumb">Asset Value Chain</span>
+  <span class="mkt-pill" data-mkt="uae">UAE</span>
+  <span class="spacer"></span>
+  <button class="btn" onclick="window.print()">⤓ Download PDF</button>
+</div></div>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="kicker">United Arab Emirates · Value Chain 1 of 3</p>
+    <h1 class="title">The Asset<br><em>Value Chain</em></h1>
+    <p class="vc-intro">
+      How a UAE commercial building moves from land to operation to disposal — and, at each stage,
+      <b>who holds the money</b>, <b>where the carbon is created</b>, <b>which regulation attaches</b>, and
+      <b>where the data lives</b>. The single most important takeaway is the <b>inversion vs the UK</b>: UAE regulatory
+      leverage sits <b>upstream at design/permit</b> and <b>outward at the occupier's operational reporting</b> — not in the
+      in-life leasing of existing stock. Click any stage to expand.
+    </p>
+    <div class="vc-legend">
+      <span class="k-money"><i></i>Money / capital</span>
+      <span class="k-carbon"><i></i>Carbon created</span>
+      <span class="k-reg"><i></i>Regulation attaches</span>
+      <span class="k-data"><i></i>Data / registry</span>
+    </div>
+  </header>
+
+  <div class="flow" id="flow"></div>
+
+  <div class="insight">
+    <p class="k">The chain-level insight</p>
+    <h3>The UAE pressure curve is inverted relative to the UK.</h3>
+    <p>In the UK, regulatory weight concentrates <b>mid-to-late life</b> — MEES gates the leasing of existing stock and UKSRS its disclosure, which is why the venture's UK thesis centres on the <b>stranded existing asset</b>. In the UAE, weight concentrates at <b>stage 1 (design/permit, via the emirate green-building codes)</b> and <b>stage 8 (operational entity-level MRV, via the federal climate law)</b> — with <b>no federal in-life leasing ban</b> in the middle. So the attachment points for a venture are the construction-documentation burden upstream and, far more scalably, the recurring occupier MRV obligation in operation.</p>
+  </div>
+
+  <p class="colophon">Built from UAE Module 1 (industry foundation, money flows, lifecycle) and Modules 3–4 (the regulatory attachment points). Figures marked in the modules as VERIFY remain directional. One of three value-chain views — see also the <a href="value-chain-services.html">compliance-services</a> and <a href="value-chain-venture.html">venture</a> chains.</p>
+</div>
+
+<script>window.MARKET="uae";</script>
+<script src="../assets/glossary.js"></script>
+<script>
+const STAGES=[
+ {t:"Land & Permit", tag:["gate","Reg gate"], desc:"Land acquisition and the building permit. In the UAE this is where the strongest, oldest, most-enforced building-level regime attaches.",
+  rows:[["money","Developer / government landowner deploys capital; land often state-controlled or master-planned."],
+        ["reg","<b>Emirate green-building codes attach here</b> — Estidama Pearl (Abu Dhabi, min 1 Pearl / 2 for government), Al Sa'fat (Dubai, Silver mandatory for new permits from 2026), Barjeel (RAK). A <b>construction gate</b> (≈ UK Part L), not a leasing ban."],
+        ["carbon","Embodied-carbon decisions begin — orientation, massing, materials specified."],
+        ["data","Permit/planning data via emirate authorities (DM, DMT)."]]},
+ {t:"Finance & Capital", tag:null, desc:"How the project is funded. The off-plan engine means much of the capital comes from buyers before completion.",
+  rows:[["money","<b>Off-plan staged payments</b> fund construction — buyers pay during build (~65% of Dubai residential volume off-plan, [VERIFY]). Escrow accounts (DLD/RERA) protect buyers. Green/sustainability-linked finance and green sukuk are nascent but rising."],
+        ["reg","CBUAE principles on climate-related financial risk steer lenders; no property tax removes one efficiency lever that exists elsewhere."],
+        ["data","Escrow, Ejari, Trakheesi (Dubai); ADREC/DMT (Abu Dhabi) — the registry layer."]]},
+ {t:"Design", tag:["gate","Reg gate"], desc:"Where the building's lifetime energy and carbon profile is largely locked in — and where the green-building documentation burden lives.",
+  rows:[["money","Design fees; PQPs (Pearl Qualified Professionals) and green-building consultants engaged."],
+        ["reg","<b>Estidama / Al Sa'fat documentation and verification</b> — the heaviest single building-level compliance task in the UAE. This is the venture's clean upstream attachment point (a documentation engine)."],
+        ["carbon","Envelope, glazing (SHGC), cooling-system selection set the operational-carbon trajectory in the UAE's cooling-dominated climate."],
+        ["data","Design models, BIM where present, compliance submissions."]]},
+ {t:"Construction & Materials", tag:["hot","Carbon-heavy"], desc:"Developer-controlled. Embodied carbon is realised here; the green-building verification burden continues.",
+  rows:[["money","Main contractor + supply chain; the bulk of project spend."],
+        ["carbon","<b>Embodied carbon</b> from cement, steel, aluminium realised — relevant to the Industrial Decarbonization Roadmap (5/63/93) and any future CBAM-style pressure on materials."],
+        ["reg","Green-building compliance evidence assembled during build."],
+        ["data","As-built data, material specifications — usually poorly captured for later carbon accounting."]]},
+ {t:"Off-plan Sale & Handover", tag:null, desc:"Completion and transfer of title. The point at which the building passes from developer to a fragmented owner base.",
+  rows:[["money","Final payments + post-handover instalments; developer realises revenue."],
+        ["reg","Title registration via DLD (Dubai) / ADREC (Abu Dhabi)."],
+        ["data","Title and registration records — the UAE analog of the UK Land Registry."],
+        ["carbon","Handover is where as-built carbon data should transfer but rarely does cleanly — a data-continuity gap."]]},
+ {t:"Ownership & Occupation", tag:["gap","The UK-gap"], desc:"In-life holding. This is where the UK concentrates its regulatory weight (MEES) — and where the UAE federal regime is notably absent.",
+  rows:[["reg","<b>No federal in-life leasing ban (no MEES-equivalent).</b> This is the structural gap vs the UK — the 'stranded existing asset' pressure that anchors the UK thesis is largely absent at federal level."],
+        ["money","Owner-occupiers, investors, or (thinly) REITs hold the asset; FM contracts let."],
+        ["carbon","Operational carbon now accrues continuously — mostly cooling and electricity."],
+        ["data","Ownership/lease data; the owner becomes the entity that must report under the federal law."]]},
+ {t:"Operation & FM", tag:["hot","Where MRV bites"], desc:"The recurring, in-life phase — and the federal climate law's primary attachment point at entity level.",
+  rows:[["reg","<b>Federal MRV reporting attaches here</b> (Decree-Law 11/2024) — Scope 1 & 2 now, Scope 3 expected 2027. Universal, penalty-backed, recurring. The venture's most scalable attachment point."],
+        ["carbon","<b>Scope 2 dominated by district cooling and electricity</b> (DEWA/ADDC factors); Scope 1 includes refrigerant leakage — the UAE-specific accounting knots."],
+        ["money","FM and district-cooling operators (Empower/Tabreed) hold the operational spend — and the data."],
+        ["data","BMS, sub-meters, utility bills, district-cooling statements — the raw material of the MRV inventory."]]},
+ {t:"Refurb / Redevelop / Dispose", tag:["gate","Re-triggers codes"], desc:"End of a use-cycle. Major works re-enter the building into the green-building regime.",
+  rows:[["reg","Major renovation/redevelopment <b>re-triggers Estidama / green-building codes</b> — a second bite of the upstream gate."],
+        ["money","Re-investment decision; refurbish-vs-redevelop economics."],
+        ["carbon","Refurb is the lever for existing-stock decarbonisation — but driven by the state retrofit programmes (DEWA DSM, Etihad ESCO), not a mandate."],
+        ["data","New compliance cycle; opportunity to re-baseline the asset."]]},
+];
+const flow=document.getElementById('flow');
+flow.innerHTML=STAGES.map((s,i)=>{
+  const tag=s.tag?`<span class="stage-tag ${s.tag[0]}">${s.tag[1]}</span>`:'';
+  const rows=s.rows.map(r=>`<div class="vrow"><div class="k k-${r[0]}"><i></i>${r[0]==='reg'?'Regulation':r[0]==='money'?'Money':r[0]==='carbon'?'Carbon':'Data'}</div><div class="v">${r[1]}</div></div>`).join('');
+  const conn=i<STAGES.length-1?'<div class="connector">↓</div>':'';
+  return `<div class="stage"><div class="stage-head"><span class="stage-n">${i+1}</span><span class="stage-t">${s.t}</span>${tag}<span class="chev">▸</span></div>`+
+         `<div class="stage-body"><p>${s.desc}</p><div class="rows">${rows}</div></div></div>${conn}`;
+}).join('');
+flow.querySelectorAll('.stage-head').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+// open the two most important stages by default
+flow.querySelectorAll('.stage')[2].classList.add('open');
+flow.querySelectorAll('.stage')[6].classList.add('open');
+</script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../assets/gate.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compliance-Services Value Chain · UAE · ESG·CRE Knowledge Base</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/shared.css">
+<style>
+.vc-intro{max-width:820px;margin:6px 0 30px;font-size:15px;color:var(--ink-soft);line-height:1.6;}
+.vc-intro b{color:var(--ink);}
+.vc-legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 26px;font-size:12px;color:var(--ink-faint);}
+.vc-legend span{display:inline-flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;letter-spacing:.03em;}
+.vc-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;}
+.flow{display:flex;flex-direction:column;gap:0;}
+.stage{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:12px;margin-bottom:14px;box-shadow:var(--shadow);overflow:hidden;}
+.stage-head{display:flex;align-items:center;gap:14px;padding:15px 18px;cursor:pointer;user-select:none;transition:background .12s;}
+.stage-head:hover{background:var(--paper-2);}
+.stage-n{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:13px;color:#fff;background:var(--uae);width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex:none;}
+.stage-t{font-family:"Fraunces",serif;font-weight:600;font-size:18px;letter-spacing:-.01em;flex:1;}
+.stage-tag{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:5px;flex:none;}
+.stage-tag.gap{background:var(--venture-bg);color:var(--venture);}
+.stage-tag.taken{background:var(--pressure-bg);color:var(--pressure);}
+.stage-tag.hard{background:var(--warn-bg);color:var(--warn);}
+.chev{font-family:monospace;color:var(--ink-faint);transition:transform .2s;flex:none;}
+.stage.open .chev{transform:rotate(90deg);}
+.stage-body{display:none;padding:0 18px 18px;border-top:1px solid var(--rule);}
+.stage.open .stage-body{display:block;}
+.stage-body p{margin:13px 0 0;font-size:14px;line-height:1.55;color:var(--ink-soft);}
+.vrow{display:grid;grid-template-columns:120px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--rule);font-size:13.5px;line-height:1.5;}
+.vrow:last-child{border-bottom:none;}
+.vrow .k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding-top:2px;display:flex;align-items:flex-start;gap:7px;}
+.vrow .k i{width:11px;height:11px;border-radius:3px;flex:none;margin-top:2px;}
+.vrow .v{color:var(--ink);} .vrow .v b{font-weight:600;}
+.k-who i{background:#1d5fa6;} .k-who{color:#1d5fa6;}
+.k-money i{background:var(--global);} .k-money{color:var(--global);}
+.k-pain i{background:var(--warn);} .k-pain{color:var(--warn);}
+.k-fit i{background:var(--venture);} .k-fit{color:var(--venture);}
+.connector{text-align:center;color:var(--rule-strong);font-size:18px;line-height:0;margin:-8px 0 6px;}
+.insight{margin-top:34px;background:linear-gradient(135deg,#0f5132,#12694a);color:#eafaf0;border-radius:14px;padding:24px 28px;box-shadow:0 8px 28px rgba(15,81,50,.26);}
+.insight .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9fdcb8;margin:0 0 8px;}
+.insight h3{font-family:"Fraunces",serif;font-weight:600;font-size:21px;margin:0 0 9px;color:#fff;}
+.insight p{margin:0;font-size:14.5px;color:#d6f0e0;line-height:1.55;} .insight p b{color:#fff;}
+.poolbar{display:flex;align-items:stretch;margin:8px 0 30px;border-radius:10px;overflow:hidden;border:1px solid var(--rule);box-shadow:var(--shadow);font-family:"IBM Plex Mono",monospace;}
+.poolbar div{padding:11px 14px;font-size:12px;line-height:1.4;}
+.poolbar .a{background:#26241f;color:#e9e4d6;flex:2;} .poolbar .a b{color:#fff;font-size:14px;}
+.poolbar .b{background:var(--venture-bg);color:var(--venture);flex:1;} .poolbar .b b{font-size:14px;}
+@media print{.stage-body{display:block !important;}.chev{display:none;}.stage-head{cursor:default;}}
+</style>
+</head>
+<body>
+<div class="topbar no-print"><div class="row">
+  <a class="crumb" href="../index.html">ESG·CRE Knowledge Base</a>
+  <span class="crumb sep">/</span><a class="crumb" href="index.html"><b>UAE</b></a>
+  <span class="crumb sep">/</span><span class="crumb">Compliance-Services Value Chain</span>
+  <span class="mkt-pill" data-mkt="uae">UAE</span>
+  <span class="spacer"></span>
+  <button class="btn" onclick="window.print()">⤓ Download PDF</button>
+</div></div>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="kicker">United Arab Emirates · Value Chain 2 of 3</p>
+    <h1 class="title">The Compliance-<br><em>Services Value Chain</em></h1>
+    <p class="vc-intro">
+      How a UAE emissions-compliance obligation actually gets fulfilled — the flow of <b>work</b> and <b>money</b> from
+      "a law now applies to me" through to verified, lodged, monitored reporting. At each step: <b>who does it today</b>,
+      <b>where the money is</b>, <b>how hard it is</b>, and <b>how well it fits the venture</b>. The pattern that emerges is the
+      whole strategy — incumbents own the high-touch top, generic SaaS floods the bottom, and the <b>UAE-localised middle of the
+      long tail is the gap</b>. Click any step to expand.
+    </p>
+    <div class="vc-legend">
+      <span class="k-who"><i></i>Who does it now</span>
+      <span class="k-money"><i></i>Where the money is</span>
+      <span class="k-pain"><i></i>Difficulty</span>
+      <span class="k-fit"><i></i>Venture fit</span>
+    </div>
+    <div class="poolbar">
+      <div class="a">UAE CRE <b>services</b> revenue pool ≈ <b>USD 19–20bn</b> &nbsp;(the pool the venture's revenue comes from) <span style="opacity:.6">[VERIFY]</span></div>
+      <div class="b">In-scope universe ≈ <b>35,000</b> private entities + 200 public <span style="opacity:.7">[VERIFY · S&amp;P]</span></div>
+    </div>
+  </header>
+
+  <div class="flow" id="flow"></div>
+
+  <div class="insight">
+    <p class="k">The chain-level insight</p>
+    <h3>The work is identical for everyone; only the price point and the localisation differ.</h3>
+    <p>Every incumbent — PwC, KPMG, S&amp;P, Uniqus — runs <b>this same eight-step flow</b>. So the workflow is <b>not</b> a differentiator; it's table stakes. The two places value actually concentrates are <b>(1) the hard, manual, UAE-specific data &amp; calculation steps</b> (district cooling, local factors, free-zone boundaries) that generic SaaS gets wrong, and <b>(2) the under-served "now what" reduction-planning step</b>. Own those two, at a long-tail price the Big 4 can't match, and the rest of the chain becomes a productisable wrapper around them.</p>
+  </div>
+
+  <p class="colophon">Built from UAE Modules 3 (pain points), 6 (sizing &amp; segments), 7 (competitors) and 8 (the wedge &amp; sequence). The services-pool and entity figures are module-flagged VERIFY. One of three value-chain views — see also the <a href="value-chain-asset.html">asset</a> and <a href="value-chain-venture.html">venture</a> chains.</p>
+</div>
+
+<script>window.MARKET="uae";</script>
+<script src="../assets/glossary.js"></script>
+<script>
+const STAGES=[
+ {t:"Regulation → obligation", tag:null, desc:"A rule lands and an entity becomes liable. The trigger event that creates all downstream demand.",
+  rows:[["who","MOCCAE / Cabinet issue the law and implementing resolutions; the obligation is universal and penalty-backed."],
+        ["money","No spend yet — but the AED 50k–2m penalty + 30 May 2026 deadline create the urgency the whole market sells against."],
+        ["pain","Low for the entity (passive) — but awareness is itself a gap; many long-tail entities don't yet know they're in scope."],
+        ["fit","<b>Door-opener.</b> The deadline urgency is the venture's primary outbound hook into Segment B."]]},
+ {t:"Scoping — \"am I in?\"", tag:["taken","Advisory owns"], desc:"Determining applicability, boundaries, which entity reports, and which scopes apply. Deceptively hard in a free-zone, multi-entity market.",
+  rows:[["who","Big 4 + law firms for large clients; mostly <b>unserved</b> for the long tail."],
+        ["money","Billable advisory hours at the top; near-zero spend at the bottom (where the need is largest)."],
+        ["pain","<b>Genuinely hard in the UAE</b> — mainland vs free zone, which emirate, financial-free-zone overlap, group structures."],
+        ["fit","Good — a UAE-localised scoping/eligibility tool is a cheap, high-value front-door product."]]},
+ {t:"Data collection", tag:["hard","Where difficulty lives"], desc:"Gathering the activity data: energy, fuel, refrigerants, and — the UAE knot — district cooling and the right local grid factors.",
+  rows:[["who","The entity, often manually; FM and district-cooling operators (Empower/Tabreed) hold key data."],
+        ["money","Labour-intensive; mostly internal cost. Data partnerships are the leverage point."],
+        ["pain","<b>The hardest, most UAE-specific step</b> — district-cooling Scope 2, DEWA vs ADDC factors, refrigerant leakage. Generic global SaaS gets this wrong."],
+        ["fit","<b>Core moat.</b> This is exactly where UAE-CRE localisation depth beats a generic tool."]]},
+ {t:"Emissions calculation", tag:["hard","UAE-specific"], desc:"Turning activity data into a defensible Scope 1/2 (then 3) inventory using the right factors and methodology.",
+  rows:[["who","SaaS tools + consultants; the calc engine itself is commoditised globally, but the UAE factors aren't."],
+        ["money","SaaS subscription territory — the commoditised layer, thin margin alone."],
+        ["pain","Moderate technically, but <b>correctness depends on UAE localisation</b> — wrong factor = wrong (and non-compliant) number."],
+        ["fit","<b>Core product.</b> A UAE-CRE-localised inventory engine (pre-loaded factors, district-cooling logic) is the productised heart."]]},
+ {t:"Reduction planning", tag:["gap","Under-served gap"], desc:"The \"now what\" — current + planned reduction measures and expected results. A mandatory submission under the law, not just a number.",
+  rows:[["who","Largely <b>unserved</b> for the long tail; consultants do it bespoke for large clients."],
+        ["pain","High-value, advisory-flavoured, hard to template well — which is exactly why it's under-served."],
+        ["money","Advisory margin at the top; an open gap in the middle."],
+        ["fit","<b>The differentiator (M3 pain #6).</b> A reduction-plan generator paired with the inventory is the feature SaaS lacks and the Big 4 won't do cheaply."]]},
+ {t:"Reporting & IEQT lodgement", tag:null, desc:"Submitting the inventory + plan on MOCCAE's mandatory platform in the approved form.",
+  rows:[["who","The entity files; tools that output IEQT-ready submissions add real convenience."],
+        ["money","Low direct revenue, high stickiness — being the rail into IEQT keeps you in the workflow."],
+        ["pain","Moderate; format/compliance correctness matters."],
+        ["fit","<b>Sit above IEQT, never replace it.</b> IEQT-submission-ready outputs are a retention feature."]]},
+ {t:"Verification & assurance", tag:["taken","Gatekeepers own"], desc:"Independent third-party verification of the data (heavier for large emitters; assurance rising as a norm).",
+  rows:[["who","<b>Accredited verifiers + Big-4 assurance.</b> A licensed sign-off the venture must not claim to issue."],
+        ["money","Premium assurance fees — but a regulated gatekeeper role, not the venture's lane."],
+        ["pain","High trust bar; independence required."],
+        ["fit","<b>Boundary — partner, don't become.</b> Supply the verifier-ready inventory; let them sign."]]},
+ {t:"Ongoing monitoring", tag:["gap","Recurring revenue"], desc:"The obligation recurs annually; targets tighten; data must be re-gathered and re-reported each cycle.",
+  rows:[["who","Whoever owns the inventory workflow owns the renewal — currently fragmented for the long tail."],
+        ["money","<b>The recurring-revenue prize</b> — annual SaaS subscription + tiered services. The reason to win the account early."],
+        ["pain","Low per-cycle once set up — the productisation payoff."],
+        ["fit","<b>The business model.</b> Land via deadline urgency, retain via the recurring cycle."]]},
+];
+const flow=document.getElementById('flow');
+flow.innerHTML=STAGES.map((s,i)=>{
+  const tag=s.tag?`<span class="stage-tag ${s.tag[0]}">${s.tag[1]}</span>`:'';
+  const labels={who:'Who now',money:'Money',pain:'Difficulty',fit:'Venture fit'};
+  const rows=s.rows.map(r=>`<div class="vrow"><div class="k k-${r[0]}"><i></i>${labels[r[0]]}</div><div class="v">${r[1]}</div></div>`).join('');
+  const conn=i<STAGES.length-1?'<div class="connector">↓</div>':'';
+  return `<div class="stage"><div class="stage-head"><span class="stage-n">${i+1}</span><span class="stage-t">${s.t}</span>${tag}<span class="chev">▸</span></div>`+
+         `<div class="stage-body"><p>${s.desc}</p>${rows}</div></div>${conn}`;
+}).join('');
+flow.querySelectorAll('.stage-head').forEach(h=>h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+// open the three steps that ARE the strategy
+[2,4,7].forEach(idx=>flow.querySelectorAll('.stage')[idx].classList.add('open'));
+</script>
+</body>
+</html>
