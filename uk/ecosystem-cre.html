@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The UK ESG Ecosystem for Commercial Real Estate — Internal Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1e9; --paper-2:#efebe0;
+    --ink:#1c1b18; --ink-soft:#4a473f; --ink-faint:#7c786c;
+    --rule:#d6d0bf; --rule-strong:#bdb6a1;
+    --global:#9a6a12;   --global-bg:#f7eed9; --global-line:#dcc188;
+    --policy:#15604a;   --policy-bg:#e2f1ea; --policy-line:#9bd0bd;
+    --regime:#7a3b6e;   --regime-bg:#f3e8f0; --regime-line:#d9bcd1;
+    --pressure:#a8431f; --pressure-bg:#f8e9e2; --pressure-line:#e3bda9;
+    --venture:#0f5132;  --venture-bg:#dcefe2; --venture-line:#a6cdb4;
+    --market:#3a3730;
+    --cre:#1d5fa6;  --cre-bg:#e6eff8;  --cre-line:#9cbfe0;
+    --build:#0f5132;   --build-bg:#dcefe2;  --build-line:#a6cdb4;
+    --partner:#9a6a12; --partner-bg:#f7eed9;--partner-line:#dcc188;
+    --out:#6c6a62;     --out-bg:#eceadf;    --out-line:#cdc8b8;
+    --shadow:0 1px 2px rgba(28,27,24,.05), 0 4px 14px rgba(28,27,24,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);
+    background-image:radial-gradient(circle at 18% 8%,rgba(255,255,255,.5),transparent 45%),radial-gradient(circle at 90% 100%,rgba(189,182,161,.18),transparent 55%);
+    color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1100px;margin:0 auto;padding:42px 30px 90px;}
+
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:28px;}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--cre);margin:0 0 10px;}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,5vw,50px);line-height:1.03;margin:0;letter-spacing:-.01em;}
+  h1 em{font-style:italic;color:var(--cre);font-weight:500;}
+  .standfirst{max-width:780px;margin:16px 0 0;font-size:16px;color:var(--ink-soft);line-height:1.55;}
+  .standfirst b{color:var(--ink);font-weight:600;}
+  .crumb{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:.03em;}
+  .crumb b{color:var(--cre);font-weight:600;}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;}
+  .toc a{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--rule-strong);border-radius:20px;padding:5px 13px;transition:all .15s ease;}
+  .toc a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  section.mod{margin:0 0 50px;scroll-margin-top:20px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);border-radius:5px;padding:2px 7px;flex:none;}
+  .sec-title{font-family:"Fraunces",serif;font-weight:600;font-size:23px;letter-spacing:-.01em;margin:0;}
+  .sec-intro{max-width:800px;color:var(--ink-soft);font-size:14.5px;line-height:1.55;margin:0 0 18px;}
+  .sec-intro b{color:var(--ink);}
+
+  .takeaway{margin-top:16px;border-left:3px solid var(--cre);background:var(--cre-bg);padding:11px 16px;border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-soft);}
+  .takeaway b{color:var(--cre);}
+  .takeaway.v{border-left-color:var(--venture);background:var(--venture-bg);} .takeaway.v b{color:var(--venture);}
+  .takeaway.p{border-left-color:var(--pressure);background:var(--pressure-bg);} .takeaway.p b{color:var(--pressure);}
+
+  .verify{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--pressure);border:1px solid var(--pressure-line);background:var(--pressure-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .confirm{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--venture);border:1px solid var(--venture-line);background:var(--venture-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+
+  .timeline{position:relative;max-width:620px;margin:10px auto 0;}
+  .timeline::before{content:"";position:absolute;left:50%;top:8px;bottom:8px;width:2px;background:var(--rule-strong);transform:translateX(-50%);}
+  .tl-item{position:relative;display:flex;flex-direction:column;align-items:center;margin-bottom:13px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-date{position:relative;z-index:2;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;color:#fff;background:var(--ink);border-radius:20px;padding:4px 15px;letter-spacing:.05em;box-shadow:var(--shadow);}
+  .tl-card{position:relative;z-index:2;margin-top:8px;background:#fff;border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:10px 16px;max-width:480px;text-align:center;border-top:3px solid var(--ink-faint);}
+  .tl-role{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);}
+  .tl-name{font-family:"Fraunces",serif;font-weight:600;font-size:14px;margin:3px 0;line-height:1.2;}
+  .tl-desc{font-size:11.5px;color:var(--ink-soft);line-height:1.45;margin:0;}
+  .tl-item.g .tl-date{background:var(--global);}  .tl-item.g .tl-card{border-top-color:var(--global);}  .tl-item.g .tl-name{color:var(--global);}
+  .tl-item.po .tl-date{background:var(--policy);} .tl-item.po .tl-card{border-top-color:var(--policy);} .tl-item.po .tl-name{color:var(--policy);}
+  .tl-item.c .tl-date{background:var(--cre);}     .tl-item.c .tl-card{border-top-color:var(--cre);}     .tl-item.c .tl-name{color:var(--cre);}
+  .tl-item.m .tl-date{background:var(--market);}  .tl-item.m .tl-card{border-top-color:var(--market);}  .tl-item.m .tl-name{color:var(--ink);}
+
+  table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--rule);border-radius:11px;overflow:hidden;box-shadow:var(--shadow);}
+  table.tbl th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--rule);background:var(--paper-2);}
+  table.tbl td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);vertical-align:top;line-height:1.4;}
+  table.tbl tr:last-child td{border-bottom:none;}
+  table.tbl .rh{color:var(--ink);font-weight:600;}
+  table.tbl tr.lead td{background:var(--pressure-bg);} table.tbl tr.lead .rh{color:var(--pressure);}
+  .dot{font-size:13px;line-height:1;}
+  .d-full{color:var(--venture);} .d-half{color:var(--global);} .d-none{color:var(--rule-strong);}
+  .colA{background:var(--cre-bg);}
+
+  .stack{display:flex;flex-direction:column;gap:8px;}
+  .layer{background:#fff;border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:11px 15px;border-left:4px solid var(--regime);}
+  .layer .ln{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--regime);}
+  .layer h4{margin:3px 0 4px;font-family:"Fraunces",serif;font-weight:600;font-size:14.5px;}
+  .layer p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.45;}
+  .layer.l2{border-left-color:var(--policy);} .layer.l2 .ln{color:var(--policy);}
+  .layer.l3{border-left-color:var(--cre);} .layer.l3 .ln{color:var(--cre);}
+  .layer.l4{border-left-color:var(--ink-faint);} .layer.l4 .ln{color:var(--ink-faint);}
+
+  .auth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .auth{background:#fff;border:1px solid var(--rule);border-radius:11px;padding:14px 15px;box-shadow:var(--shadow);cursor:default;transition:transform .12s ease,box-shadow .12s ease;border-top:3px solid var(--ink-faint);}
+  .auth:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(28,27,24,.12);}
+  .auth .ab{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;color:var(--ink);}
+  .auth .af{font-size:11px;color:var(--ink-faint);margin:2px 0 8px;line-height:1.3;}
+  .auth .as{font-size:12px;color:var(--ink-soft);line-height:1.45;} .auth .as b{color:var(--ink);font-weight:600;}
+  .auth.reg{border-top-color:var(--regime);} .auth.reg .ab{color:var(--regime);}
+  .auth.bld{border-top-color:var(--cre);} .auth.bld .ab{color:var(--cre);}
+  .auth.fin{border-top-color:var(--global);} .auth.fin .ab{color:var(--global);}
+  .auth.env{border-top-color:var(--policy);} .auth.env .ab{color:var(--policy);}
+
+  .forces{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .fcard{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);border-top:4px solid var(--ink-faint);}
+  .fcard h4{margin:0 0 2px;font-family:"Fraunces",serif;font-weight:600;font-size:17px;}
+  .fcard .fwhat{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
+  .fcard .row{display:grid;grid-template-columns:84px 1fr;gap:8px;font-size:12.5px;color:var(--ink-soft);line-height:1.4;margin-bottom:6px;}
+  .fcard .row .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);padding-top:2px;}
+  .fcard .row b{color:var(--ink);}
+  .fcard.reg{border-top-color:var(--pressure);} .fcard.reg h4{color:var(--pressure);}
+  .fcard.inv{border-top-color:var(--global);} .fcard.inv h4{color:var(--global);}
+  .fcard.len{border-top-color:var(--policy);} .fcard.len h4{color:var(--policy);}
+  .fcard.ten{border-top-color:var(--cre);} .fcard.ten h4{color:var(--cre);}
+
+  /* lifecycle flow */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:4px 0 0;}
+  .step{flex:1;min-width:118px;background:#fff;border:1px solid var(--rule);box-shadow:var(--shadow);padding:11px 12px;}
+  .step:first-child{border-radius:11px 0 0 11px;} .step:last-child{border-radius:0 11px 11px 0;}
+  .step + .step{border-left:none;}
+  .step .sn{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--ink-faint);letter-spacing:.08em;}
+  .step h5{margin:3px 0 4px;font-family:"Fraunces",serif;font-weight:600;font-size:13px;}
+  .step p{margin:0;font-size:11px;color:var(--ink-soft);line-height:1.35;}
+  .step.hot{background:var(--cre-bg);border-color:var(--cre-line);} .step.hot h5{color:var(--cre);}
+  .flow-key{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);margin-top:8px;}
+  .flow-key b{color:var(--cre);}
+
+  /* value chain */
+  .vc-legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 14px;font-size:12px;color:var(--ink-soft);}
+  .vc-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .vc-legend .sw{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  .chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;}
+  .link{flex:1;min-width:150px;border-radius:10px;padding:12px 13px;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+  .link .lk{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+  .link h5{margin:0 0 5px;font-family:"Fraunces",serif;font-weight:600;font-size:14px;}
+  .link p{margin:0;font-size:11.5px;color:var(--ink-soft);line-height:1.4;}
+  .link .who{margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-faint);}
+  .link.build{background:var(--build-bg);border:1.5px solid var(--build-line);} .link.build .lk,.link.build h5{color:var(--build);}
+  .link.partner{background:var(--partner-bg);border:1.5px solid var(--partner-line);} .link.partner .lk,.link.partner h5{color:var(--partner);}
+  .link.out{background:var(--out-bg);border:1.5px dashed var(--out-line);} .link.out .lk,.link.out h5{color:var(--out);}
+  .chain-arrow{display:flex;align-items:center;justify-content:center;color:var(--rule-strong);font-size:16px;flex:none;width:14px;}
+
+  .wedge{margin-top:20px;background:linear-gradient(135deg,#0d1f15,#163a26);color:#e7f1ea;border-radius:14px;padding:24px 26px;}
+  .wedge h3{font-family:"Fraunces",serif;font-weight:600;font-size:20px;color:#fff;margin:0 0 4px;}
+  .wedge .sub{font-size:13px;color:#a9c7b6;margin:0 0 18px;max-width:680px;line-height:1.5;}
+  .wedge-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .wcol{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:14px 16px;}
+  .wcol.no{background:rgba(168,67,31,.16);border-color:rgba(245,200,170,.4);}
+  .wcol .wi{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8fc6a6;margin-bottom:8px;}
+  .wcol.no .wi{color:#f0b48f;}
+  .wcol ul{margin:0;padding-left:16px;font-size:12.5px;color:#cfe2d6;line-height:1.6;} .wcol ul b{color:#fff;}
+
+  .bridge{margin-top:20px;background:linear-gradient(135deg,#10243b,#1d4a73);color:#e7f0f8;border-radius:14px;padding:24px 26px;}
+  .bridge h3{font-family:"Fraunces",serif;font-weight:600;font-size:20px;color:#fff;margin:0 0 8px;}
+  .bridge p{font-size:13.5px;color:#cfe0ef;line-height:1.55;margin:0 0 10px;} .bridge p:last-child{margin-bottom:0;} .bridge b{color:#fff;}
+
+  #tt{position:fixed;z-index:50;max-width:290px;background:var(--ink);color:var(--paper);font-size:12px;line-height:1.45;border-radius:8px;padding:10px 12px;box-shadow:0 8px 28px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .12s ease;}
+  #tt b{color:#fff;}
+  .foot-note{margin-top:50px;border-top:1px solid var(--rule);padding-top:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);line-height:1.7;}
+  .foot-note b{color:var(--cre);}
+
+  @media (max-width:820px){
+    .auth-grid,.forces,.wedge-cols{grid-template-columns:1fr;}
+    .flow,.chain{flex-direction:column;}
+    .step:first-child,.step:last-child{border-radius:11px;} .step + .step{border-left:1px solid var(--rule);border-top:none;}
+    .chain-arrow{transform:rotate(90deg);width:auto;height:14px;}
+  }
+  @media print {
+    html,body{background:#f4f1e9 !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+    body{zoom:0.72;}
+    @page{size:A4;margin:10mm;}
+    .wrap{max-width:1120px !important;padding:30px 30px 40px !important;}
+    .auth-grid{grid-template-columns:repeat(3,1fr) !important;}
+    .forces,.wedge-cols{grid-template-columns:1fr 1fr !important;}
+    .flow,.chain{flex-direction:row !important;}
+    section.mod:not(#s1){break-inside:avoid;page-break-inside:avoid;}
+    .timeline,table.tbl,.auth-grid,.stack,.forces,.flow,.chain,.wedge,.bridge{break-inside:avoid;page-break-inside:avoid;}
+    #tt{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">Internal team briefing · The anchor sector · United Kingdom</p>
+    <h1>The UK ESG ecosystem for <em>commercial real estate</em></h1>
+    <p class="standfirst">The sector the venture knows best, read in full — so the multi-sector picture becomes easy. CRE is the <b>template</b>: the same skeleton (lineage → authorities → architecture → forcing functions → the deep mechanism → value chain) reappears in every other sector. Learn it once here, in detail, and the rest is a matter of <b>swapping the top layer</b>. The deep mechanism here is <b>MEES and the stranded-asset cliff</b>; the value chain ends with the bridge outward.</p>
+    <p class="crumb">SOURCE · UK CRE MODULES 01–08 + iSBEM BRIEFS · <span class="verify">VERIFY</span> = UNCONFIRMED/PERISHABLE · <span class="confirm">CONFIRMED</span> = PRIMARY POLICY</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#s1">01 · CRE as the anchor</a>
+    <a href="#s2">02 · The lineage</a>
+    <a href="#s3">03 · The authorities</a>
+    <a href="#s4">04 · The architecture</a>
+    <a href="#s5">05 · The four forcing functions</a>
+    <a href="#s6">06 · MEES &amp; the stranded asset</a>
+    <a href="#s7">07 · The building lifecycle</a>
+    <a href="#s8">08 · Value chain &amp; the bridge</a>
+  </nav>
+
+  <!-- 1 -->
+  <section class="mod" id="s1">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">CRE as the anchor — read this and the rest is easy</h2></div>
+    <p class="sec-intro">Commercial real estate is where the venture's knowledge is deepest, and it is the cleanest place to learn the whole UK ESG system, because <b>every sector is built on the same skeleton</b>. A climate treaty becomes a domestic framework, which spawns instruments, enforced by a set of authorities, arranged in layers, transmitted through forcing functions, with one sharp mechanism creating the urgency — and a value chain where the venture plays.</p>
+    <p class="sec-intro">In CRE that sharp mechanism is <b>MEES</b>: a regulation that can make a building <i>illegal to lease</i>. Hold this report's structure in your head, and the multi-sector briefing reads as the same diagram four times over — manufacturing swaps MEES for a carbon price, logistics for a fleet mandate, and the "tenant" force becomes "customer Scope-3 demand". <b>Same bones, different top layer.</b></p>
+    <div class="takeaway"><b>How to use this document:</b> read it as the worked example. Sections 02–08 mirror the multi-sector report one-for-one; §08 closes with the explicit bridge that maps CRE onto the wider economy.</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="mod" id="s2">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">The lineage — from Paris to a UK building</h2></div>
+    <p class="sec-intro">The same spine as every UK sector, landing on the <b>CRE-specific instruments</b>. An international treaty, a binding domestic framework with legally enforceable carbon budgets, the Net Zero target — then the building-level rules.</p>
+    <div class="timeline">
+      <div class="tl-item g"><span class="tl-date">2015 / 16</span><div class="tl-card"><span class="tl-role">International root</span><p class="tl-name">Paris Agreement · Article 13</p><p class="tl-desc">The Enhanced Transparency Framework — nations must measure, report and verify emissions. The seed of all corporate disclosure.</p></div></div>
+      <div class="tl-item po"><span class="tl-date">2008</span><div class="tl-card"><span class="tl-role">Framework law</span><p class="tl-name">Climate Change Act 2008</p><p class="tl-desc">Legally binding carbon budgets, advised by the CCC. Commercial building stock emissions must fall ~87% by 2040 <span class="verify">Verify</span>; CRE is ~20–23% of UK CO₂.</p></div></div>
+      <div class="tl-item po"><span class="tl-date">2019</span><div class="tl-card"><span class="tl-role">The target</span><p class="tl-name">Net Zero by 2050 enshrined</p><p class="tl-desc">The legally binding 100%-reduction target — the obligation built-environment regulation exists to deliver.</p></div></div>
+      <div class="tl-item c"><span class="tl-date">2015–23</span><div class="tl-card"><span class="tl-role">The building rules land</span><p class="tl-name">MEES (2015) · EPC · SECR · ESOS · GRESB</p><p class="tl-desc">The CRE instruments: a minimum-energy leasing standard, the EPC it tests against, energy reporting, and the investor benchmark.</p></div></div>
+      <div class="tl-item c"><span class="tl-date">2023–25</span><div class="tl-card"><span class="tl-role">MEES bites</span><p class="tl-name">EPC E floor · valid-EPC rule</p><p class="tl-desc">Since Apr 2023, unlawful to let below EPC E; since Apr 2025, a valid in-date EPC required to let. <span class="confirm">Confirmed</span></p></div></div>
+      <div class="tl-item m"><span class="tl-date">2026–30</span><div class="tl-card"><span class="tl-role">The cliff approaches</span><p class="tl-name">UK SRS · EPC C → EPC B</p><p class="tl-desc">UK SRS finalised Feb 2026; MEES proposed to tighten to EPC C (~2027/28) then B (~2030) — <b>not yet law, dates keep slipping</b> <span class="verify">Verify</span>.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="mod" id="s3">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">The authorities — who sets what in CRE</h2></div>
+    <p class="sec-intro">CRE governance is split across policy departments, financial regulators, the enforcement layer, and a de-facto market authority. <b>Hover any tile.</b></p>
+    <div class="auth-grid">
+      <div class="auth reg" data-tip="<b>Department for Energy Security &amp; Net Zero.</b> Owns the instruments that bite the building itself: MEES, the EPC framework (and its reform), and ESOS. The most important department for CRE compliance.">
+        <div class="ab">DESNZ</div><div class="af">Energy Security &amp; Net Zero · Policy</div>
+        <div class="as"><b>Sets:</b> MEES, the EPC framework &amp; reform, ESOS.</div></div>
+      <div class="auth fin" data-tip="<b>Department for Business &amp; Trade.</b> Owns the UK Sustainability Reporting Standards (UK SRS) — the entity-level, investor-facing climate disclosure regime that a listed REIT must report against.">
+        <div class="ab">DBT</div><div class="af">Business &amp; Trade · Disclosure</div>
+        <div class="as"><b>Sets:</b> UK SRS (the ISSB-based disclosure standard).</div></div>
+      <div class="auth fin" data-tip="<b>Financial Conduct Authority.</b> Regulates listed-company disclosure and is the route by which UK SRS becomes mandatory for listed firms; also runs the SDR anti-greenwash fund-label regime.">
+        <div class="ab">FCA</div><div class="af">Financial Conduct Authority · Markets</div>
+        <div class="as"><b>Sets:</b> listed-firm disclosure enforcement; SDR &amp; fund labels.</div></div>
+      <div class="auth env" data-tip="<b>Local authorities.</b> The actual enforcers of MEES — they serve compliance notices and levy penalties (up to £150k) and publish the breach register. Historically under-resourced and patchy, but expected to tighten.">
+        <div class="ab">Local authorities</div><div class="af">MEES enforcement · EPCs</div>
+        <div class="as"><b>Enforce:</b> MEES penalties &amp; register; EPC lodgement.</div></div>
+      <div class="auth env" data-tip="<b>Environment Agency.</b> Administers ESOS (the four-yearly energy audit) and is a UK ETS regulator; the operational body for several energy obligations (with devolved counterparts).">
+        <div class="ab">Environment Agency</div><div class="af">Operational regulator</div>
+        <div class="as"><b>Runs:</b> ESOS administration; energy permitting.</div></div>
+      <div class="auth fin" data-tip="<b>RICS.</b> Sets the Red Book valuation standard — valuers are now required to factor EPC/ESG into a building's market value, which is how a poor rating becomes a real, booked 'brown discount'.">
+        <div class="ab">RICS</div><div class="af">Valuation standard</div>
+        <div class="as"><b>Sets:</b> Red Book — EPC/ESG must feed valuation (the brown discount).</div></div>
+      <div class="auth fin" data-tip="<b>GRESB.</b> Not a regulator but a de-facto authority: the Global Real Estate Sustainability Benchmark that most major property investors require their managers to report to annually. Investor pressure, codified.">
+        <div class="ab">GRESB</div><div class="af">Investor benchmark · de-facto</div>
+        <div class="as"><b>Sets:</b> the annual real-estate ESG benchmark investors demand.</div></div>
+      <div class="auth env" data-tip="<b>Companies House.</b> The filing destination for SECR — large companies disclose energy and carbon inside the directors' report, enforced via Companies House penalties.">
+        <div class="ab">Companies House</div><div class="af">Filing / SECR</div>
+        <div class="as"><b>Runs:</b> the SECR filing destination.</div></div>
+      <div class="auth bld" data-tip="<b>Accredited EPC assessors &amp; their schemes.</b> Only an accredited assessor can lodge an EPC via the SBEM/iSBEM calculation — the licensed gatekeeper the venture must sit alongside, never replace.">
+        <div class="ab">EPC assessors</div><div class="af">Accredited · SBEM/iSBEM</div>
+        <div class="as"><b>Produce:</b> the EPC itself — the number MEES tests against.</div></div>
+    </div>
+    <div class="takeaway"><b>The pattern to notice:</b> exactly as in the wider economy, no single body owns "CRE ESG" — policy (DESNZ/DBT), markets (FCA, GRESB, RICS), and enforcement (local authorities, EA) are split, so an owner faces overlapping, non-identical demands. That fragmentation is the "single source of truth" opening, in miniature.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="mod" id="s4">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">The architecture — four layers, and who is caught</h2></div>
+    <p class="sec-intro">The CRE acronyms resolve into the same <b>four layers</b> as the rest of the economy. Beneath them, the CRE-specific matrix is organised <b>by owner type</b> — and it reveals the single most important strategic fact in the sector.</p>
+    <div class="stack">
+      <div class="layer"><span class="ln">Layer 1 · Investor / capital-market disclosure</span><h4>UK SRS (ISSB S1/S2) · TCFD (legacy) · GRESB</h4><p>Tell investors and the market about climate risk and performance. GRESB sits parallel — same data, private-investor audience.</p></div>
+      <div class="layer l2"><span class="ln">Layer 2 · Mandatory energy / carbon reporting</span><h4>SECR (annual, in the accounts) · ESOS (4-yearly audit)</h4><p>Tell the government what you used. Economy-wide for large firms; produces the energy data the rest of the stack consumes.</p></div>
+      <div class="layer l3"><span class="ln">Layer 3 · Building compliance &amp; standards</span><h4>MEES / EPC · Building Regs Part L / BRUKL</h4><p>Meet a physical standard or you can't operate. MEES is the leasing gate; Part L is the construction gate. <b>The sharpest teeth in CRE.</b></p></div>
+      <div class="layer l4"><span class="ln">Layer 4 · Voluntary certification</span><h4>BREEAM · LEED · NABERS UK</h4><p>Prove quality to tenants, investors and lenders. The shift toward operational ratings (NABERS) is closing the design-vs-actual gap.</p></div>
+    </div>
+
+    <p class="sec-intro" style="margin-top:22px"><b>The "who's caught" matrix — by owner type.</b> <span class="dot d-full">●</span> caught directly · <span class="dot d-half">◐</span> size/investor-dependent · <span class="dot d-none">·</span> not directly.</p>
+    <table class="tbl">
+      <thead><tr><th style="width:24%">Regime</th><th>Large listed REIT</th><th>Large private</th><th>Mid-market</th><th>Small landlord</th></tr></thead>
+      <tbody>
+        <tr><td class="rh">UK SRS</td><td><span class="dot d-full">●</span> soon mandatory</td><td><span class="dot d-half">◐</span> voluntary</td><td><span class="dot d-none">·</span></td><td><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">SECR</td><td><span class="dot d-full">●</span></td><td><span class="dot d-full">●</span></td><td><span class="dot d-half">◐</span> size-dep.</td><td><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">ESOS</td><td><span class="dot d-full">●</span></td><td><span class="dot d-full">●</span></td><td><span class="dot d-half">◐</span> maybe</td><td><span class="dot d-none">·</span></td></tr>
+        <tr class="lead"><td class="rh">MEES / EPC</td><td class="colA"><span class="dot d-full">●</span></td><td class="colA"><span class="dot d-full">●</span></td><td class="colA"><span class="dot d-full">●</span></td><td class="colA"><span class="dot d-full">●</span> every building</td></tr>
+        <tr><td class="rh">GRESB</td><td><span class="dot d-half">◐</span> usually</td><td><span class="dot d-half">◐</span> sometimes</td><td><span class="dot d-none">·</span> rarely</td><td><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">CSRD (EU)</td><td><span class="dot d-half">◐</span> if EU footprint</td><td><span class="dot d-half">◐</span> if EU footprint</td><td><span class="dot d-none">·</span></td><td><span class="dot d-none">·</span></td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway p"><b>MEES is the great leveller.</b> Every other regime has a size or investor threshold that exempts the smaller players — but <b>MEES applies to every leased commercial building regardless of owner size.</b> That makes the MEES problem the <i>broadest possible market</i> in CRE: not just the big REITs, but every landlord. (In the multi-sector world, the analog is customer/Scope-3 demand — the one force that reaches the long tail.)</div>
+  </section>
+
+  <!-- 5 -->
+  <section class="mod" id="s5">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">The four forcing functions</h2></div>
+    <p class="sec-intro">"ESG" in CRE is not one thing — it is <b>four separate pressure systems</b> on the building owner, each with a different actor, timeline and buying motivation. They all consume the same building data, which is why a single source of truth wins.</p>
+    <div class="forces">
+      <div class="fcard reg">
+        <h4>1 · Regulator</h4><div class="fwhat">Legal compliance — the sharpest</div>
+        <div class="row"><span class="k">Instrument</span><span><b>MEES</b> — can make the building illegal to lease</span></div>
+        <div class="row"><span class="k">Motivation</span><span>Avoid fines &amp; (above all) keep the asset lettable</span></div>
+        <div class="row"><span class="k">Consumes</span><span>The EPC rating</span></div>
+      </div>
+      <div class="fcard inv">
+        <h4>2 · Investor</h4><div class="fwhat">Capital-markets pressure</div>
+        <div class="row"><span class="k">Instrument</span><span><b>GRESB</b>, pension net-zero mandates, RICS valuation</span></div>
+        <div class="row"><span class="k">Motivation</span><span>Cost of equity, valuation, access to capital</span></div>
+        <div class="row"><span class="k">Consumes</span><span>Entity + asset GHG and performance data</span></div>
+      </div>
+      <div class="fcard len">
+        <h4>3 · Lender</h4><div class="fwhat">Cost-of-capital pressure</div>
+        <div class="row"><span class="k">Instrument</span><span>Green &amp; sustainability-linked loans; EPC-tied margins</span></div>
+        <div class="row"><span class="k">Motivation</span><span>Cheaper debt; avoid the "brown discount" (5–15% for EPC D−) <span class="verify">Verify</span></span></div>
+        <div class="row"><span class="k">Consumes</span><span>EPC + actual energy / covenant KPIs</span></div>
+      </div>
+      <div class="fcard ten">
+        <h4>4 · Tenant</h4><div class="fwhat">Lettability pressure</div>
+        <div class="row"><span class="k">Instrument</span><span>Green leases; corporate occupiers' own net-zero needs</span></div>
+        <div class="row"><span class="k">Motivation</span><span>Avoid vacancy; corporates need green space for their own UK SRS</span></div>
+        <div class="row"><span class="k">Consumes</span><span>Shared landlord–tenant energy data</span></div>
+      </div>
+    </div>
+    <div class="takeaway"><b>Why four, not one:</b> each force creates a <i>different</i> buying motivation — fear of the fine, fear of capital flight, the price of debt, the risk of vacancy — but they converge on the same underlying data. In the multi-sector report this same four-box expands to five (a direct carbon price appears) and "tenant" generalises into "customer / Scope-3".</div>
+  </section>
+
+  <!-- 6 -->
+  <section class="mod" id="s6">
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">MEES &amp; the stranded-asset mechanic — the "why now"</h2></div>
+    <p class="sec-intro">This is the deep core of CRE, and the equivalent of the carbon-price section in the manufacturing world. <b>MEES is the mechanism doing the stranding.</b> It is enforced through the <b>EPC</b> — an A–G rating produced by an accredited assessor via the SBEM/iSBEM calculation, valid 10 years, required on build, sale or let, and <i>modelled, not metered</i>.</p>
+    <table class="tbl">
+      <thead><tr><th style="width:30%">Milestone</th><th>Rule</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td class="rh">From Apr 2023</td><td>Unlawful to let (new or continuing) below EPC E</td><td><span class="confirm">Confirmed · law</span></td></tr>
+        <tr><td class="rh">From Apr 2025</td><td>A valid, in-date EPC required to let</td><td><span class="confirm">Confirmed · law</span></td></tr>
+        <tr class="lead"><td class="rh">~2027 / 2028</td><td>Proposed minimum EPC C (new, then all leases)</td><td><span class="verify">Verify · not yet law</span></td></tr>
+        <tr class="lead"><td class="rh">~2030 (–2035?)</td><td>Proposed minimum EPC B</td><td><span class="verify">Verify · may slip</span></td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway p"><b>The cliff edge, not a slope.</b> An EPC-D building isn't worth slightly less than an EPC-C one — it is <i>cannot be leased after the deadline, therefore little rent, therefore hard to sell or refinance</i>. One letter-grade boundary collapses the value. JLL estimates <b>~65% of UK office stock is at risk of stranding by 2030</b> if MEES tightens to B; Central London's best stock ran ~1% vacancy in Q4 2025 versus ~27%+ for the worst <span class="verify">Verify</span>. That bifurcation is the demand.</div>
+    <p class="sec-intro" style="margin-top:18px"><b>Penalties &amp; enforcement.</b> Fines up to <b>£150,000</b> (10% of rateable value under 3 months' breach, 20% beyond) plus public naming <span class="confirm">Confirmed</span>. Enforced by <b>local authorities</b> — historically weak and patchy, but the real driver isn't the fine: even with zero enforcement, a poor-EPC building loses tenants, valuation and refinancing. <b>The market enforces MEES where the council doesn't.</b> Exemptions (7-year payback, third-party consent refused, RICS &gt;5% devaluation, 6-month new-landlord grace) exist — the 7-year-payback exemption is a political flashpoint that may narrow, expanding the forced-retrofit market overnight.</p>
+    <div class="takeaway"><b>Two product-critical nuances.</b> (1) <b>The ruler is changing:</b> EPC reform is underway — non-domestic EPCs keep their carbon metric, launch slipped to ~H2 2027 <span class="verify">Verify</span>; a product must treat the EPC methodology and the deadline as <i>variables</i>, never hardcode them. (2) <b>EPC vs actual meter data are two different jobs on the same building</b> — the EPC is modelled and legal; lenders, GRESB and LEED increasingly want real metered energy. Two parallel data needs, same asset — the sharpest product angle, and one the big platforms underplay.</div>
+  </section>
+
+  <!-- 7 -->
+  <section class="mod" id="s7">
+    <div class="sec-head"><span class="sec-num">07</span><h2 class="sec-title">The building lifecycle — where ESG bites</h2></div>
+    <p class="sec-intro">Knowing <i>when</i> ESG matters tells you when an owner will pay. A building moves through a transaction lifecycle, and ESG (and the data behind it) enters at every stage — but the <b>richest opportunities</b> cluster at acquisition, operations, reporting and refurbishment.</p>
+    <div class="flow">
+      <div class="step"><div class="sn">01</div><h5>Develop</h5><p>Design choices: BREEAM/LEED targets, embodied carbon, EPC modelling.</p></div>
+      <div class="step hot"><div class="sn">02</div><h5>Acquire</h5><p>Due diligence: what's the EPC? Retrofit cost to hit MEES? Make-or-break for deals.</p></div>
+      <div class="step"><div class="sn">03</div><h5>Lease</h5><p>Green-lease clauses: data-sharing, retrofit cooperation, KPIs.</p></div>
+      <div class="step hot"><div class="sn">04</div><h5>Operate</h5><p><b>Where the data lives</b> — meters, BMS, utility bills. Controlled by the FM.</p></div>
+      <div class="step hot"><div class="sn">05</div><h5>Report</h5><p>Annual ESG to investors, regulators, lenders: UK SRS, SECR, GRESB.</p></div>
+      <div class="step hot"><div class="sn">06</div><h5>Refurbish</h5><p>Capex to hit standards / tenant demand. ESG drives this hard now.</p></div>
+      <div class="step"><div class="sn">07</div><h5>Sell / refinance</h5><p>Back to due diligence for the buyer; green-loan KPIs on new debt.</p></div>
+    </div>
+    <p class="flow-key"><b>Highlighted</b> = the four richest opportunity stages (acquire · operate · report · refurbish).</p>
+    <div class="takeaway"><b>The players at each stage:</b> owners (REITs — Landsec, British Land, SEGRO); operators (asset/property/facilities managers — the FM controls the energy data); advisors (the Big Five — JLL, CBRE, Savills, Knight Frank, Cushman — both competitor and channel); valuers (RICS), lawyers, and lenders. The data the venture wants is generated in <b>Operate</b> and consumed in <b>Report</b> — own that flow.</div>
+  </section>
+
+  <!-- 8 -->
+  <section class="mod" id="s8">
+    <div class="sec-head"><span class="sec-num">08</span><h2 class="sec-title">The value chain — and the bridge to multi-sector</h2></div>
+    <p class="sec-intro">The CRE value chain, with the venture's lane colour-coded. Own the soft, recurring, software-leverageable links; partner on data and the licensed calculation; stay out of the physical and capital-intensive ends.</p>
+    <div class="vc-legend">
+      <span><span class="sw" style="background:var(--build)"></span> We build</span>
+      <span><span class="sw" style="background:var(--partner)"></span> We partner / channel</span>
+      <span><span class="sw" style="background:var(--out);opacity:.7"></span> Not our lane</span>
+    </div>
+    <div class="chain">
+      <div class="link build"><span class="lk">Link 1</span><h5>EPC &amp; MEES intelligence</h5><p>Where each asset stands; forecast risk under each deadline scenario.</p><div class="who">consulting-led entry</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link partner"><span class="lk">Link 2</span><h5>Data capture</h5><p>Meters, BMS, utility bills — via the FM.</p><div class="who">→ FM · BMS · meters</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link build"><span class="lk">Link 3</span><h5>Measure &amp; track</h5><p>EPC register + actual energy; the two-data-need engine.</p><div class="who">core product</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link build"><span class="lk">Link 4</span><h5>Report</h5><p>One data set → UK SRS, SECR, GRESB, lenders.</p><div class="who">single source of truth</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link partner"><span class="lk">Link 5</span><h5>Assess / certify</h5><p>The accredited EPC assessor &amp; the verifier.</p><div class="who">→ licensed gatekeeper</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link build"><span class="lk">Link 6</span><h5>Plan the capex</h5><p>D→C→B pathway with £/sqft ROI; the "now what".</p><div class="who">recurring relationship</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link out"><span class="lk">Link 7</span><h5>Deliver retrofit</h5><p>The physical works &amp; finance.</p><div class="who">→ contractors · lenders</div></div>
+    </div>
+
+    <div class="wedge">
+      <h3>The CRE wedge</h3>
+      <p class="sub">A productised data layer over the overlapping stack — what the modules captured as a five-part MVP — sold to the broad MEES-exposed market, entered consulting-led while the rules keep moving.</p>
+      <div class="wedge-cols">
+        <div class="wcol">
+          <div class="wi">Build — the five-part MVP</div>
+          <ul>
+            <li><b>EPC register tracker</b> — single source of truth per asset, expiry alerts.</li>
+            <li><b>MEES risk flag</b> — "8 assets illegal to lease in 2027; £2.3m to comply" as a CFO dashboard.</li>
+            <li><b>EPC-vs-actual gap</b> — where the modelled rating and real energy diverge.</li>
+            <li><b>Capex planner</b> — D→C→B upgrades with £/sqft ROI.</li>
+            <li><b>Green-lease trigger</b> — auto-check EPC at lease; block below threshold.</li>
+          </ul>
+        </div>
+        <div class="wcol no">
+          <div class="wi">Do NOT build</div>
+          <ul>
+            <li><b>The accredited EPC assessment</b> — only licensed assessors can lodge it. Never say "we improve your EPC"; say "we track it and feed your assessor."</li>
+            <li><b>The retrofit delivery &amp; finance</b> — capital-intensive, incumbent-owned.</li>
+            <li><b>Hardcoded deadlines / EPC methodology</b> — they are moving variables.</li>
+            <li><b>The valuer's or lender's seat</b> — feed them data, don't replace them.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="bridge">
+      <h3>The bridge — why CRE makes the multi-sector picture easy</h3>
+      <p>Everything above is a <b>template</b>. The multi-sector report uses this exact skeleton — lineage, authorities, four-layer architecture, forcing functions, a deep mechanism, a value chain — and changes only the <b>top layer</b>:</p>
+      <p>• <b>The deep mechanism</b> swaps from MEES (asset-value cliff) to a <b>carbon price</b> in manufacturing (UK ETS/CBAM) and a <b>fleet mandate</b> in logistics — but the value chain (intelligence → capture → measure → report → reduce, with delivery left to incumbents) is the same shape. &nbsp; • <b>The "tenant" force</b> generalises into <b>customer / Scope-3 demand</b>, which becomes the dominant cross-sector force. &nbsp; • <b>"MEES the great leveller"</b> becomes <b>"customer demand the great leveller"</b> — the force that reaches the SME long tail. &nbsp; • <b>Layers 1–2 (UK SRS, SECR, ESOS)</b> are <b>identical</b> across every sector — that shared base is what lets one product travel.</p>
+      <p>Read the CRE detail once, and the multi-sector briefing is the same diagram with the top layer swapped out. <b>CRE is the anchor; the rest is substitution.</b></p>
+    </div>
+  </section>
+
+  <div class="foot-note">
+    UK · CRE ESG ecosystem briefing — internal team document, distilled from the CRE programme (Modules 01–08) and the iSBEM briefs.<br>
+    Figures marked <span class="verify">Verify</span> are unconfirmed or perishable (notably the MEES EPC C/B dates, which are <b>not yet law</b> and have slipped); <span class="confirm">Confirmed</span> sit in primary UK law/policy as of early–mid 2026.<br>
+    Guardrail: own the data layer, never the regulated calculation or signature — sit alongside the accredited assessor, the verifier, the valuer and the lender.
+  </div>
+
+</div>
+
+<div id="tt"></div>
+<script>
+  (function(){
+    var tt=document.getElementById('tt');
+    document.querySelectorAll('[data-tip]').forEach(function(el){
+      el.addEventListener('mouseenter',function(){tt.innerHTML=el.getAttribute('data-tip');tt.style.opacity='1';});
+      el.addEventListener('mousemove',function(e){var x=e.clientX+16,y=e.clientY+16,w=tt.offsetWidth,h=tt.offsetHeight;
+        if(x+w>window.innerWidth-12)x=e.clientX-w-16; if(y+h>window.innerHeight-12)y=e.clientY-h-16;
+        tt.style.left=x+'px';tt.style.top=y+'px';});
+      el.addEventListener('mouseleave',function(){tt.style.opacity='0';});
+    });
+  })();
+</script>
+</body>
+</html>

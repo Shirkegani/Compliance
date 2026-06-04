@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Supply Chain / Scope 3 — Sector Deep-Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1e9; --paper-2:#efebe0;
+    --ink:#1c1b18; --ink-soft:#4a473f; --ink-faint:#7c786c;
+    --rule:#d6d0bf; --rule-strong:#bdb6a1;
+    --sc:#7a3b6e; --sc-bg:#f3e8f0; --sc-line:#d9bcd1;       /* signature: purple */
+    --global:#9a6a12; --global-bg:#f7eed9; --global-line:#dcc188;
+    --pressure:#a8431f; --pressure-bg:#f8e9e2; --pressure-line:#e3bda9;
+    --venture:#0f5132; --venture-bg:#dcefe2; --venture-line:#a6cdb4;
+    --cre:#1d5fa6; --cre-bg:#e6eff8; --cre-line:#9cbfe0;
+    --log:#0f6b66; --log-bg:#dcefee;
+    --shadow:0 1px 2px rgba(28,27,24,.05), 0 4px 14px rgba(28,27,24,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);
+    background-image:radial-gradient(circle at 18% 8%,rgba(255,255,255,.5),transparent 45%),radial-gradient(circle at 90% 100%,rgba(189,182,161,.18),transparent 55%);
+    color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px;margin:0 auto;padding:42px 30px 90px;}
+
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:24px;}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sc);margin:0 0 10px;}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,5vw,48px);line-height:1.04;margin:0;letter-spacing:-.01em;}
+  h1 em{font-style:italic;color:var(--sc);font-weight:500;}
+  .standfirst{max-width:760px;margin:16px 0 0;font-size:16px;color:var(--ink-soft);line-height:1.55;}
+  .standfirst b{color:var(--ink);font-weight:600;}
+  .crumb{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:.03em;}
+  .crumb b{color:var(--sc);font-weight:600;}
+
+  .lead{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--sc);border-radius:0 10px 10px 0;padding:14px 18px;margin:0 0 34px;box-shadow:var(--shadow);}
+  .lead p{margin:0 0 9px;font-size:13.5px;color:var(--ink-soft);line-height:1.5;} .lead p:last-child{margin-bottom:0;}
+  .lead b{color:var(--ink);} .lead .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sc);}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;}
+  .toc a{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--rule-strong);border-radius:20px;padding:5px 12px;transition:all .15s ease;}
+  .toc a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  section.mod{margin:0 0 40px;scroll-margin-top:20px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);border-radius:5px;padding:2px 7px;flex:none;}
+  .sec-title{font-family:"Fraunces",serif;font-weight:600;font-size:22px;letter-spacing:-.01em;margin:0;}
+  p.body{font-size:14.5px;color:var(--ink-soft);line-height:1.6;margin:0 0 12px;max-width:820px;}
+  p.body b{color:var(--ink);} p.body i{color:var(--ink-soft);}
+
+  .takeaway{margin:14px 0;border-left:3px solid var(--venture);background:var(--venture-bg);padding:11px 16px;border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+  .takeaway b{color:var(--venture);}
+  .takeaway .lbl{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--venture);display:block;margin-bottom:3px;}
+  .takeaway.s{border-left-color:var(--sc);background:var(--sc-bg);} .takeaway.s b{color:var(--sc);} .takeaway.s .lbl{color:var(--sc);}
+
+  .verify{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--pressure);border:1px solid var(--pressure-line);background:var(--pressure-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .confirm{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--venture);border:1px solid var(--venture-line);background:var(--venture-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+
+  /* 15-category grid */
+  .cats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:6px 0 14px;}
+  .catcol{background:#fff;border:1px solid var(--rule);border-radius:11px;box-shadow:var(--shadow);padding:13px 15px;border-top:3px solid var(--sc);}
+  .catcol.down{border-top-color:var(--ink-faint);}
+  .catcol .ch{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--sc);margin-bottom:7px;}
+  .catcol.down .ch{color:var(--ink-faint);}
+  .catcol ol{margin:0;padding-left:20px;} .catcol li{font-size:12px;color:var(--ink-soft);line-height:1.5;margin-bottom:2px;}
+  .catcol li b{color:var(--ink);} .catcol .tag{font-family:"IBM Plex Mono",monospace;font-size:9px;color:var(--ink-faint);}
+  .catcol .big{color:var(--sc);font-weight:600;}
+
+  table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--rule);border-radius:11px;overflow:hidden;box-shadow:var(--shadow);margin:6px 0 14px;}
+  table.tbl th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--rule);background:var(--paper-2);}
+  table.tbl td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);vertical-align:top;line-height:1.45;}
+  table.tbl tr:last-child td{border-bottom:none;}
+  table.tbl .rh{color:var(--ink);font-weight:600;}
+  table.tbl .colsc{background:var(--sc-bg);}
+
+  .cascade{background:linear-gradient(135deg,#2e1b2a,#5a2c50);color:#f0e4ed;border-radius:12px;padding:18px 22px;margin:6px 0 14px;}
+  .cascade .cl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#d7a9cc;margin-bottom:8px;}
+  .cascade p{margin:0;font-size:14px;line-height:1.55;color:#f0e4ed;} .cascade p b{color:#fff;}
+
+  ul.clean{margin:4px 0 14px;padding-left:0;list-style:none;}
+  ul.clean li{position:relative;padding-left:22px;font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:7px;}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:8px;width:6px;height:6px;border-radius:2px;background:var(--sc);}
+  ul.clean li b{color:var(--ink);}
+  ul.clean.v li::before{background:var(--venture);}
+  ul.clean.no li::before{background:var(--pressure);transform:rotate(45deg);border-radius:0;}
+  ol.num{margin:4px 0 14px;padding-left:20px;} ol.num li{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:7px;} ol.num li b{color:var(--ink);}
+
+  .sources{font-size:13px;color:var(--ink-soft);line-height:1.6;} .sources b{color:var(--ink);}
+  .foot-note{margin-top:46px;border-top:1px solid var(--rule);padding-top:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);line-height:1.7;} .foot-note b{color:var(--sc);}
+
+  @media (max-width:820px){ .cats{grid-template-columns:1fr;} }
+  @media print {
+    html,body{background:#f4f1e9 !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+    body{zoom:0.74;}
+    @page{size:A4;margin:10mm;}
+    .wrap{max-width:1040px !important;padding:28px 28px 36px !important;}
+    .cats{grid-template-columns:1fr 1fr !important;}
+    .sec-head{break-after:avoid;page-break-after:avoid;}
+    .cats,table.tbl,.takeaway,.lead,.cascade{break-inside:avoid;page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">UK sector deep-dive · Tier-1 research · The demand engine</p>
+    <h1>UK Supply Chain / Scope 3 — <em>the demand engine</em></h1>
+    <p class="standfirst">Not a sector — a <b>cascade</b>. A large organisation with a disclosure obligation or a net-zero target must account for emissions it doesn't own, the bulk of which sit with its <b>suppliers</b> — so it pushes the obligation down the chain, and each supplier pushes it down again. A firm that escapes every direct regulation is <b>forced to measure anyway, by its customer</b>. That is the single largest, most cross-sector demand pool the venture can address.</p>
+    <p class="crumb">SOURCE · GHG PROTOCOL · SBTi · CABINET OFFICE · CDP/ECOVADIS · DESNZ/DEFRA · UKGBC · <span class="verify">VERIFY</span> = PERISHABLE/SECONDARY</p>
+  </header>
+
+  <div class="lead">
+    <p><span class="lbl">Where this sits</span> &nbsp;Tier-1 parked research module #3 and the <b>keystone</b> of the expansion thesis. Its crux feeds the cross-sector synthesis (§7) and the opportunity/value chain (§8) of the compact report — not a single sector slot — because Scope 3 <i>unifies</i> CRE, manufacturing and logistics into one market rather than a fourth sector beside them.</p>
+    <p><span class="lbl">Figure discipline</span> &nbsp;Frameworks here are moving (SBTi released a V2 Corporate Net-Zero Standard in draft in late 2025; CSRD scope was cut by the 2026 EU Omnibus). Percentages and thresholds are tagged <span class="verify">Verify</span>.</p>
+  </div>
+
+  <nav class="toc">
+    <a href="#s1">01 · 15 categories, one cascade</a>
+    <a href="#s2">02 · Hardest &amp; biggest</a>
+    <a href="#s3">03 · Demand channels &amp; UK nuance</a>
+    <a href="#s4">04 · The cascade</a>
+    <a href="#s5">05 · Where each sector plugs in</a>
+    <a href="#s6">06 · The data-collection problem</a>
+    <a href="#s7">07 · Opportunity spaces</a>
+    <a href="#s8">08 · Caveats</a>
+    <a href="#s9">09 · Capability check</a>
+    <a href="#s10">10 · Sources</a>
+  </nav>
+
+  <!-- 1 -->
+  <section class="mod" id="s1">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">The mental model — 15 categories, one cascade</h2></div>
+    <p class="body">Scope 3 is <b>indirect value-chain emissions</b> — everything not in Scope 1 (own combustion) or Scope 2 (purchased energy). The GHG Protocol Corporate Value Chain Standard defines <b>15 categories</b>, split upstream (1–8) and downstream (9–15):</p>
+    <div class="cats">
+      <div class="catcol">
+        <div class="ch">Upstream · 1–8</div>
+        <ol>
+          <li><span class="big">Purchased goods &amp; services</span> <span class="tag">◄ biggest</span></li>
+          <li>Capital goods <span class="tag">(CRE)</span></li>
+          <li>Fuel &amp; energy (not S1/S2)</li>
+          <li>Upstream transport &amp; distribution <span class="tag">(logistics)</span></li>
+          <li>Waste</li>
+          <li>Business travel</li>
+          <li>Employee commuting</li>
+          <li>Upstream leased assets <span class="tag">(CRE)</span></li>
+        </ol>
+      </div>
+      <div class="catcol down">
+        <div class="ch">Downstream · 9–15</div>
+        <ol start="9">
+          <li>Downstream transport &amp; distribution</li>
+          <li>Processing of sold products</li>
+          <li>Use of sold products <span class="tag">◄ often biggest for OEMs</span></li>
+          <li>End-of-life of sold products</li>
+          <li>Downstream leased assets <span class="tag">(CRE)</span></li>
+          <li>Franchises</li>
+          <li>Investments <span class="tag">(finance)</span></li>
+        </ol>
+      </div>
+    </div>
+    <p class="body">Two facts make this the centre of gravity: <b>Scope 3 is typically 70–90% of a company's total footprint</b> <span class="verify">Verify · SBTi/GHG Protocol</span> — most of the problem lives outside a firm's own walls; and <b>each prior sector plugs straight into a category</b> — a manufacturer's output is its customer's Category 1, a logistics operator's freight is Categories 4 and 9, a landlord's tenant energy is Categories 8/13. <b>Every sector's "output carbon" is somebody else's Scope 3 input</b> — the unifying insight of the whole expansion programme.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="mod" id="s2">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Why Scope 3 is the hardest <span style="font-style:italic">and</span> the biggest</h2></div>
+    <p class="body">Scope 1 and 2 are <i>yours</i> — you have the meters and the fuel bills. Scope 3 is <b>data you don't control</b>, sitting in hundreds or thousands of third parties. The measurement-quality ladder runs:</p>
+    <ol class="num">
+      <li><b>Supplier-specific (primary)</b> — the supplier's own verified emissions, a product carbon footprint (PCF) from an LCA, or an EPD. Most accurate.</li>
+      <li><b>Activity-based</b> — actual quantities (kg, km, kWh) × emission factors.</li>
+      <li><b>Average-data</b> — industry-average factors per unit.</li>
+      <li><b>Spend-based (secondary)</b> — £ spent × an emission factor (Exiobase, DEFRA). Least precise; a valid <i>start</i>, not a destination.</li>
+    </ol>
+    <div class="takeaway"><span class="lbl">The core opportunity</span> Almost everyone <b>starts spend-based</b> (it needs only the purchase ledger) and is pushed toward <b>supplier-specific</b> data by their own targets and their customers' demands. <b>Closing that gap — getting primary data out of suppliers — is the core operational problem of Scope 3, and the core software opportunity.</b></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="mod" id="s3">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">The demand channels — who forces it (and a key UK nuance)</h2></div>
+    <p class="body">Unlike CRE (MEES) or industry (ETS), Scope 3 in the UK is driven <b>more by markets than by a hard regulatory deadline</b> — a nuance that matters for product design.</p>
+    <ul class="clean">
+      <li><b>UK disclosure regulation is a weak Scope 3 driver.</b> SECR is <b>Scope 1 + 2 only</b>. UK SRS (ISSB S2) requires Scope 3 in principle but carries a <b>transitional/indefinite relief</b> in the UK adaptation. So the statutory push is softer than the EU's.</li>
+      <li><b>EU CSRD / ESRS E1 does mandate Scope 3</b> (with a primary-vs-secondary data-split disclosure) — but the <b>2026 Omnibus cut CSRD scope to the very largest firms</b>, concentrating UK spillover in big cross-border groups.</li>
+    </ul>
+    <p class="body"><b>The strong UK drivers are market and procurement:</b></p>
+    <ul class="clean">
+      <li><b>Public procurement — PPN 006:</b> bids for contracts ≥£5m/yr require a <b>Carbon Reduction Plan</b> covering Scope 1, 2 and relevant Scope 3, with non-compliance an automatic disqualification. The state is the single biggest buyer, cascading the requirement down its suppliers.</li>
+      <li><b>Private buyer demand + SBTi supplier-engagement targets:</b> SBTi requires near-term Scope 3 targets covering <b>≥67% of total Scope 3</b> <span class="verify">Verify</span>, a materiality screen of all 15 categories (exclusions ~5%), and <b>supplier-engagement targets</b> under which a company commits to getting suppliers to set their own science-based targets within ~5 years <span class="verify">Verify</span> — the cascade written into the standard itself.</li>
+      <li><b>CDP and EcoVadis questionnaires</b> — the channels through which large buyers actually collect the data, scored and benchmarked.</li>
+      <li><b>CBAM embedded carbon</b> (manufacturing) — a regulatory-adjacent Scope-3 driver for imported goods.</li>
+      <li><b>Construction embodied carbon</b> (CRE link) — UKGBC roadmap, EPD-led procurement, the proposed <b>Part Z</b>; Scope 3 can be <b>80–95% of a built-environment org's footprint</b> <span class="verify">Verify · UKGBC</span>.</li>
+    </ul>
+    <div class="takeaway s"><span class="lbl">The UK takeaway</span> Because the push is <b>market-led rather than deadline-led</b>, the demand is <b>continuous and relationship-based</b> (a customer keeps asking, every year, in their format) rather than a one-off compliance scramble. That suits a <b>recurring software product</b> better than a deadline-driven one.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="mod" id="s4">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">The cascade — why this is an economy-wide market</h2></div>
+    <div class="cascade">
+      <div class="cl">The multiplier</div>
+      <p>One large buyer with an SBTi target or a PPN 006 obligation must report its Category 1 emissions → it asks its <b>hundreds of suppliers</b> for data → each supplier, to answer credibly (and keep the contract), must build its <b>own</b> inventory → and each of <i>those</i> suppliers then asks <i>its</i> suppliers.</p>
+    </div>
+    <p class="body">So a single obligation at the top <b>propagates down through tiers to the SME long tail</b> — firms with no direct regulatory duty of their own. They measure <b>because a customer demands it, on pain of being delisted or bid-blocked</b> — exactly the dynamic seen in the manufacturing (OEM scorecards) and logistics ("bid-blocked diesel fleet") modules. The addressable population is therefore <b>not "large UK companies" but "anyone in a supply chain that touches a large company or a public contract"</b> — which is most of the economy.</p>
+    <div class="takeaway s"><span class="lbl">The great-leveller analog</span> This is the structural analog of <b>MEES as the great leveller</b> in CRE: MEES forces every landlord regardless of size; <b>customer Scope-3 demand forces every supplier regardless of size</b>. Same shape, far wider footprint.</div>
+  </section>
+
+  <!-- 5 -->
+  <section class="mod" id="s5">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Where each sector plugs in (the unifying table)</h2></div>
+    <table class="tbl">
+      <thead><tr><th style="width:22%">Prior module</th><th>Its emissions become…</th><th>The data product the buyer wants</th></tr></thead>
+      <tbody>
+        <tr><td class="rh">Manufacturing</td><td>Customer's <b>Cat 1</b> (purchased goods); embodied in <b>Cat 2</b></td><td>Product carbon footprint (PCF/EPD); CBAM embedded carbon</td></tr>
+        <tr><td class="rh">Logistics</td><td>Shipper's <b>Cat 4 / Cat 9</b> (transport &amp; distribution)</td><td>Per-shipment / per-route carbon</td></tr>
+        <tr><td class="rh">CRE</td><td>Occupier's <b>Cat 8/13</b> (leased assets); developer's embodied carbon</td><td>Asset/whole-life carbon; landlord–tenant split</td></tr>
+        <tr><td class="rh">Finance (later)</td><td>Investee's <b>Cat 15</b> (financed emissions)</td><td>Portfolio emissions</td></tr>
+      </tbody>
+    </table>
+    <p class="body">Read down the middle column: <b>every sector the venture has studied is a Scope-3 line for someone else.</b> That is why a Scope-3 data layer is not a fourth product — it's the <b>connective tissue</b> that lets one platform serve all of them.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="mod" id="s6">
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">The data-collection problem — where the software lives</h2></div>
+    <p class="body">The whole of Scope 3 reduces operationally to a few hard, repeatable jobs that are exactly what software does well:</p>
+    <ul class="clean">
+      <li><b>Supplier data collection at scale</b> — surveys/portals to pull primary data (or PCFs/EPDs) from the top suppliers, with spend-based estimation as the fallback for the long tail. (Rule of thumb: moving the top 10–20 suppliers from spend-based to primary data is a 1–2 cycle effort.)</li>
+      <li><b>Footprinting across all 15 categories</b> with the right factors (DEFRA, Exiobase) and a defensible primary/secondary split.</li>
+      <li><b>Carbon Reduction Plan / disclosure generation</b> in the formats buyers actually ask for (PPN 006 template, CDP, EcoVadis, customer questionnaires).</li>
+      <li><b>"Answer once, reuse everywhere"</b> — the single-source-of-truth thesis at value-chain scale: a supplier completes its inventory once and exports it into every customer's questionnaire.</li>
+    </ul>
+  </section>
+
+  <!-- 7 -->
+  <section class="mod" id="s7">
+    <div class="sec-head"><span class="sec-num">07</span><h2 class="sec-title">Venture opportunity spaces — the expansion keystone</h2></div>
+    <ul class="clean v">
+      <li><b>The cross-sector supplier/footprint platform for the SME long tail</b> — the highest-volume opportunity in the whole programme: help the firms <i>forced by customer/PPN demand</i> build a credible footprint and Carbon Reduction Plan, and respond to questionnaires once. This makes the venture multi-sector by default, because the long tail spans manufacturing, logistics, CRE supply and services.</li>
+      <li><b>Product carbon footprint (PCF/EPD) tooling</b> — primary-data generation for manufacturers feeding Cat 1 and CBAM.</li>
+      <li><b>Per-shipment carbon</b> (logistics) and <b>whole-life/embodied carbon</b> (CRE) as category-specific feeds into the same engine.</li>
+      <li><b>Supplier-engagement-as-a-service for large buyers</b> — the <i>other side</i> of the cascade: helping a big organisation collect from its suppliers and run its SBTi supplier-engagement target. Also a powerful distribution channel — land one large buyer, reach its whole supply base.</li>
+    </ul>
+    <p class="body"><b>What NOT to build:</b></p>
+    <ul class="clean no">
+      <li>Become the <b>SBTi validator / CDP scorer</b> — independent gatekeepers; feed them, don't replace them.</li>
+      <li>The <b>deep-science LCA consultancy</b> at the bespoke end — partner with LCA specialists.</li>
+      <li>Anything assuming a <b>hard UK Scope-3 mandate</b> — the UK push is market-led, so sell on winning/keeping contracts and answering customers, not a statutory deadline.</li>
+    </ul>
+  </section>
+
+  <!-- 8 -->
+  <section class="mod" id="s8">
+    <div class="sec-head"><span class="sec-num">08</span><h2 class="sec-title">Honest caveats</h2></div>
+    <ol class="num">
+      <li><b>SBTi is mid-revision</b> — the V2 Corporate Net-Zero Standard was in draft in late 2025; thresholds (the 67% coverage, supplier-engagement mechanics, FLAG rules) may shift <span class="verify">Verify</span>.</li>
+      <li><b>UK Scope-3 regulation is deliberately light</b> — don't over-claim a statutory driver; the real force is procurement + customers + voluntary targets. A strength for a recurring product, a weakness for a deadline pitch.</li>
+      <li><b>CSRD spillover is narrower than older sources say</b> — post-Omnibus, only the largest cross-border firms.</li>
+      <li><b>Data quality is contested</b> — spend-based numbers are easy but weak; the value is in the supplier-primary-data uplift, which is hard and where buyers focus scrutiny.</li>
+    </ol>
+  </section>
+
+  <!-- 9 -->
+  <section class="mod" id="s9">
+    <div class="sec-head"><span class="sec-num">09</span><h2 class="sec-title">What you should now be able to do</h2></div>
+    <ul class="clean">
+      <li>Explain why <b>Scope 3 is 70–90% of a typical footprint</b> and name the <b>15 categories</b> (upstream 1–8, downstream 9–15), with Cat 1 usually largest.</li>
+      <li>Explain the <b>data-quality ladder</b> (supplier-specific → activity → average → spend-based) and why the value is in moving up it.</li>
+      <li>State the <b>key UK nuance</b>: SECR is Scope 1+2 only and UK SRS has Scope 3 relief, so UK Scope-3 demand is <b>market-led</b> (PPN 006, OEM scorecards, SBTi, CDP), not deadline-led.</li>
+      <li>Explain the <b>cascade</b> and why it pulls the SME long tail into measurement — the great-leveller analog to MEES.</li>
+      <li>Map <b>how manufacturing, logistics and CRE each become a Scope-3 category</b> for someone else.</li>
+      <li>Identify the <b>cross-sector supplier-data platform</b> as the expansion keystone, and what to avoid building.</li>
+    </ul>
+  </section>
+
+  <!-- 10 -->
+  <section class="mod" id="s10">
+    <div class="sec-head"><span class="sec-num">10</span><h2 class="sec-title">Primary sources to build on</h2></div>
+    <p class="sources">
+      <b>GHG Protocol</b> — Corporate Value Chain (Scope 3) Standard; the 15 categories and calculation methods.<br>
+      <b>SBTi</b> — Corporate Net-Zero Standard and Near-Term Criteria (incl. the V2 draft); Scope 3 coverage and supplier-engagement rules.<br>
+      <b>Cabinet Office</b> — PPN 006 Carbon Reduction Plan requirements and template; Procurement Act 2023 context.<br>
+      <b>CDP / EcoVadis</b> — the questionnaire/scoring channels (commercial, but the de-facto demand format).<br>
+      <b>DESNZ / Defra</b> — UK GHG conversion factors; UK SRS Scope 3 treatment; SECR scope (Scope 1+2).<br>
+      <b>UKGBC</b> — embodied-carbon and built-environment Scope 3 guidance (the CRE link); proposed Part Z.<br>
+      <b>EU</b> — CSRD / ESRS E1 (post-Omnibus scope) for the spillover picture.
+    </p>
+  </section>
+
+  <div class="foot-note">
+    UK Sector Deep-Dive — Supply Chain / Scope 3. Tier-1 parked research module and keystone of the multi-sector UK ESG programme.<br>
+    Figures marked <span class="verify">Verify</span> are perishable or secondary-sourced; primary frameworks (GHG Protocol, SBTi, PPN 006) cited in §10.<br>
+    <b>Completes</b> the three new sector deep-dives (Manufacturing · Logistics · Supply chain) feeding the compact report's synthesis and value chain.
+  </div>
+
+</div>
+</body>
+</html>

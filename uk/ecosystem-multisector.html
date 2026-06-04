@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The UK ESG Ecosystem — Across the Economy — Internal Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1e9; --paper-2:#efebe0;
+    --ink:#1c1b18; --ink-soft:#4a473f; --ink-faint:#7c786c;
+    --rule:#d6d0bf; --rule-strong:#bdb6a1;
+
+    --global:#9a6a12;   --global-bg:#f7eed9; --global-line:#dcc188;
+    --policy:#15604a;   --policy-bg:#e2f1ea; --policy-line:#9bd0bd;
+    --regime:#7a3b6e;   --regime-bg:#f3e8f0; --regime-line:#d9bcd1;
+    --pressure:#a8431f; --pressure-bg:#f8e9e2; --pressure-line:#e3bda9;
+    --venture:#0f5132;  --venture-bg:#dcefe2; --venture-line:#a6cdb4;
+    --market:#3a3730;
+
+    /* sector accents */
+    --cre:#1d5fa6;  --cre-bg:#e6eff8;  --cre-line:#9cbfe0;
+    --mfg:#a8431f;  --mfg-bg:#f8e9e2;  --mfg-line:#e3bda9;
+    --log:#0f6b66;  --log-bg:#dcefee;  --log-line:#9fd2cd;
+    --sc:#7a3b6e;   --sc-bg:#f3e8f0;   --sc-line:#d9bcd1;
+
+    /* value-chain roles */
+    --build:#0f5132;   --build-bg:#dcefe2;  --build-line:#a6cdb4;
+    --partner:#9a6a12; --partner-bg:#f7eed9;--partner-line:#dcc188;
+    --out:#6c6a62;     --out-bg:#eceadf;    --out-line:#cdc8b8;
+
+    --shadow:0 1px 2px rgba(28,27,24,.05), 0 4px 14px rgba(28,27,24,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);
+    background-image:radial-gradient(circle at 18% 8%,rgba(255,255,255,.5),transparent 45%),radial-gradient(circle at 90% 100%,rgba(189,182,161,.18),transparent 55%);
+    color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1100px;margin:0 auto;padding:42px 30px 90px;}
+
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:28px;}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--regime);margin:0 0 10px;}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,5vw,50px);line-height:1.03;margin:0;letter-spacing:-.01em;}
+  h1 em{font-style:italic;color:var(--regime);font-weight:500;}
+  .standfirst{max-width:780px;margin:16px 0 0;font-size:16px;color:var(--ink-soft);line-height:1.55;}
+  .standfirst b{color:var(--ink);font-weight:600;}
+  .crumb{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:.03em;}
+  .crumb b{color:var(--regime);font-weight:600;}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;}
+  .toc a{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--rule-strong);border-radius:20px;padding:5px 13px;transition:all .15s ease;}
+  .toc a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  section.mod{margin:0 0 50px;scroll-margin-top:20px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px;}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);border-radius:5px;padding:2px 7px;flex:none;}
+  .sec-title{font-family:"Fraunces",serif;font-weight:600;font-size:23px;letter-spacing:-.01em;margin:0;}
+  .sec-intro{max-width:800px;color:var(--ink-soft);font-size:14.5px;line-height:1.55;margin:0 0 18px;}
+  .sec-intro b{color:var(--ink);}
+
+  .takeaway{margin-top:16px;border-left:3px solid var(--regime);background:var(--regime-bg);padding:11px 16px;border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-soft);}
+  .takeaway b{color:var(--regime);}
+  .takeaway.v{border-left-color:var(--venture);background:var(--venture-bg);} .takeaway.v b{color:var(--venture);}
+  .takeaway.p{border-left-color:var(--pressure);background:var(--pressure-bg);} .takeaway.p b{color:var(--pressure);}
+
+  .verify{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--pressure);border:1px solid var(--pressure-line);background:var(--pressure-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .confirm{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--venture);border:1px solid var(--venture-line);background:var(--venture-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+
+  /* timeline */
+  .timeline{position:relative;max-width:620px;margin:10px auto 0;}
+  .timeline::before{content:"";position:absolute;left:50%;top:8px;bottom:8px;width:2px;background:var(--rule-strong);transform:translateX(-50%);}
+  .tl-item{position:relative;display:flex;flex-direction:column;align-items:center;margin-bottom:13px;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-date{position:relative;z-index:2;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:12px;color:#fff;background:var(--ink);border-radius:20px;padding:4px 15px;letter-spacing:.05em;box-shadow:var(--shadow);}
+  .tl-card{position:relative;z-index:2;margin-top:8px;background:#fff;border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:10px 16px;max-width:480px;text-align:center;border-top:3px solid var(--ink-faint);}
+  .tl-role{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);}
+  .tl-name{font-family:"Fraunces",serif;font-weight:600;font-size:14px;margin:3px 0;line-height:1.2;}
+  .tl-desc{font-size:11.5px;color:var(--ink-soft);line-height:1.45;margin:0;}
+  .tl-item.g .tl-date{background:var(--global);}  .tl-item.g .tl-card{border-top-color:var(--global);}  .tl-item.g .tl-name{color:var(--global);}
+  .tl-item.po .tl-date{background:var(--policy);} .tl-item.po .tl-card{border-top-color:var(--policy);} .tl-item.po .tl-name{color:var(--policy);}
+  .tl-item.r .tl-date{background:var(--regime);}  .tl-item.r .tl-card{border-top-color:var(--regime);}  .tl-item.r .tl-name{color:var(--regime);}
+  .tl-item.m .tl-date{background:var(--market);}  .tl-item.m .tl-card{border-top-color:var(--market);}  .tl-item.m .tl-name{color:var(--ink);}
+
+  /* generic tables */
+  table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--rule);border-radius:11px;overflow:hidden;box-shadow:var(--shadow);}
+  table.tbl th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--rule);background:var(--paper-2);}
+  table.tbl td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);vertical-align:top;line-height:1.4;}
+  table.tbl tr:last-child td{border-bottom:none;}
+  table.tbl .rh{color:var(--ink);font-weight:600;}
+  .dot{font-size:13px;line-height:1;}
+  .d-full{color:var(--venture);} .d-half{color:var(--global);} .d-none{color:var(--rule-strong);}
+  .colcre{background:var(--cre-bg);} .colmfg{background:var(--mfg-bg);} .collog{background:var(--log-bg);} .colsc{background:var(--sc-bg);}
+
+  /* layer stack */
+  .stack{display:flex;flex-direction:column;gap:8px;}
+  .layer{background:#fff;border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:11px 15px;border-left:4px solid var(--regime);}
+  .layer .ln{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--regime);}
+  .layer h4{margin:3px 0 4px;font-family:"Fraunces",serif;font-weight:600;font-size:14.5px;}
+  .layer p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.45;}
+  .layer.l2{border-left-color:var(--policy);} .layer.l2 .ln{color:var(--policy);}
+  .layer.l3{border-left-color:var(--cre);} .layer.l3 .ln{color:var(--cre);}
+  .layer.l4{border-left-color:var(--ink-faint);} .layer.l4 .ln{color:var(--ink-faint);}
+
+  /* authority tiles */
+  .auth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .auth{background:#fff;border:1px solid var(--rule);border-radius:11px;padding:14px 15px;box-shadow:var(--shadow);cursor:default;transition:transform .12s ease,box-shadow .12s ease;border-top:3px solid var(--ink-faint);}
+  .auth:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(28,27,24,.12);}
+  .auth .ab{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;color:var(--ink);}
+  .auth .af{font-size:11px;color:var(--ink-faint);margin:2px 0 8px;line-height:1.3;}
+  .auth .as{font-size:12px;color:var(--ink-soft);line-height:1.45;} .auth .as b{color:var(--ink);font-weight:600;}
+  .auth.reg{border-top-color:var(--regime);} .auth.reg .ab{color:var(--regime);}
+  .auth.env{border-top-color:var(--policy);} .auth.env .ab{color:var(--policy);}
+  .auth.fin{border-top-color:var(--global);} .auth.fin .ab{color:var(--global);}
+
+  /* forces table sector intensity */
+  .badge{font-family:"IBM Plex Mono",monospace;font-size:10px;border-radius:5px;padding:1px 6px;white-space:nowrap;}
+  .b-dom{background:var(--pressure-bg);color:var(--pressure);border:1px solid var(--pressure-line);}
+  .b-str{background:var(--venture-bg);color:var(--venture);border:1px solid var(--venture-line);}
+  .b-mod{background:var(--global-bg);color:var(--global);border:1px solid var(--global-line);}
+  .b-weak{background:var(--paper-2);color:var(--ink-faint);border:1px solid var(--rule);}
+
+  /* sector cards */
+  .sectors{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .scard{background:#fff;border:1px solid var(--rule);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);border-top:4px solid var(--ink-faint);}
+  .scard h4{margin:0 0 2px;font-family:"Fraunces",serif;font-weight:600;font-size:17px;}
+  .scard .logic{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;}
+  .scard .row{display:grid;grid-template-columns:78px 1fr;gap:8px;font-size:12.5px;color:var(--ink-soft);line-height:1.4;margin-bottom:6px;}
+  .scard .row .k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);padding-top:2px;}
+  .scard .row b{color:var(--ink);}
+  .scard.cre{border-top-color:var(--cre);} .scard.cre h4{color:var(--cre);}
+  .scard.mfg{border-top-color:var(--mfg);} .scard.mfg h4{color:var(--mfg);}
+  .scard.log{border-top-color:var(--log);} .scard.log h4{color:var(--log);}
+  .scard.sc{border-top-color:var(--sc);}  .scard.sc h4{color:var(--sc);}
+
+  /* value chain */
+  .vc-legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 14px;font-size:12px;color:var(--ink-soft);}
+  .vc-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .vc-legend .sw{width:12px;height:12px;border-radius:3px;display:inline-block;}
+  .chain{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;}
+  .link{flex:1;min-width:150px;border-radius:10px;padding:12px 13px;display:flex;flex-direction:column;box-shadow:var(--shadow);}
+  .link .lk{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px;}
+  .link h5{margin:0 0 5px;font-family:"Fraunces",serif;font-weight:600;font-size:14px;}
+  .link p{margin:0;font-size:11.5px;color:var(--ink-soft);line-height:1.4;}
+  .link .who{margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--ink-faint);}
+  .link.build{background:var(--build-bg);border:1.5px solid var(--build-line);} .link.build .lk,.link.build h5{color:var(--build);}
+  .link.partner{background:var(--partner-bg);border:1.5px solid var(--partner-line);} .link.partner .lk,.link.partner h5{color:var(--partner);}
+  .link.out{background:var(--out-bg);border:1.5px dashed var(--out-line);} .link.out .lk,.link.out h5{color:var(--out);}
+  .chain-arrow{display:flex;align-items:center;justify-content:center;color:var(--rule-strong);font-size:16px;flex:none;width:14px;}
+  .value-bar{margin-top:10px;background:var(--ink);color:var(--paper);border-radius:10px;padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .value-bar .vlab{font-family:"Fraunces",serif;font-weight:600;font-size:14px;color:#fff;}
+  .value-bar .vit{font-family:"IBM Plex Mono",monospace;font-size:11px;background:rgba(255,255,255,.12);border-radius:5px;padding:3px 9px;color:#e8e3d6;}
+
+  .wedge{margin-top:20px;background:linear-gradient(135deg,#0d1f15,#163a26);color:#e7f1ea;border-radius:14px;padding:24px 26px;}
+  .wedge h3{font-family:"Fraunces",serif;font-weight:600;font-size:20px;color:#fff;margin:0 0 4px;}
+  .wedge .sub{font-size:13px;color:#a9c7b6;margin:0 0 18px;max-width:680px;line-height:1.5;}
+  .wedge-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .wcol{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:10px;padding:14px 16px;}
+  .wcol.no{background:rgba(168,67,31,.16);border-color:rgba(245,200,170,.4);}
+  .wcol .wi{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#8fc6a6;margin-bottom:8px;}
+  .wcol.no .wi{color:#f0b48f;}
+  .wcol ul{margin:0;padding-left:16px;font-size:12.5px;color:#cfe2d6;line-height:1.6;}
+  .wcol ul b{color:#fff;}
+
+  #tt{position:fixed;z-index:50;max-width:290px;background:var(--ink);color:var(--paper);font-size:12px;line-height:1.45;border-radius:8px;padding:10px 12px;box-shadow:0 8px 28px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .12s ease;}
+  #tt b{color:#fff;}
+
+  .foot-note{margin-top:50px;border-top:1px solid var(--rule);padding-top:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);line-height:1.7;}
+  .foot-note b{color:var(--regime);}
+
+  @media (max-width:820px){
+    .auth-grid,.sectors,.wedge-cols{grid-template-columns:1fr;}
+    .flow,.chain{flex-direction:column;}
+    .chain-arrow{transform:rotate(90deg);width:auto;height:14px;}
+  }
+
+  /* ---------- print / PDF (standard A4) ---------- */
+  @media print {
+    html,body{background:#f4f1e9 !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+    body{zoom:0.72;}
+    @page{size:A4;margin:10mm;}
+    .wrap{max-width:1120px !important;padding:30px 30px 40px !important;}
+    .auth-grid{grid-template-columns:repeat(3,1fr) !important;}
+    .sectors,.wedge-cols{grid-template-columns:1fr 1fr !important;}
+    .chain{flex-direction:row !important;}
+    section.mod:not(#s1){break-inside:avoid;page-break-inside:avoid;}
+    .timeline,table.tbl,.auth-grid,.stack,.sectors,.chain,.value-bar,.wedge{break-inside:avoid;page-break-inside:avoid;}
+    #tt{display:none !important;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">Internal team briefing · Multi-sector expansion · United Kingdom</p>
+    <h1>The UK ESG ecosystem — <em>across the economy</em></h1>
+    <p class="standfirst">How one climate framework becomes binding pressure on a <b>building</b>, a <b>factory</b>, a <b>fleet</b> — and on every <b>supplier</b> beneath them. This widens the venture's lens from CRE to the whole economy: it maps the regulatory architecture, shows <b>who is caught by what</b>, ranks the pressures sector by sector, and ends on a value chain that treats CRE as the proven beachhead and the <b>Scope-3 supply-chain layer as the connective wedge</b>.</p>
+    <p class="crumb">SOURCE · UK CRE MODULES 01–08 + MANUFACTURING / LOGISTICS / SUPPLY-CHAIN DEEP-DIVES · <span class="verify">VERIFY</span> = UNCONFIRMED/PERISHABLE · <span class="confirm">CONFIRMED</span> = PRIMARY POLICY</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#s1">01 · The expansion thesis</a>
+    <a href="#s2">02 · The lineage</a>
+    <a href="#s3">03 · The authorities</a>
+    <a href="#s4">04 · The architecture</a>
+    <a href="#s5">05 · The forcing functions</a>
+    <a href="#s6">06 · The four sectors</a>
+    <a href="#s7">07 · Cross-sector synthesis</a>
+    <a href="#s8">08 · The expansion value chain</a>
+  </nav>
+
+  <!-- 1 -->
+  <section class="mod" id="s1">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">The expansion thesis — from CRE to the whole economy</h2></div>
+    <p class="sec-intro">The venture's research began with commercial real estate. The decision now is to go <b>multi-sector</b> — CRE, manufacturing, logistics, supply-chain and beyond. The argument that makes this credible rather than reckless is structural: most of what hits a building also hits a factory or a fleet, because the <b>cross-cutting reporting layer is sector-agnostic</b>, and the <b>Scope-3 cascade</b> forces measurement down through every supply chain regardless of sector.</p>
+    <p class="sec-intro">Two facts anchor the move. First, the heavy economy-wide regimes — <b>SECR, ESOS, UK SRS</b> — are not CRE rules; they catch every large company in every sector, and the data plumbing the venture already understands transfers directly. Second, the dominant demand driver across all sectors turns out to be the same one: a <b>customer demanding carbon data from its supplier</b> (PPN 006, OEM scorecards, SBTi). That single mechanism unifies the sectors into one market.</p>
+    <div class="takeaway"><b>The shape of the move:</b> keep CRE as the worked beachhead, extend through the shared disclosure layer and the Scope-3 demand engine into manufacturing, logistics and the SME long tail. The sector-specific top layers differ; the measurement-and-reporting core is common.</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="mod" id="s2">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">The lineage — from Paris to a UK obligation</h2></div>
+    <p class="sec-intro">Unlike the UAE's single universal statute, the UK has a <b>framework law that spawns a stack of instruments</b>. The spine: an international treaty, a binding domestic framework with legally enforceable carbon budgets, the Net Zero target, and then the regimes that fan out from it across 2019–2027.</p>
+
+    <div class="timeline">
+      <div class="tl-item g"><span class="tl-date">2015 / 16</span><div class="tl-card"><span class="tl-role">International root</span><p class="tl-name">Paris Agreement · Article 13</p><p class="tl-desc">The UNFCCC treaty's Enhanced Transparency Framework — nations must measure, report and verify emissions. The seed of all corporate MRV logic.</p></div></div>
+      <div class="tl-item po"><span class="tl-date">2008</span><div class="tl-card"><span class="tl-role">Framework law</span><p class="tl-name">Climate Change Act 2008</p><p class="tl-desc">The binding statute: legally enforceable five-yearly <b>carbon budgets</b>, advised by the independent Climate Change Committee (CCC).</p></div></div>
+      <div class="tl-item po"><span class="tl-date">2019</span><div class="tl-card"><span class="tl-role">The target</span><p class="tl-name">Net Zero by 2050 enshrined</p><p class="tl-desc">The Act amended to a legally binding 100% reduction by 2050 — the obligation every downstream regime ultimately serves.</p></div></div>
+      <div class="tl-item r"><span class="tl-date">2019–24</span><div class="tl-card"><span class="tl-role">The instruments fan out</span><p class="tl-name">SECR · ESOS · MEES · UK ETS · ZEV mandate</p><p class="tl-desc">The framework spawns sector and entity rules: energy reporting, building standards, carbon pricing, vehicle mandates — each catching a different population.</p></div></div>
+      <div class="tl-item r"><span class="tl-date">2025–26</span><div class="tl-card"><span class="tl-role">Tightening &amp; landing</span><p class="tl-name">SAF mandate · UK SRS · ETS reform</p><p class="tl-desc">SAF mandate live (Jan 2025); UK SRS finalised (Feb 2026); ETS maritime (Jul 2026) and free-allocation reform; new CCA scheme.</p></div></div>
+      <div class="tl-item m"><span class="tl-date">2027</span><div class="tl-card"><span class="tl-role">The pressure step-up</span><p class="tl-name">UK CBAM · ETS phase-out · ESOS P4</p><p class="tl-desc">UK CBAM begins <span class="confirm">1 Jan 2027</span>; ETS free allocation starts phasing out for CBAM sectors; ESOS Phase 4 deadline (5 Dec). Carbon becomes a harder cost.</p></div></div>
+    </div>
+
+    <div class="takeaway"><b>The structural contrast with the UAE:</b> there is no single "UK climate law" that catches everyone. The Climate Change Act sets the binding ceiling; the <i>obligations</i> are delivered by a fan of instruments, each with its own population, deadline and regulator. Mapping <b>who is caught by what</b> (§04) is therefore the central task.</div>
+  </section>
+
+  <!-- 3 -->
+  <section class="mod" id="s3">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">The authorities — who sets what</h2></div>
+    <p class="sec-intro">UK climate governance is <b>fragmented across departments and regulators</b> — a feature to show, not hide, because it's the source of the overlapping-stack problem the venture sells against. <b>Hover any tile</b> for detail.</p>
+    <div class="auth-grid">
+      <div class="auth reg" data-tip="<b>Department for Energy Security &amp; Net Zero.</b> Owns climate, energy and carbon-pricing policy: UK ETS, CBAM design, CCL/CCAs, the Industrial Decarbonisation Strategy and CCUS clusters, ESOS, and net-zero strategy.">
+        <div class="ab">DESNZ</div><div class="af">Energy Security &amp; Net Zero · Policy</div>
+        <div class="as"><b>Sets:</b> UK ETS, CBAM, CCL/CCAs, ESOS, industrial decarbonisation, net-zero strategy.</div></div>
+      <div class="auth reg" data-tip="<b>Climate Change Committee.</b> The independent statutory advisor created by the Climate Change Act. Recommends the legally binding five-yearly carbon budgets and monitors progress — it advises, it does not regulate.">
+        <div class="ab">CCC</div><div class="af">Climate Change Committee · Advisory</div>
+        <div class="as"><b>Sets:</b> advice on carbon budgets; progress monitoring (statutory, independent).</div></div>
+      <div class="auth fin" data-tip="<b>Financial Conduct Authority.</b> Climate-related disclosure for listed firms and asset managers; the Sustainability Disclosure Requirements (SDR) and anti-greenwashing fund-labelling regime; the route through which UK SRS becomes mandatory for listed companies.">
+        <div class="ab">FCA</div><div class="af">Financial Conduct Authority · Markets</div>
+        <div class="as"><b>Sets:</b> listed-firm climate disclosure, SDR &amp; fund labels; UK SRS enforcement route.</div></div>
+      <div class="auth fin" data-tip="<b>Prudential Regulation Authority (Bank of England).</b> Supervises how banks and insurers manage climate-related financial risk — the channel through which lender/insurer pressure transmits into the real economy.">
+        <div class="ab">PRA</div><div class="af">Prudential Regulation Authority · Banks/insurers</div>
+        <div class="as"><b>Sets:</b> climate-risk supervision for banks &amp; insurers (the lender-pressure channel).</div></div>
+      <div class="auth env" data-tip="<b>Environment Agency.</b> The operational regulator and administrator: it runs ESOS, administers the Climate Change Agreements, and is a UK ETS regulator. The body that actually polices much of the stack (with devolved counterparts).">
+        <div class="ab">Environment Agency</div><div class="af">Operational regulator (+ devolved)</div>
+        <div class="as"><b>Sets/runs:</b> ESOS administration, CCAs, UK ETS regulation, permitting.</div></div>
+      <div class="auth fin" data-tip="<b>HM Revenue &amp; Customs.</b> Collects the carbon-and-energy taxes and will administer CBAM: the Climate Change Levy, Carbon Price Support, and the new CBAM charge on imports from 2027.">
+        <div class="ab">HMRC</div><div class="af">Revenue &amp; Customs · Tax</div>
+        <div class="as"><b>Sets/collects:</b> CCL, Carbon Price Support, and CBAM (from 2027).</div></div>
+      <div class="auth reg" data-tip="<b>Department for Transport.</b> Owns transport decarbonisation: the ZEV mandate and petrol/diesel/HGV phase-out, the RTFO, and the SAF mandate for aviation fuel.">
+        <div class="ab">DfT</div><div class="af">Department for Transport</div>
+        <div class="as"><b>Sets:</b> ZEV mandate &amp; vehicle phase-out, RTFO, SAF mandate.</div></div>
+      <div class="auth env" data-tip="<b>Companies House.</b> The filing destination for SECR — large companies disclose energy and carbon inside their directors' report, enforced through Companies House non-compliance penalties.">
+        <div class="ab">Companies House</div><div class="af">Filing / SECR</div>
+        <div class="as"><b>Sets/runs:</b> the SECR filing destination (energy &amp; carbon in the accounts).</div></div>
+      <div class="auth reg" data-tip="<b>Cabinet Office.</b> Owns public-procurement policy — PPN 006, which requires bidders for contracts ≥£5m to publish a Carbon Reduction Plan. The state using its ~45%-of-GDP purchasing power to cascade carbon demand down supply chains.">
+        <div class="ab">Cabinet Office</div><div class="af">Public procurement</div>
+        <div class="as"><b>Sets:</b> PPN 006 Carbon Reduction Plan rules — the procurement-demand channel.</div></div>
+    </div>
+    <p class="sec-intro" style="margin-top:20px"><b>How to hold them in your head — five functional roles.</b> The bodies group into: <b>policy-setters</b> who write the rules (DESNZ for carbon and energy, DfT for transport, Cabinet Office for procurement); the <b>independent advisor</b> that sets the ceiling (the CCC recommends the legally binding carbon budgets but regulates nothing); <b>market &amp; prudential regulators</b> that transmit capital pressure (FCA for disclosure and fund labels, PRA for bank and insurer climate risk); <b>operational regulators &amp; collectors</b> that police and bill (Environment Agency for ESOS / CCAs / ETS, HMRC for the carbon taxes and CBAM, Companies House for SECR filings); and the <b>procurement lever</b> (Cabinet Office, via PPN 006).</p>
+    <div class="takeaway"><b>Why the fragmentation matters.</b> Where the UAE concentrates almost everything in one ministry (MOCCAE), the UK spreads it across eight-plus bodies that share no common data standard, deadline or portal. A single company answers to several of them at once, with overlapping but non-identical data requests — which is precisely the "single source of truth" pain the venture sells against. The fragmentation isn't a footnote; it <i>is</i> the market.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="mod" id="s4">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">The architecture — four layers, and who is caught</h2></div>
+    <p class="sec-intro">The acronym soup resolves into <b>four layers</b>. The key strategic fact is in the matrix beneath them: the disclosure and energy-reporting layers are <b>economy-wide</b>, the asset and sector-pricing layers are <b>population-specific</b>, and one channel — public procurement — <b>cuts across everything</b>.</p>
+
+    <div class="stack">
+      <div class="layer"><span class="ln">Layer 1 · Investor / capital-market disclosure</span><h4>UK SRS (ISSB S1/S2) · TCFD (legacy) · EU CSRD spillover</h4><p>Tell the markets about your climate risk. Forward-looking, investor-facing. UK SRS finalised Feb 2026; mandatory for listed firms expected ~2027 <span class="verify">Verify</span>.</p></div>
+      <div class="layer l2"><span class="ln">Layer 2 · Mandatory energy / carbon reporting</span><h4>SECR (annual, in the accounts) · ESOS (4-yearly audit)</h4><p>Tell the government what you used. <b>Economy-wide</b> for large firms; ESOS spans buildings, transport and industrial process. SECR is Scope 1+2 only.</p></div>
+      <div class="layer l3"><span class="ln">Layer 3 · Sector compliance &amp; pricing</span><h4>CRE: MEES/EPC, Part L · Industry: UK ETS, CBAM, CCL/CCAs · Transport: ZEV mandate, RTFO, SAF</h4><p>Meet a standard or pay a price. <b>Population-specific</b> — a leasing ban for buildings, a carbon price for installations, a sales mandate for vehicles.</p></div>
+      <div class="layer l4"><span class="ln">Layer 4 · Procurement &amp; voluntary market</span><h4>PPN 006 · SBTi · CDP / EcoVadis · BREEAM/LEED</h4><p>Prove it to win work. PPN 006 cuts across <i>all</i> sectors via public contracts; SBTi/CDP carry private buyer demand down every supply chain.</p></div>
+    </div>
+
+    <p class="sec-intro" style="margin-top:22px"><b>The "who's caught" matrix</b> — the single most useful artefact in the report. <span class="dot d-full">●</span> caught directly · <span class="dot d-half">◐</span> partially / size-dependent · <span class="dot d-none">·</span> not directly.</p>
+    <table class="tbl">
+      <thead><tr>
+        <th style="width:25%">Regime</th><th>Economy-wide</th><th class="colcre">CRE</th><th class="colmfg">Mfg</th><th class="collog">Logistics</th><th class="colsc">Supply-chain / SME tail</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="rh">UK SRS (ISSB)</td><td><span class="dot d-half">◐</span> large/listed</td><td class="colcre"><span class="dot d-full">●</span></td><td class="colmfg"><span class="dot d-full">●</span></td><td class="collog"><span class="dot d-full">●</span></td><td class="colsc"><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">SECR</td><td><span class="dot d-full">●</span> large cos</td><td class="colcre"><span class="dot d-full">●</span></td><td class="colmfg"><span class="dot d-full">●</span></td><td class="collog"><span class="dot d-full">●</span></td><td class="colsc"><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">ESOS</td><td><span class="dot d-full">●</span> large undertakings</td><td class="colcre"><span class="dot d-full">●</span></td><td class="colmfg"><span class="dot d-full">●</span></td><td class="collog"><span class="dot d-full">●</span></td><td class="colsc"><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">MEES / EPC</td><td><span class="dot d-none">·</span></td><td class="colcre"><span class="dot d-full">●</span> every leased building</td><td class="colmfg"><span class="dot d-half">◐</span> sites</td><td class="collog"><span class="dot d-half">◐</span> sheds</td><td class="colsc"><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">UK ETS</td><td><span class="dot d-none">·</span></td><td class="colcre"><span class="dot d-none">·</span></td><td class="colmfg"><span class="dot d-full">●</span> installations</td><td class="collog"><span class="dot d-half">◐</span> aviation/maritime</td><td class="colsc"><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">UK CBAM (2027)</td><td><span class="dot d-none">·</span></td><td class="colcre"><span class="dot d-none">·</span></td><td class="colmfg"><span class="dot d-full">●</span> 5 sectors</td><td class="collog"><span class="dot d-half">◐</span> importers</td><td class="colsc"><span class="dot d-half">◐</span> embedded data</td></tr>
+        <tr><td class="rh">CCL / CCAs</td><td><span class="dot d-half">◐</span> all business energy</td><td class="colcre"><span class="dot d-half">◐</span></td><td class="colmfg"><span class="dot d-full">●</span> energy-intensive</td><td class="collog"><span class="dot d-half">◐</span></td><td class="colsc"><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">ZEV / RTFO / SAF</td><td><span class="dot d-none">·</span></td><td class="colcre"><span class="dot d-none">·</span></td><td class="colmfg"><span class="dot d-half">◐</span> fleets</td><td class="collog"><span class="dot d-full">●</span> fleets &amp; fuel</td><td class="colsc"><span class="dot d-none">·</span></td></tr>
+        <tr><td class="rh">PPN 006 (procurement)</td><td><span class="dot d-full">●</span> any ≥£5m bidder</td><td class="colcre"><span class="dot d-full">●</span></td><td class="colmfg"><span class="dot d-full">●</span></td><td class="collog"><span class="dot d-full">●</span></td><td class="colsc"><span class="dot d-full">●</span> cascades down</td></tr>
+        <tr><td class="rh">SBTi / CDP (customer)</td><td><span class="dot d-half">◐</span> demand-led</td><td class="colcre"><span class="dot d-half">◐</span></td><td class="colmfg"><span class="dot d-full">●</span></td><td class="collog"><span class="dot d-full">●</span></td><td class="colsc"><span class="dot d-full">●</span> the long tail</td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway"><b>Read the matrix two ways.</b> Down a column: a single firm faces a <i>bundle</i> of overlapping regimes — the "single source of truth" pain. Across the bottom two rows: <b>procurement and customer demand are the only forces that reach the SME long tail</b>, regardless of sector — which is exactly where the broadest, least-served market sits.</div>
+  </section>
+
+  <!-- 5 -->
+  <section class="mod" id="s5">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">The forcing functions — and how the mix flips by sector</h2></div>
+    <p class="sec-intro">CRE taught four forces (regulatory, investor, lender, tenant). For a multi-sector view, two changes: a fifth force — a direct <b>carbon price</b> — appears for industry, and the CRE "tenant" force generalises into the dominant cross-sector force, <b>customer / value-chain (Scope 3)</b>. The strength of each flips by sector.</p>
+    <table class="tbl">
+      <thead><tr><th style="width:20%">Force</th><th class="colcre">CRE</th><th class="colmfg">Manufacturing</th><th class="collog">Logistics</th><th>What it consumes</th></tr></thead>
+      <tbody>
+        <tr><td class="rh">Regulatory standard</td><td class="colcre"><span class="badge b-dom">Dominant (MEES)</span></td><td class="colmfg"><span class="badge b-mod">Moderate</span></td><td class="collog"><span class="badge b-str">Strong (vehicle/fuel)</span></td><td>Asset rating / audit data</td></tr>
+        <tr><td class="rh">Carbon price <span class="mono">(new)</span></td><td class="colcre"><span class="badge b-weak">None</span></td><td class="colmfg"><span class="badge b-dom">Dominant (ETS/CBAM)</span></td><td class="collog"><span class="badge b-mod">Rising (fuel/ETS)</span></td><td>Per-tonne / embedded-carbon data</td></tr>
+        <tr><td class="rh">Investor / capital</td><td class="colcre"><span class="badge b-str">Strong (GRESB)</span></td><td class="colmfg"><span class="badge b-mod">Moderate</span></td><td class="collog"><span class="badge b-mod">Moderate</span></td><td>Entity GHG + risk data</td></tr>
+        <tr><td class="rh">Lender</td><td class="colcre"><span class="badge b-str">Strong (SLLs)</span></td><td class="colmfg"><span class="badge b-mod">Moderate</span></td><td class="collog"><span class="badge b-mod">Moderate</span></td><td>Covenant / KPI data</td></tr>
+        <tr><td class="rh">Customer / Scope 3</td><td class="colcre"><span class="badge b-mod">Tenant demand</span></td><td class="colmfg"><span class="badge b-dom">Dominant (OEM)</span></td><td class="collog"><span class="badge b-dom">Dominant (bid-block)</span></td><td>Supplier / per-shipment carbon</td></tr>
+      </tbody>
+    </table>
+    <div class="takeaway p"><b>The unifying read:</b> the forces differ in <i>strength</i> by sector, but they all consume <b>the same underlying entity GHG data</b>. And the one force that is dominant or rising in <i>every</i> sector is <b>customer / Scope-3 demand</b> — the engine that pulls the whole economy, including firms no regulator touches, into measurement.</div>
+  </section>
+
+  <!-- 6 -->
+  <section class="mod" id="s6">
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">The four sectors — crux of each</h2></div>
+    <p class="sec-intro">Each sector has a different governing logic, a different "why now," and a different atomic data point — but a shared measurement core. (Full treatment in the parked deep-dives.)</p>
+    <div class="sectors">
+      <div class="scard cre">
+        <h4>CRE · the asset-value world</h4>
+        <div class="logic">Logic — a leasing ban strands the asset</div>
+        <div class="row"><span class="k">Bites via</span><span><b>MEES</b> (EPC floor to lease), EPC, Part L, green leases</span></div>
+        <div class="row"><span class="k">Why now</span><span>The stranding cliff — EPC C/B tightening deadlines</span></div>
+        <div class="row"><span class="k">Data point</span><span>EPC rating of the asset</span></div>
+        <div class="row"><span class="k">Status</span><span>Proven beachhead (Modules 1–8)</span></div>
+      </div>
+      <div class="scard mfg">
+        <h4>Manufacturing · the carbon-price world</h4>
+        <div class="logic">Logic — a direct cost per tonne of carbon</div>
+        <div class="row"><span class="k">Bites via</span><span><b>UK ETS</b>, <b>CBAM</b> (2027), CCL/CCAs, ESOS</span></div>
+        <div class="row"><span class="k">Why now</span><span>ETS free-allocation phase-out + CBAM from 2027</span></div>
+        <div class="row"><span class="k">Data point</span><span>tCO₂e per installation / embedded carbon per product</span></div>
+        <div class="row"><span class="k">Scale</span><span>~16% of UK emissions — largest industrial section <span class="verify">Verify</span></span></div>
+      </div>
+      <div class="scard log">
+        <h4>Logistics · the fuel-and-fleet world</h4>
+        <div class="logic">Logic — fleet transition + client demand</div>
+        <div class="row"><span class="k">Bites via</span><span><b>ZEV mandate</b>, HGV phase-out, RTFO, SAF, CAZ/ULEZ; warehousing = CRE</span></div>
+        <div class="row"><span class="k">Why now</span><span>"Bid-blocked" by clients for a diesel fleet</span></div>
+        <div class="row"><span class="k">Data point</span><span>tCO₂e per vehicle / route / shipment</span></div>
+        <div class="row"><span class="k">Scale</span><span>Transport ~30% of UK emissions — largest sector</span></div>
+      </div>
+      <div class="scard sc">
+        <h4>Supply chain / Scope 3 · the demand engine</h4>
+        <div class="logic">Logic — not a sector; a cascade</div>
+        <div class="row"><span class="k">Bites via</span><span><b>PPN 006</b>, OEM scorecards, <b>SBTi</b>, CDP — the customer is the regulator</span></div>
+        <div class="row"><span class="k">Why now</span><span>Measure or be delisted — reaches the SME long tail</span></div>
+        <div class="row"><span class="k">Data point</span><span>Supplier footprint / product carbon footprint</span></div>
+        <div class="row"><span class="k">Role</span><span>Connective tissue: 70–90% of any footprint <span class="verify">Verify</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="mod" id="s7">
+    <div class="sec-head"><span class="sec-num">07</span><h2 class="sec-title">Cross-sector synthesis — one market, not four</h2></div>
+    <p class="sec-intro">Strip away the sector-specific top layers and the four collapse into one opportunity. They <b>share</b> the entity-data core (SECR/ESOS/UK SRS), and they <b>connect</b> through Scope 3 — because every sector's output carbon is someone else's Scope-3 input.</p>
+    <table class="tbl">
+      <thead><tr><th style="width:24%">Sector</th><th>Its emissions become…</th><th>The data product the buyer wants</th></tr></thead>
+      <tbody>
+        <tr><td class="rh">Manufacturing</td><td>Customer's <b>Category 1</b> (purchased goods); embodied in Cat 2</td><td>Product carbon footprint (PCF/EPD); CBAM embedded carbon</td></tr>
+        <tr><td class="rh">Logistics</td><td>Shipper's <b>Cat 4 / Cat 9</b> (transport &amp; distribution)</td><td>Per-shipment / per-route carbon</td></tr>
+        <tr><td class="rh">CRE</td><td>Occupier's <b>Cat 8 / 13</b> (leased assets); developer's embodied carbon</td><td>Whole-life / asset carbon; landlord–tenant split</td></tr>
+        <tr><td class="rh">Finance (later)</td><td>Investee's <b>Cat 15</b> (financed emissions)</td><td>Portfolio emissions</td></tr>
+      </tbody>
+    </table>
+    <p class="sec-intro" style="margin-top:20px"><b>What's shared, what diverges.</b> The four sectors <i>converge</i> on the same entity GHG data and the same demand trigger — a customer or a public buyer asking for carbon numbers — and <i>diverge</i> only in a thin top layer: the instrument that bites (MEES vs ETS vs the ZEV mandate vs a buyer's scorecard), the buyer persona (asset manager vs operations vs procurement), and the atomic data point (an EPC vs a tonne vs a shipment vs a product footprint). The shared base is large; the divergent top is small — which is why one core product can serve all four.</p>
+    <p class="sec-intro"><b>The expansion sequence this implies.</b> Prove the product in CRE (done), then follow the <i>shared</i> layer outward: a CRE client that also runs factories or fleets already needs SECR / ESOS / UK SRS across all of them, so the second sector is often won <i>inside an existing account</i> rather than through fresh acquisition. From there, the Scope-3 cascade reaches the supplier long tail, where the volume sits. Sequence by where the shared layer and customer demand are strongest — not by sector size alone.</p>
+    <div class="takeaway v"><b>The synthesis:</b> the disclosure/energy plumbing the venture built for CRE transfers to every sector unchanged, and the <b>Scope-3 cascade</b> means one supplier-data platform can serve all of them at once — "gather once, report many," now at value-chain scale. That is what makes a multi-sector play one product, not four.</div>
+  </section>
+
+  <!-- 8 -->
+  <section class="mod" id="s8">
+    <div class="sec-head"><span class="sec-num">08</span><h2 class="sec-title">The expansion value chain — and where we play</h2></div>
+    <p class="sec-intro">The generalised chain, with our lane colour-coded. The same instinct as the CRE map — own the soft, recurring, software-leverageable links; partner on data and verification; stay out of the physical and capital-intensive ends — now with the <b>Scope-3 supplier layer feeding the middle as the connective wedge</b>.</p>
+    <div class="vc-legend">
+      <span><span class="sw" style="background:var(--build)"></span> We build</span>
+      <span><span class="sw" style="background:var(--partner)"></span> We partner / channel</span>
+      <span><span class="sw" style="background:var(--out);opacity:.7"></span> Not our lane</span>
+    </div>
+    <div class="chain">
+      <div class="link build"><span class="lk">Link 1</span><h5>Reg. intelligence</h5><p>Where you stand across the overlapping stack.</p><div class="who">consulting-led entry</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link partner"><span class="lk">Link 2</span><h5>Data capture</h5><p>Energy, fuel, fleet, supplier &amp; product data.</p><div class="who">→ meters · telematics · suppliers</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link build"><span class="lk">Link 3</span><h5>Measure</h5><p>The inventory engine — Scope 1/2/3.</p><div class="who">core product</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link build"><span class="lk">Link 4</span><h5>Report</h5><p>One data set → many destinations.</p><div class="who">SECR·UKSRS·ETS·CBAM·CRP·CDP</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link partner"><span class="lk">Link 5</span><h5>Verify / assure</h5><p>Sit alongside the assurer, SBTi, CDP.</p><div class="who">→ verifiers · validators</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link build"><span class="lk">Link 6</span><h5>Reduce</h5><p>Transition &amp; reduction plan — the "now what."</p><div class="who">recurring relationship</div></div>
+      <div class="chain-arrow">→</div>
+      <div class="link out"><span class="lk">Link 7</span><h5>Deliver</h5><p>Retrofit, CCUS, vehicles, charging, fuel.</p><div class="who">→ ESCOs · CCUS · OEMs · banks</div></div>
+    </div>
+    <div class="value-bar">
+      <span class="vlab">Value realised →</span>
+      <span class="vit">Compliance</span>
+      <span class="vit">Win &amp; keep contracts</span>
+      <span class="vit">Operating-cost savings</span>
+      <span class="vit">Investor &amp; lender access</span>
+    </div>
+
+    <div class="wedge">
+      <h3>The expansion wedge</h3>
+      <p class="sub">CRE is the proven beachhead. The route outward is the shared disclosure layer plus the Scope-3 demand engine — which lets one measurement-and-reporting core serve manufacturing, logistics and the SME long tail without rebuilding the product per sector.</p>
+      <div class="wedge-cols">
+        <div class="wcol">
+          <div class="wi">Build — across all sectors</div>
+          <ul>
+            <li><b>The cross-sector supplier / footprint platform</b> for the SME long tail — answer once, reuse in every customer's questionnaire (the connective keystone).</li>
+            <li><b>The localised MRV / inventory engine</b> — Scope 1/2/3, sector-specific factors (CBAM embedded carbon, per-shipment, EPC).</li>
+            <li><b>Single source of truth</b> across the overlapping stack — one capture, many destinations.</li>
+            <li><b>Reduction-plan / Carbon-Reduction-Plan tooling</b> — the recurring "now what," and the PPN 006 deliverable.</li>
+          </ul>
+        </div>
+        <div class="wcol no">
+          <div class="wi">Do NOT build</div>
+          <ul>
+            <li><b>The physical delivery</b> — retrofit, CCUS, vehicles, charging, fuel (capital-intensive, incumbent-owned).</li>
+            <li><b>The gatekeeper's seat</b> — ETS verifier, SBTi validator, CDP scorer, the PQP/assessor. Sit alongside them.</li>
+            <li><b>The carbon-trading desk</b> or bespoke deep-science LCA consultancy — partner.</li>
+            <li><b>Anything assuming a universal mandate</b> outside CRE — the cross-sector forcer is the <i>customer</i>, not a statute.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway v"><b>The expansion sentence.</b> A productised, UK-localised, multi-sector <b>measurement + reporting + reduction-plan</b> platform — anchored in CRE, extended through the sector-agnostic disclosure layer, and pulled outward by the Scope-3 cascade into the manufacturing, logistics and SME-supplier long tail that procurement and customer demand force to measure but no one yet serves well.</div>
+  </section>
+
+  <div class="foot-note">
+    UK · ESG ecosystem briefing (multi-sector) — internal team document, distilled from the CRE programme (Modules 01–08) and the Manufacturing, Logistics, and Supply-chain/Scope-3 deep-dives.<br>
+    Figures marked <span class="verify">Verify</span> are unconfirmed or perishable; <span class="confirm">Confirmed</span> sit in primary UK policy/legislation as of early–mid 2026.<br>
+    Decisions implied: keep CRE as beachhead · build the measurement-reporting-reduction core + the Scope-3 supplier platform · partner on data &amp; verification · stay out of physical delivery; the cross-sector forcer is customer demand, not a single statute.
+  </div>
+
+</div>
+
+<div id="tt"></div>
+<script>
+  (function(){
+    var tt=document.getElementById('tt');
+    document.querySelectorAll('[data-tip]').forEach(function(el){
+      el.addEventListener('mouseenter',function(){tt.innerHTML=el.getAttribute('data-tip');tt.style.opacity='1';});
+      el.addEventListener('mousemove',function(e){var x=e.clientX+16,y=e.clientY+16,w=tt.offsetWidth,h=tt.offsetHeight;
+        if(x+w>window.innerWidth-12)x=e.clientX-w-16; if(y+h>window.innerHeight-12)y=e.clientY-h-16;
+        tt.style.left=x+'px';tt.style.top=y+'px';});
+      el.addEventListener('mouseleave',function(){tt.style.opacity='0';});
+    });
+  })();
+</script>
+</body>
+</html>

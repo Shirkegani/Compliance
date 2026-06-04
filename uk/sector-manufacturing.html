@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Manufacturing &amp; Industry ESG — Sector Deep-Dive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f4f1e9; --paper-2:#efebe0;
+    --ink:#1c1b18; --ink-soft:#4a473f; --ink-faint:#7c786c;
+    --rule:#d6d0bf; --rule-strong:#bdb6a1;
+    --mfg:#a8431f; --mfg-bg:#f8e9e2; --mfg-line:#e3bda9;
+    --global:#9a6a12; --global-bg:#f7eed9; --global-line:#dcc188;
+    --policy:#15604a; --policy-bg:#e2f1ea; --policy-line:#9bd0bd;
+    --regime:#7a3b6e; --regime-bg:#f3e8f0; --regime-line:#d9bcd1;
+    --venture:#0f5132; --venture-bg:#dcefe2; --venture-line:#a6cdb4;
+    --cre:#1d5fa6; --cre-bg:#e6eff8; --cre-line:#9cbfe0;
+    --shadow:0 1px 2px rgba(28,27,24,.05), 0 4px 14px rgba(28,27,24,.06);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);
+    background-image:radial-gradient(circle at 18% 8%,rgba(255,255,255,.5),transparent 45%),radial-gradient(circle at 90% 100%,rgba(189,182,161,.18),transparent 55%);
+    color:var(--ink);font-family:"IBM Plex Sans",-apple-system,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1000px;margin:0 auto;padding:42px 30px 90px;}
+
+  .masthead{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:24px;}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mfg);margin:0 0 10px;}
+  h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,5vw,48px);line-height:1.04;margin:0;letter-spacing:-.01em;}
+  h1 em{font-style:italic;color:var(--mfg);font-weight:500;}
+  .standfirst{max-width:760px;margin:16px 0 0;font-size:16px;color:var(--ink-soft);line-height:1.55;}
+  .standfirst b{color:var(--ink);font-weight:600;}
+  .crumb{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);margin-top:14px;letter-spacing:.03em;}
+  .crumb b{color:var(--mfg);font-weight:600;}
+
+  .lead{background:#fff;border:1px solid var(--rule);border-left:4px solid var(--mfg);border-radius:0 10px 10px 0;padding:14px 18px;margin:0 0 34px;box-shadow:var(--shadow);}
+  .lead p{margin:0 0 9px;font-size:13.5px;color:var(--ink-soft);line-height:1.5;} .lead p:last-child{margin-bottom:0;}
+  .lead b{color:var(--ink);} .lead .lbl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mfg);}
+
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 40px;}
+  .toc a{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-soft);text-decoration:none;border:1px solid var(--rule-strong);border-radius:20px;padding:5px 12px;transition:all .15s ease;}
+  .toc a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);}
+
+  section.mod{margin:0 0 40px;scroll-margin-top:20px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:10px;}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--ink);border:1.5px solid var(--ink);border-radius:5px;padding:2px 7px;flex:none;}
+  .sec-title{font-family:"Fraunces",serif;font-weight:600;font-size:22px;letter-spacing:-.01em;margin:0;}
+  p.body{font-size:14.5px;color:var(--ink-soft);line-height:1.6;margin:0 0 12px;max-width:820px;}
+  p.body b{color:var(--ink);} p.body i{color:var(--ink-soft);}
+
+  .takeaway{margin:14px 0;border-left:3px solid var(--venture);background:var(--venture-bg);padding:11px 16px;border-radius:0 8px 8px 0;font-size:13.5px;color:var(--ink-soft);line-height:1.5;}
+  .takeaway b{color:var(--venture);}
+  .takeaway .lbl{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--venture);display:block;margin-bottom:3px;}
+  .takeaway.p{border-left-color:var(--mfg);background:var(--mfg-bg);} .takeaway.p b{color:var(--mfg);} .takeaway.p .lbl{color:var(--mfg);}
+
+  .verify{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mfg);border:1px solid var(--mfg-line);background:var(--mfg-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .confirm{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--venture);border:1px solid var(--venture-line);background:var(--venture-bg);border-radius:4px;padding:1px 5px;white-space:nowrap;}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+
+  /* pressures schematic */
+  .pressures{display:flex;flex-direction:column;gap:9px;margin:6px 0 14px;}
+  .pr{background:#fff;border:1px solid var(--rule);border-radius:10px;box-shadow:var(--shadow);padding:11px 15px;border-left:4px solid var(--mfg);}
+  .pr .pn{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mfg);}
+  .pr h4{margin:3px 0 4px;font-family:"Fraunces",serif;font-weight:600;font-size:14.5px;}
+  .pr p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.45;} .pr p b{color:var(--ink);}
+  .pr.p2{border-left-color:var(--policy);} .pr.p2 .pn{color:var(--policy);}
+  .pr.p3{border-left-color:var(--cre);} .pr.p3 .pn{color:var(--cre);}
+  .pr.p4{border-left-color:var(--regime);} .pr.p4 .pn{color:var(--regime);}
+  .pr.dom{box-shadow:0 0 0 1.5px var(--mfg-line),var(--shadow);}
+
+  table.tbl{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--rule);border-radius:11px;overflow:hidden;box-shadow:var(--shadow);margin:6px 0 14px;}
+  table.tbl th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:9px 12px;border-bottom:1.5px solid var(--rule);background:var(--paper-2);}
+  table.tbl td{padding:9px 12px;border-bottom:1px solid var(--rule);color:var(--ink-soft);vertical-align:top;line-height:1.45;}
+  table.tbl tr:last-child td{border-bottom:none;}
+  table.tbl .rh{color:var(--ink);font-weight:600;}
+  table.tbl .colcre{background:var(--cre-bg);} table.tbl .colmfg{background:var(--mfg-bg);}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px;}
+  .tier{background:#fff;border:1px solid var(--rule);border-radius:11px;padding:14px 16px;box-shadow:var(--shadow);}
+  .tier .tlbl{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint);}
+  .tier h4{margin:4px 0 6px;font-family:"Fraunces",serif;font-weight:600;font-size:15px;}
+  .tier p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.5;} .tier p b{color:var(--ink);}
+  .tier .big{font-family:"Fraunces",serif;font-weight:700;font-size:18px;}
+  .tier.a{border-top:3px solid var(--mfg);} .tier.a .big{color:var(--mfg);}
+  .tier.b{border-top:3px solid var(--venture);} .tier.b .big{color:var(--venture);}
+
+  ul.clean{margin:4px 0 14px;padding-left:0;list-style:none;}
+  ul.clean li{position:relative;padding-left:22px;font-size:13.5px;color:var(--ink-soft);line-height:1.5;margin-bottom:7px;}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:8px;width:6px;height:6px;border-radius:2px;background:var(--mfg);}
+  ul.clean li b{color:var(--ink);}
+  ul.clean.v li::before{background:var(--venture);}
+  ul.clean.no li::before{background:var(--mfg);transform:rotate(45deg);border-radius:0;}
+
+  .sources{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+  .sources b{color:var(--ink);}
+
+  .foot-note{margin-top:46px;border-top:1px solid var(--rule);padding-top:16px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-faint);line-height:1.7;}
+  .foot-note b{color:var(--mfg);}
+
+  @media (max-width:820px){ .twocol{grid-template-columns:1fr;} }
+
+  @media print {
+    html,body{background:#f4f1e9 !important;-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+    body{zoom:0.74;}
+    @page{size:A4;margin:10mm;}
+    .wrap{max-width:1040px !important;padding:28px 28px 36px !important;}
+    .twocol{grid-template-columns:1fr 1fr !important;}
+    .sec-head{break-after:avoid;page-break-after:avoid;}
+    .pressures,table.tbl,.twocol,.takeaway,.lead,.tier{break-inside:avoid;page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="kicker">UK sector deep-dive · Tier-1 research · Multi-sector expansion</p>
+    <h1>UK Manufacturing &amp; Industry ESG — <em>the carbon-price world</em></h1>
+    <p class="standfirst">UK ETS, CBAM, CCAs/CCL, industrial decarbonisation — and why it's a different game from CRE. Where CRE runs on an <b>asset-value</b> logic anchored on MEES, manufacturing runs on a <b>carbon-price</b> logic: a direct cost per tonne, a border price, an energy tax, and a customer/Scope-3 squeeze from above. The buyer, the data, and the "why now" are all different.</p>
+    <p class="crumb">SOURCE · UK ETS AUTHORITY / DESNZ · HMRC / GOV.UK · ENVIRONMENT AGENCY · CABINET OFFICE · <span class="verify">VERIFY</span> = PERISHABLE/SECONDARY · <span class="confirm">CONFIRMED</span> = PRIMARY POLICY</p>
+  </header>
+
+  <div class="lead">
+    <p><span class="lbl">Where this sits</span> &nbsp;Tier-1 parked research module #1 in the multi-sector expansion programme; its crux feeds §6b of the compact UK ESG report. Companions: <i>Logistics &amp; Transport</i> and <i>Supply chain / Scope 3</i>.</p>
+    <p><span class="lbl">Figure discipline</span> &nbsp;This is a fast-moving area — the ETS is mid-reform, CBAM is pre-launch, the EU-UK linkage is mid-negotiation. Dates, prices, caps and thresholds are tagged <span class="verify">Verify</span> where perishable or secondary, <span class="confirm">Confirmed</span> where in primary policy. Re-verify before any external use.</p>
+  </div>
+
+  <nav class="toc">
+    <a href="#s1">01 · Mental model</a>
+    <a href="#s2">02 · The battleground</a>
+    <a href="#s3">03 · UK ETS</a>
+    <a href="#s4">04 · UK CBAM</a>
+    <a href="#s5">05 · CCL &amp; CCAs</a>
+    <a href="#s6">06 · ESOS for industry</a>
+    <a href="#s7">07 · Industrial decarbonisation</a>
+    <a href="#s8">08 · Scope-3 demand engine</a>
+    <a href="#s9">09 · The CRE contrast</a>
+    <a href="#s10">10 · Opportunity spaces</a>
+    <a href="#s11">11 · Caveats</a>
+    <a href="#s12">12 · Capability check</a>
+    <a href="#s13">13 · Sources</a>
+  </nav>
+
+  <!-- 1 -->
+  <section class="mod" id="s1">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">The mental model — four pressures, a different centre of gravity</h2></div>
+    <p class="body">In CRE the centre of gravity is <b>MEES, the great leveller</b> — a building rating. Manufacturing has its own stack, and its centre of gravity is a <b>price on carbon</b>. Hold these four pressures:</p>
+    <div class="pressures">
+      <div class="pr dom"><div class="pn">Pressure 1 · dominant</div><h4>Carbon pricing — the direct cost per tonne</h4><p><b>UK ETS</b> (cap-and-trade on installations) · <b>UK CBAM</b> (border price on imports, from 2027) · <b>CCL / CPS</b> (tax on business energy and on power-generation fuels).</p></div>
+      <div class="pr p2"><div class="pn">Pressure 2</div><h4>Energy &amp; efficiency obligations</h4><p><b>ESOS</b> (4-yearly audit: buildings + transport + process) · <b>CCAs</b> (efficiency targets that buy down the CCL) · <b>SECR</b> (energy/carbon in the accounts — shared with all large firms).</p></div>
+      <div class="pr p3"><div class="pn">Pressure 3</div><h4>Customer / value-chain — your emissions are someone's Scope 3</h4><p><b>PPN 006</b> (public contracts → Carbon Reduction Plan) · <b>OEM scorecards</b> (supply data or be delisted) · <b>SBTi / CDP</b> (the frameworks the demand is expressed in).</p></div>
+      <div class="pr p4"><div class="pn">Pressure 4 · shared with all sectors</div><h4>Cross-cutting disclosure</h4><p><b>UK SRS (ISSB S1/S2)</b> · <b>TCFD</b> (legacy, absorbed into UK SRS). The only layer CRE and manufacturing fully share.</p></div>
+    </div>
+    <p class="body">The crucial difference from CRE: <b>Pressures 1 and 3 barely exist for a landlord</b> — a building owner pays no direct carbon price and faces no border tax. Conversely, <b>MEES has no factory equivalent</b> — there is no "you cannot operate this plant below an efficiency rating" leasing ban. Only the disclosure layer is fully shared — which is exactly why the venture's "single source of truth" thesis can travel across sectors.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="mod" id="s2">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Why manufacturing is the battleground — the emissions reality</h2></div>
+    <p class="body">UK <b>total net territorial emissions in 2024 were ~373 MtCO₂e</b> <span class="confirm">Confirmed · DESNZ final, Feb 2026</span>, down ~53% on 1990. Against that, <b>manufacturing is the single largest-emitting industrial SIC section — roughly 62 MtCO₂e in 2023, ~16% of all UK emissions</b> <span class="verify">Verify</span> (it has been the top section since 2019). Industry is decarbonising in lumpy, structural ways: <b>2024 industrial emissions fell ~7%, largely via blast-furnace closures in iron &amp; steel and lower coal</b> <span class="verify">Verify</span> — i.e. partly by losing capacity, not only by efficiency. That is the politically charged backdrop (jobs, competitiveness, carbon leakage) the whole policy stack is trying to manage.</p>
+    <p class="body">The strategic read: manufacturing is <b>hard-to-abate</b>. A chunk of its emissions are <i>process</i> emissions (the CO₂ from making cement from limestone, or steel from iron ore) that efficiency cannot remove — they need CCS, hydrogen or electrification. That is <i>why</i> the mix is a price (ETS/CBAM/CCL) plus a state capital programme, rather than a simple performance standard. Where CRE can largely be fixed with retrofit, industry needs a price signal <i>and</i> infrastructure.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="mod" id="s3">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">The UK ETS — the core carbon price</h2></div>
+    <p class="body"><b>What it is.</b> A cap-and-trade scheme launched in 2021 (the post-Brexit replacement for EU ETS participation), run by the UK ETS Authority. It puts an absolute, declining <b>cap</b> on in-scope installations and lets them trade allowances (UKAs). It covers <b>energy-intensive industry, power generation, and domestic aviation</b> — installations above activity thresholds, not whole companies.</p>
+    <p class="body"><b>The cap (the teeth).</b> Reset in 2022 to align with net zero; the <b>2026 cap is 77.4 MtCO₂e</b> <span class="verify">Verify</span> and declines annually. Within it, an <b>industry cap</b> (free allocation) was set at <b>40% of the total cap from 2024</b>, reducing each year <span class="verify">Verify</span>.</p>
+    <p class="body"><b>Free allocation — the part that's changing fast.</b> The <b>second allocation period now starts in 2027</b> (2026 is a bridge year), re-timed to align with CBAM <span class="confirm">Confirmed</span>. For <b>CBAM-covered sectors, free allocation begins to phase out from 2027 over an indicative ~9-year trajectory</b> <span class="verify">Verify</span>; other sectors continue in reduced form to 2030. The November 2025 review confirmed current benchmarks for 2027, moving to updated EU benchmarks for 2028–2030 <span class="verify">Verify</span>. The translation: <b>emitting carbon is moving from "mostly free" to "increasingly a direct cost"</b> across 2027–2030. That is the demand event.</p>
+    <p class="body"><b>Scope is expanding.</b> Domestic <b>maritime enters from July 2026</b>; <b>energy-from-waste / incineration</b> reaches full inclusion in 2028 (MRV-only from 2026); <b>Phase II is confirmed 2031–2040</b>; an <b>ultra-small / low-emitter</b> route exists 2026–2030 <span class="verify">Verify</span>.</p>
+    <p class="body"><b>Price.</b> Volatile and policy-sensitive — roughly <b>£30–£55/tCO₂e through 2025</b> <span class="verify">Verify</span>. Quote the direction (rising, converging toward the EU price if linkage completes), never a spot price.</p>
+    <p class="body"><b>The EU–UK linkage.</b> On <b>19 May 2025</b> the UK and EU agreed a "Common Understanding" to work toward linking the two ETSs; the EU Council backed a negotiating mandate on <b>12 Nov 2025</b>, and <b>formal negotiations were announced to begin January 2026</b> <span class="verify">Verify</span>. A link would mean mutual recognition of allowances, cross-system trading, and — critically — <b>mutual CBAM exemptions</b>, which the UK estimates could save exporters ~£800m by 2030 <span class="verify">Verify</span>. In motion, not done.</p>
+    <div class="takeaway"><span class="lbl">Why it matters for the venture</span> The ETS itself is a trading/compliance regime where licensed verifiers and brokers already operate — <i>not</i> a software gap to occupy. But the <b>free-allocation phase-out + benchmark tightening + scope expansion</b> means a growing population must produce <b>audit-grade, benchmark-aligned emissions data</b> annually and <i>forecast</i> their allowance exposure to plan capex. That data-assembly-and-forecasting layer beneath ETS compliance is the analog of the CRE "MRV inventory engine." Don't build the trading desk or become the verifier — sit alongside the gatekeeper.</div>
+  </section>
+
+  <!-- 4 -->
+  <section class="mod" id="s4">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">UK CBAM — the border price (new, from 2027)</h2></div>
+    <p class="body"><b>What it is.</b> A Carbon Border Adjustment Mechanism that prices emissions <i>embedded in imported goods</i>, so importers face a charge comparable to a UK producer's ETS/CPS cost. Legislated in the <b>Finance Bill 2025–26</b> (with preparatory provisions in Finance Act 2025), it <b>starts 1 January 2027</b> <span class="confirm">Confirmed</span>.</p>
+    <p class="body"><b>Scope.</b> Imports of <b>aluminium, cement, fertiliser, hydrogen, and iron &amp; steel</b> <span class="confirm">Confirmed</span>. <b>Glass and ceramics are excluded</b> from launch (deferred); <b>electricity is not included</b>. <b>Indirect (electricity-related) emissions are excluded until 2029 at the earliest</b> <span class="confirm">Confirmed · Nov 2025 update</span>.</p>
+    <p class="body"><b>Who's liable and how.</b> The charge falls on the <b>UK importer</b>, who must register with <b>HMRC</b> once they meet a <b>£50,000</b> threshold of CBAM goods over a rolling 12 months <span class="confirm">Confirmed</span> (raised from £10,000, so only larger importers are caught). Connected companies can register as a group. The <b>first accounting period is all of 2027, with the return and payment due by 31 May 2028</b>, moving to <b>quarterly</b> from 2028 <span class="verify">Verify</span>. Expected revenue ~£140m (2027–28) rising to ~£180m (2028–29) <span class="verify">Verify</span>.</p>
+    <p class="body"><b>The ripple beyond importers.</b> Though the legal duty is the importer's, the practical effect is a <b>supply-chain data demand</b>: overseas producers will be asked for <b>verified embedded-emissions data</b> per consignment (or the importer pays punitive default values). CBAM turns "embedded carbon of this batch of steel" into a <b>per-shipment number someone must produce, evidence and defend</b>.</p>
+    <p class="body"><b>Interplay with the ETS.</b> CBAM and the ETS free-allocation phase-out are deliberately coupled — as free allocation falls for CBAM sectors from 2027, the border price rises to replace it as the anti-leakage tool. Two halves of one mechanism.</p>
+    <div class="takeaway"><span class="lbl">Why it matters for the venture</span> CBAM is an <b>embedded-carbon accounting and evidence problem</b> at the product/consignment level — structured data that software solves, and where generic corporate carbon tools are weak. But the <b>£50k threshold means it's a mid/large-importer problem, not a universal one</b> — treat it as a high-value vertical wedge, not a mass market.</div>
+  </section>
+
+  <!-- 5 -->
+  <section class="mod" id="s5">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">CCL + CCAs — the energy tax and the deal that buys it down</h2></div>
+    <p class="body"><b>Climate Change Levy (CCL).</b> A tax on <b>business energy use</b> (electricity, gas, LPG, solid fuels), paid by industrial/commercial/agricultural/public-sector consumers and shown as a line on the bill. <b>HMRC collects it; DESNZ owns the policy.</b> Main rates are uprated annually (next rise 1 April 2026); the gas-vs-electricity rebalancing completed in 2024 <span class="verify">Verify</span>. A parallel <b>Carbon Price Support</b> rate applies to fossil fuels used in power generation.</p>
+    <p class="body"><b>Climate Change Agreements (CCAs).</b> <b>Voluntary sector agreements</b>, administered by the <b>Environment Agency</b>, in which energy-intensive operators commit to efficiency/carbon targets for a large CCL discount — up to roughly <b>90%+ on electricity</b> and ~65–89% on gas <span class="verify">Verify · confirm current %</span>. Missing two-yearly targets triggers <b>buyout payments</b> (usually far smaller than the savings).</p>
+    <p class="body"><b>The new scheme is live.</b> DESNZ confirmed a new CCA scheme on <b>16 Oct 2024</b>, running to <b>31 March 2033</b>, with the <b>first new target period (TP7) starting 1 January 2026</b> <span class="confirm">Confirmed</span>. New applications open 1 January–31 August each year, 2026–2030; eligibility covers <b>50+ energy-intensive sectors</b>; ~8,400 UK facilities currently hold a CCA <span class="verify">Verify</span>.</p>
+    <div class="takeaway"><span class="lbl">Why it matters for the venture</span> A CCA is a <b>recurring measure-target-report relationship</b> with two-yearly reporting and live consequences. The under-served job is connecting <b>CCA target tracking → ESOS findings → ETS/CBAM exposure → disclosure</b> into one workflow instead of four disconnected spreadsheets.</div>
+  </section>
+
+  <!-- 6 -->
+  <section class="mod" id="s6">
+    <div class="sec-head"><span class="sec-num">06</span><h2 class="sec-title">ESOS for industry — the 4-yearly audit (shared with CRE, but wider)</h2></div>
+    <p class="body"><b>What it is.</b> A mandatory <b>energy audit every four years</b> for <b>large UK undertakings</b> (≥250 employees, or ≥£44m turnover with ≥£38m balance sheet). It explicitly spans <b>buildings, transport and industrial processes</b> — so for a manufacturer it reaches the production line, not just the offices.</p>
+    <p class="body"><b>Phase 4 status.</b> Compliance period <b>6 Dec 2023 → deadline 5 Dec 2027</b>; qualification date 31 Dec 2026. <b>Mandatory net-zero assessment was pushed to Phase 5 (2027–2031)</b>; in Phase 4 it's a <b>voluntary</b> option (PAS 51215-1/-2:2025). <b>Action-plan + annual public progress reporting</b> carry over from the Phase 3 reform. Display Energy Certificates and Green Deal Assessments are removed as compliance routes. Administered by the <b>Environment Agency</b> (+ devolved).</p>
+    <div class="takeaway"><span class="lbl">The weakness = the opportunity</span> ESOS has historically been <b>audit-and-ignore</b>: an assessor reports cost-effective savings, the company files it, and the recommendations <b>die in a PDF</b>. There is still no hard duty to act — only to audit and (now) report progress. <b>Connecting ESOS findings → an actual decarbonisation pathway → ETS/CCA/disclosure outputs is a workflow nobody has cleanly built</b> — and it spans both CRE and industry, the cross-sector bridge the expansion thesis needs.</div>
+  </section>
+
+  <!-- 7 -->
+  <section class="mod" id="s7">
+    <div class="sec-head"><span class="sec-num">07</span><h2 class="sec-title">Industrial decarbonisation — the state capital programme</h2></div>
+    <p class="body">Because much of industry is hard-to-abate, the UK pairs the <i>price</i> signals with a <i>state-funded infrastructure</i> programme — the "how do you physically abate" layer.</p>
+    <ul class="clean">
+      <li><b>Industrial Decarbonisation Strategy (2021)</b> set the direction: CCUS, hydrogen, fuel-switching, electrification, efficiency for industrial clusters.</li>
+      <li><b>CCUS cluster sequencing:</b> Track-1 — <b>HyNet</b> (NW England + N Wales) and the <b>East Coast Cluster</b> (Teesside + Humber), selected Oct 2021. Track-2 — <b>Acorn</b> (Scotland) and <b>Viking</b> (Humber). HyNet + ECC target ~33 MtCO₂/yr capture and ~31,000 jobs <span class="verify">Verify</span>.</li>
+      <li><b>Funding:</b> ~<b>£21.7bn over 25 years</b> committed (Oct 2024, up from £20bn in March 2023), with ~£3.9bn across 2025–26 <span class="verify">Verify</span>. First clusters now expected operational <b>~2028</b> (≈2 years behind schedule); competitive allocation for CCS projects from 2027 <span class="verify">Verify</span>.</li>
+      <li>Adjacent support: the <b>Energy Intensive Industries Compensation Scheme</b> (relief on electricity policy costs), hydrogen production support, electrification grants.</li>
+    </ul>
+    <div class="takeaway"><span class="lbl">Why it matters for the venture</span> This is <b>capital-intensive delivery owned by incumbents</b> (CCUS developers, energy majors, EPC contractors) — <b>not the venture's lane</b>. But it <i>generates demand</i> for the data the venture can own: a plant negotiating cluster connection, an EII claim, or a hydrogen-switching business case all need credible, audit-grade emissions data. Feed the delivery players; don't replace them.</div>
+  </section>
+
+  <!-- 8 -->
+  <section class="mod" id="s8">
+    <div class="sec-head"><span class="sec-num">08</span><h2 class="sec-title">The Scope-3 / supply-chain demand mechanism — the real multiplier</h2></div>
+    <p class="body">This is the most important section for an <i>expansion</i> thesis, because it is the <b>demand engine that links CRE, manufacturing and logistics into one market</b>. The mechanism: large organisations are obliged (or choose) to report and cut <b>Scope 3</b>, whose dominant component is purchased goods and services — so they push the obligation <b>down onto suppliers</b>, who must measure and disclose regardless of their own size.</p>
+    <p class="body"><b>1 · Public procurement — PPN 006.</b> Since September 2021, bids for UK public contracts worth <b>≥£5m/year</b> must publish a <b>Carbon Reduction Plan</b> — Scope 1, 2 and a defined set of Scope 3, plus a commitment to net zero by 2050 <span class="confirm">Confirmed</span>. <b>Non-compliance is an automatic disqualification.</b> With public spending ~45% of GDP — and Tier-1 suppliers pushing the requirement down their own chains — it cascades far below the £5m line.</p>
+    <p class="body"><b>2 · Private OEM pressure.</b> Major buyers — industry reporting names the likes of <b>Rolls-Royce, JLR, BAE, Siemens, Unilever</b> <span class="verify">Verify · single secondary source</span> — run <b>supplier sustainability scorecards</b> and increasingly <b>delist suppliers who can't provide emissions data</b>. The expression layer is <b>SBTi</b> and <b>CDP</b>; the calculation rests on the GHG Protocol Scope 3 Standard and DEFRA conversion factors.</p>
+    <div class="takeaway"><span class="lbl">Why this is the keystone</span> It converts ESG from a <i>large-company</i> obligation into a <b>whole-supply-chain</b> one. A 30-person fabrication shop with no ETS installation, no UK SRS duty and no MEES building is still told, "give us your product carbon footprint or lose the contract." That <b>SME long tail — forced to measure by a customer, not a regulator —</b> is structurally the same wedge as the CRE long tail forced by MEES: broad, under-served, must-act, too small for the Big Four. The largest cross-sector market for a productised measurement + reduction-plan tool sits here.</div>
+  </section>
+
+  <!-- 9 -->
+  <section class="mod" id="s9">
+    <div class="sec-head"><span class="sec-num">09</span><h2 class="sec-title">The CRE contrast — why this is a different game (and what transfers)</h2></div>
+    <table class="tbl">
+      <thead><tr><th style="width:22%">Dimension</th><th class="colcre">CRE (Modules 1–8)</th><th class="colmfg">Manufacturing / Industry</th></tr></thead>
+      <tbody>
+        <tr><td class="rh">Governing logic</td><td class="colcre">Asset value — a leasing ban (MEES) strands the building</td><td class="colmfg">Carbon price — per-tonne cost (ETS) + border tax (CBAM) + energy tax (CCL)</td></tr>
+        <tr><td class="rh">"Great leveller"</td><td class="colcre">MEES — every leased building, any owner size</td><td class="colmfg">None universal; ETS/CBAM are threshold-gated. Scope-3/customer demand is the nearest forcer</td></tr>
+        <tr><td class="rh">Atomic data point</td><td class="colcre">EPC rating of the asset</td><td class="colmfg">tCO₂e per installation / embedded carbon per product</td></tr>
+        <tr><td class="rh">The buyer</td><td class="colcre">Asset / fund manager, property team</td><td class="colmfg">Operations, sustainability, and procurement functions</td></tr>
+        <tr><td class="rh">The "why now"</td><td class="colcre">Stranding cliff (EPC C/B deadlines)</td><td class="colmfg">Free-allocation phase-out + CBAM (2027) + customer delisting</td></tr>
+        <tr><td class="rh">Capital delivery</td><td class="colcre">Retrofit / refurbishment</td><td class="colmfg">CCUS, hydrogen, electrification (the cluster programme)</td></tr>
+        <tr><td class="rh">Shared layer</td><td class="colcre">UK SRS, SECR, ESOS, TCFD</td><td class="colmfg">UK SRS, SECR, ESOS, TCFD — <b>identical</b></td></tr>
+      </tbody>
+    </table>
+    <p class="body">The bottom row is the whole expansion argument: the <b>cross-cutting disclosure-and-energy layer is shared</b>, so the venture's SECR/ESOS/UK SRS data plumbing transfers directly, while the sector-specific top layer (ETS/CBAM/CCA vs MEES/EPC) is what changes. "Gather once, report many" holds — the "many" simply grows from "MEES + UKSRS + GRESB" to "MEES + ETS + CBAM + CCA + UKSRS + customer scorecards."</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="mod" id="s10">
+    <div class="sec-head"><span class="sec-num">10</span><h2 class="sec-title">Venture opportunity spaces (manufacturing)</h2></div>
+    <p class="body">Mapping the pains to wedges:</p>
+    <ul class="clean v">
+      <li><b>The industrial MRV / emissions-inventory engine</b> — audit-grade, benchmark-aligned Scope 1/2 for ETS installations and CCA holders, with the forecasting to plan allowance exposure.</li>
+      <li><b>Embedded-carbon / product-footprint calculation for CBAM and customer demand</b> — per-product/per-consignment carbon, evidenced and exportable into CBAM returns and CDP/customer scorecards.</li>
+      <li><b>The Scope-3 / supplier-data platform for the SME long tail</b> — the highest-volume opportunity; cross-sector by nature and the clearest bridge from CRE outward.</li>
+      <li><b>ESOS-to-action workflow</b> — turning the four-yearly audit that "dies in a PDF" into a live reduction pathway feeding ETS/CCA/disclosure. Spans CRE + industry.</li>
+      <li><b>Reduction-plan tooling</b> — the recurring "now what" after measurement, consistent with the CRE wedge.</li>
+    </ul>
+    <p class="body"><b>What NOT to build first:</b></p>
+    <ul class="clean no">
+      <li>The <b>carbon-trading desk</b> or anything that tries to <b>become the ETS verifier</b> — licensed gatekeepers; sit alongside.</li>
+      <li>The <b>CCUS / abatement delivery</b> layer — capital-intensive, incumbent-owned.</li>
+      <li>Anything assuming a <b>MEES-style universal mandate</b> for factories — it doesn't exist. Build for the price-and-customer-driven data need, not a non-existent asset-rating ban.</li>
+    </ul>
+  </section>
+
+  <!-- 11 -->
+  <section class="mod" id="s11">
+    <div class="sec-head"><span class="sec-num">11</span><h2 class="sec-title">Honest caveats</h2></div>
+    <ul class="clean">
+      <li><b>This is the fastest-moving area in the whole programme.</b> The ETS reform, CBAM detail, the new CCA scheme, the ESOS Phase 4/5 split, and the EU-UK linkage all moved within the last 6–18 months, several still in consultation or negotiation.</li>
+      <li><b>Carbon prices are not figures to quote</b> — quote direction (rising, converging on EU), not a spot UKA price.</li>
+      <li><b>CBAM is mid-build</b> — draft regulations and HMRC guidance were still being finalised in early 2026; default values and return cadence may shift.</li>
+      <li><b>The OEM-scorecard naming is single-sourced</b> — treat the company list as illustrative, not authoritative.</li>
+      <li><b>Thresholds are simplified here</b> — ESOS, CCA eligibility and CBAM group rules all have edge cases; confirm against the regulator for any specific buyer.</li>
+    </ul>
+  </section>
+
+  <!-- 12 -->
+  <section class="mod" id="s12">
+    <div class="sec-head"><span class="sec-num">12</span><h2 class="sec-title">What you should now be able to do</h2></div>
+    <ul class="clean">
+      <li>Explain why manufacturing runs on a <b>carbon-price</b> logic, not CRE's <b>asset-value</b> logic — and name the three price instruments (ETS, CBAM, CCL).</li>
+      <li>State that manufacturing is the <b>largest-emitting UK industrial SIC section (~16%)</b> and is hard-to-abate (process emissions need CCS/hydrogen).</li>
+      <li>Describe the <b>UK ETS free-allocation phase-out from 2027</b> and why it's coupled to <b>CBAM (1 Jan 2027)</b>.</li>
+      <li>Name the <b>five CBAM sectors</b> and the <b>£50k importer threshold</b>, and explain CBAM as an embedded-carbon data problem.</li>
+      <li>Explain the <b>new CCA scheme (2026–2033)</b> and the CCL-discount mechanic.</li>
+      <li>State <b>ESOS Phase 4's deadline (5 Dec 2027)</b> and articulate the "dies in a PDF" gap.</li>
+      <li>Explain the <b>EU-UK ETS linkage</b> and its CBAM-exemption prize.</li>
+      <li>Explain why <b>Scope-3 / PPN 006 / OEM scorecards</b> are the cross-sector demand multiplier that reaches the SME long tail.</li>
+      <li>Articulate which layers <b>transfer from the CRE venture</b> (disclosure/energy plumbing) and which are <b>new</b> (the carbon-price top layer).</li>
+    </ul>
+  </section>
+
+  <!-- 13 -->
+  <section class="mod" id="s13">
+    <div class="sec-head"><span class="sec-num">13</span><h2 class="sec-title">Primary sources to build on</h2></div>
+    <p class="sources">
+      <b>UK ETS Authority / DESNZ</b> — the cap, free-allocation review responses (Nov 2025), scope-expansion consultations (maritime, EfW), Phase II.<br>
+      <b>HMRC / gov.uk</b> — UK CBAM legislation (Finance Act 2025; Finance Bill 2025–26), draft regulations and HMRC guidance; the £50k threshold and return timetable.<br>
+      <b>Environment Agency</b> — the CCA scheme rules and target periods; ESOS Phase 4 guidance and the MESOS reporting system.<br>
+      <b>DESNZ statistics</b> — Final UK territorial GHG (2024, published Feb 2026) and the GHG-by-SIC annex (manufacturing share).<br>
+      <b>Cabinet Office</b> — PPN 006 (and PPN 01/24) Carbon Reduction Plan requirements.<br>
+      <b>CCUS programme / DESNZ</b> — cluster sequencing, Track-1/Track-2, the £21.7bn envelope.<br>
+      <b>ICAP</b> — neutral synthesis of UK ETS status (secondary, reliable for orientation).<br>
+      <b>EU-UK</b> — the 19 May 2025 Common Understanding and the subsequent linkage negotiation steps.
+    </p>
+  </section>
+
+  <div class="foot-note">
+    UK Sector Deep-Dive — Manufacturing &amp; Industry. Tier-1 parked research module for the multi-sector UK ESG programme.<br>
+    Figures marked <span class="verify">Verify</span> are perishable or secondary-sourced; <span class="confirm">Confirmed</span> sit in primary government policy/legislation as of early–mid 2026.<br>
+    <b>Next module:</b> Logistics &amp; Transport — domestic transport is the UK's single largest emitting sector (~30%).
+  </div>
+
+</div>
+</body>
+</html>
